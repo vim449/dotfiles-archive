@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/dominic/.emacs.d'
+let g:netrw_dirhist_1='/home/dominic/Documents/code/junk_projects'
+let g:netrw_dirhist_0='/home/dominic/Documents/code/Python_RSA/__pycache__'
+let g:netrw_dirhist_9='/home/dominic/.config/awesome/themes/powerarrow-blue'
+let g:netrw_dirhist_8='/home/dominic/.config/awesome/themes'
+let g:netrw_dirhist_7='/home/dominic/.config/awesome'
+let g:netrw_dirhist_6='/home/dominic/vimwiki'
+let g:netrw_dirhist_5='/home/dominic/Documents/code/Vulkan_Game/src/main/java/Vulkan_Game'
+let g:netrw_dirhist_4='/home/dominic/Documents/code/Vulkan_Game/src/main/java'
+let g:netrw_dirhist_3='/home/dominic/Documents/code/Vulkan_Game/src/main'
