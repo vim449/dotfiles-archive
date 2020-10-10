@@ -516,6 +516,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+   ;; Transparency
+   (spacemacs/toggle-transparency)
+
    ;; Tab-width
    (setq-default indent-tabs-mode nil)
    (setq-default tab-width 4)
@@ -541,7 +544,7 @@ before packages are loaded."
                (setq flycheck-clang-include-path '("../include" "./include" "." "../../include" "../inc" "../../inc"))))
 
    ;; Start all frames maximized
-   (add-to-list 'default-frame-alist '(fullscreen . maximized))
+   ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
    ;; Scroll compilation output to first error
    (setq compilation-scroll-output t)
