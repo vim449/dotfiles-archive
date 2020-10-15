@@ -210,48 +210,32 @@ globalkeys = my_table.join(
     -- dmenu
     awful.key({ modkey, "Shift" }, "Return",
     function ()
-        awful.spawn(string.format("dmenu_run",
+        awful.spawn(string.format("dmenu_run -i",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),
 
     -- My dmenu scripts (Alt+Ctrl+Key)
-    awful.key({ altkey, "Control" }, "e", function () awful.util.spawn( "./.dmenu/dmenu-edit-configs.sh" ) end,
+    awful.key({ altkey, "Control" }, "e", function () awful.util.spawn( "./.config/dmenu/scripts/dmenu-edit-configs.sh" ) end,
         {description = "edit config files" , group = "dmenu scripts" }),
-    awful.key({ altkey, "Control" }, "m", function () awful.util.spawn( "./.dmenu/dmenu-sysmon.sh" ) end,
-        {description = "system monitoring apps" , group = "dmenu scripts" }),
+    awful.key({ altkey, "Control" }, "m", function () awful.util.spawn( "./.config/dmenu/scripts/dmenu-manpages.sh" ) end,
+        {description = "system monitoring apps" , group = "dmenu man page searcher" }),
     awful.key({ altkey, "Control" }, "p", function () awful.util.spawn( "passmenu" ) end,
         {description = "passmenu" , group = "dmenu scripts" }),
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn( "./.dmenu/dmenu-trading.sh" ) end,
         {description = "trading programs" , group = "dmenu scripts" }),
 
     -- My applications (Super+Alt+Key)
-    awful.key({ modkey, altkey }, "a", function () awful.util.spawn( terminal.." -e ncpamixer" ) end,
-        {description = "ncpamixer" , group = "terminal apps" }),
     awful.key({ modkey, altkey }, "b", function () awful.util.spawn( "brave" ) end,
         {description = "brave browser" , group = "gui apps" }),
     awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && emacs" ) end,
         {description = editorgui , group = "gui apps" }),
     awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( "pcmanfm" ) end,
         {description = "pcmanfm" , group = "gui apps" }),
-    awful.key({ modkey, altkey  }, "i", function () awful.util.spawn( terminal.." -e irssi" ) end,
-        {description = "irssi" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "j", function () awful.util.spawn( terminal.." -e joplin" ) end,
-        {description = "joplin" , group = "terminal apps" }),
     awful.key({ modkey, altkey }, "l", function () awful.util.spawn( terminal.." -e lynx --cfg=~/.lynx/lynx.cfg --lss=~/.lynx/lynx.lss -vikeys gopher://distro.tube" ) end,
         {description = "lynx cli browser" , group = "terminal apps" }),
     awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e toot curses" ) end,
         {description = "toot curses" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "n", function () awful.util.spawn( terminal.." -e newsboat" ) end,
-        {description = "newsboat" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "p", function () awful.util.spawn( terminal.." -e pianobar" ) end,
-        {description = "pianobar" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "r", function () awful.util.spawn( terminal.." -e rtv" ) end,
-        {description = "rtv" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "w", function () awful.util.spawn( terminal.." -e wopr report.xml" ) end,
-        {description = "wopr report.xml" , group = "terminal apps" }),
-    awful.key({ modkey, altkey  }, "y", function () awful.util.spawn( terminal.." -e youtube-viewer" ) end,
-        {description = "youtube-viewer" , group = "terminal apps" }),
 
     -- screenshots
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArchLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
