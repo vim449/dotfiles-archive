@@ -70,7 +70,7 @@ plugins=(
     gradle
     zsh-autosuggestions
     zsh-syntax-highlighting
-    tmux
+    # tmux
 )
 
 source $ZSH/oh-my-zsh.sh

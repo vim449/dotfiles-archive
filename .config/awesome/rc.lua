@@ -219,7 +219,7 @@ globalkeys = my_table.join(
     awful.key({ altkey, "Control" }, "e", function () awful.util.spawn( "./.config/dmenu/scripts/dmenu-edit-configs.sh" ) end,
         {description = "edit config files" , group = "dmenu scripts" }),
     awful.key({ altkey, "Control" }, "m", function () awful.util.spawn( "./.config/dmenu/scripts/dmenu-manpages.sh" ) end,
-        {description = "system monitoring apps" , group = "dmenu man page searcher" }),
+        {description = "dmenu man page searcher" , group = "dmenu scripts" }),
     awful.key({ altkey, "Control" }, "p", function () awful.util.spawn( "passmenu" ) end,
         {description = "passmenu" , group = "dmenu scripts" }),
     awful.key({ altkey, "Control"  }, "t", function () awful.util.spawn( "./.dmenu/dmenu-trading.sh" ) end,
