@@ -70,11 +70,11 @@ local modkey1      = "Control"
 
 -- personal variables
 local browser           = "brave"
-local editorgui         = "emacs"
+local editorgui         = "emacsclient -c -a emacs"
 local filemanager       = "pcmanfm"
 local mailclient        = "mailspring"
 local mediaplayer       = "vlc"
-local scrlocker         = "slimlock"
+local scrlocker         = "lightlocker"
 local terminal          = "alacritty"
 local virtualmachine    = "virtualbox"
 
@@ -160,8 +160,7 @@ beautiful.init(string.format(gears.filesystem.get_configuration_dir() .. "/theme
 local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },
     { "manual", terminal .. " -e 'man awesome'" },
-    { "edit config", terminal.." vim /home/dt/.config/awesome/rc.lua" },
-    { "arandr", "arandr" },
+    { "edit config", terminal.." vim $HOME/.config/awesome/rc.lua" },
     { "restart", awesome.restart },
 }
 
@@ -177,6 +176,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
         { "Log out", function() awesome.quit() end },
         { "Sleep", "systemctl suspend" },
         { "Restart", "systemctl reboot" },
+        { "Hibernate", "systemctl hibernate" },
         { "Exit", "systemctl poweroff" },
         -- other triads can be put here
     }
@@ -228,7 +228,7 @@ globalkeys = my_table.join(
     -- My applications (Super+Alt+Key)
     awful.key({ modkey, altkey }, "b", function () awful.util.spawn( "brave" ) end,
         {description = "brave browser" , group = "gui apps" }),
-    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && emacs" ) end,
+    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && emacsclient -c -a emacs" ) end,
         {description = editorgui , group = "gui apps" }),
     awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( "pcmanfm" ) end,
         {description = "pcmanfm" , group = "gui apps" }),
@@ -241,11 +241,7 @@ globalkeys = my_table.join(
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArchLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
         {description = "ScreenShot", group = "screenshots"}),
 
-    -- Personal keybindings}}}
-
-
     -- Hotkeys Awesome
-
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
         {description = "show help", group="awesome"}),
 
@@ -669,9 +665,6 @@ awful.rules.rules = {
     { rule = { class = mediaplayer },
           properties = { maximized = true } },
 
-    { rule = { class = "Vlc" },
-          properties = { maximized = true } },
-
     { rule = { class = "VirtualBox Manager" },
           properties = { maximized = true } },
 
@@ -801,6 +794,7 @@ client.connect_signal("focus", border_adjust)
 client.connect_signal("property::maximized", border_adjust)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
+-- Autostart
 awful.spawn.with_shell("lxsession")
 awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("picom --config  $HOME/.config/picom/picom.conf")
@@ -808,3 +802,4 @@ awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("volumeicon")
 awful.spawn.with_shell("setxkbmap -option caps:escape")
 awful.spawn.with_shell("firewalld")
+awful.spawn.with_shell("emacs --daemon")

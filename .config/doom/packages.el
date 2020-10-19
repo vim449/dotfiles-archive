@@ -58,6 +58,4 @@
 (package! tldr)
 (package! treemacs)
 (package! wc-mode)
-(package! writeroom-mode)
 (package! evil-quickscope)
-(package! airline-themes)

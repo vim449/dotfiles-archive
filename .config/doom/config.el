@@ -8,6 +8,21 @@
       :desc "Load new theme"
       "h t" #'counsel-load-theme)
 
+;; Basic Defaults
+(global-evil-quickscope-always-mode 1)
+
+(defun prefer-horizontal-split ()
+  (set-variable 'split-height-threshold nil t)
+  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
+(add-hook 'markdown-mode-hook 'prefer-horizontal-split)
+
+(setq display-line-numbers-type 'relative)
+(map! :leader
+      :desc "Toggle truncate lines"
+      "l t" #'toggle-truncate-lines)
+(setq-default indent-tabs-mode nil)
+
+;; Org Mode
 (after! org
   (setq org-directory "~/Org/"
         org-agenda-files '("~/Org/agenda.org")
@@ -24,28 +39,19 @@
   (require 'org-bullets)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
-(setq display-line-numbers-type t)
-(map! :leader
-      :desc "Toggle truncate lines"
-      "l t" #'toggle-truncate-lines)
-
 (setq neo-window-fixed-size nil)
 
 (require 'ox-groff)
 
 (setq browse-url-browser-function 'eww-browse-url)
 
-(defun prefer-horizontal-split ()
-  (set-variable 'split-height-threshold nil t)
-  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
-(add-hook 'markdown-mode-hook 'prefer-horizontal-split)
-
+;; Tab Stuff
 (setq centaur-tabs-set-bar 'over
       centaur-tabs-set-icons t
       centaur-tabs-gray-out-icons 'buffer
       centaur-tabs-height 24
       centaur-tabs-set-modified-marker t
-      centaur-tabs-style "bar"
+      centaur-tabs-style "slant"
       centaur-tabs-modified-marker "•")
 (map! :leader
       :desc "Toggle tabs on/off"
@@ -76,6 +82,7 @@
                                              (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
+;; Emms Configuration
 (use-package emms
   :ensure t
   :config
@@ -95,6 +102,7 @@
   (emms-mode-line 1)
   (emms-playing-time 1))
 
+;; Mu4e Configuration
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (setq mu4e-get-mail-command "mbsync -c ~/.config/doom/mu4e/.mbsyncrc -a"
@@ -134,4 +142,3 @@
      ("https://betanews.com/feed" betanews linux)
      ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
      ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
-(global-evil-quickscope-always-mode 1)
