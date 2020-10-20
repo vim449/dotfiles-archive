@@ -41,3 +41,13 @@ These should all be inside of standard repositories or AUR
 5. Run =p10k configure= to create the default config for p10k
 6. Run =chsh /usr/bin/zsh= to set default shell
 7. Update oh-my-zsh
+** To install doom emacs:
+1. append =$HOME/.config/emacs/bin= to path (already set up if using zsh)
+2. =doom sync= will install and compile all core essentials
+3. =doom doctor= will list all dependencies needed for current plugins. Install all that are needed for you
+** To install NeoViM:
+1. simply enter and exit repeatedly until update and install messages are no longer received
+* TODO
+** TODO Fix Mu4e in doom
+** TODO add width control for dmenu
+** TODO move p10k and ohmyzsh into XDG compliant directories
