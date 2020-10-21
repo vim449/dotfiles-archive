@@ -1,6 +1,6 @@
-(setq doom-font (font-spec :family "Hack" :size 12)
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      ;; doom-big-font (font-spec :family "Hack" :size 14)
+      ;; doom-big-font (font-spec :family "FiraCode Nerd Font" :size 14)
       )
 
 (setq doom-theme 'doom-gruvbox)
