@@ -32,7 +32,7 @@ The programs that currently have a proper configuration file are:
 
 These should all be inside of standard repositories or AUR
 
-** Clone this repo into a folder under ~/.config/dotfiles
+** Clone this repo into a folder at =~/.config/dotfiles=
 ** Please install oh-my-zsh and powerlevel10k for zsh:
 1. Run =sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"= to install oh-my-zsh
 2. Run =git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k= to install powerlevel10k
@@ -40,11 +40,16 @@ These should all be inside of standard repositories or AUR
 4. Run =git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting= to install proper syntax highlighting
 5. Run =p10k configure= to create the default config for p10k
 6. Run =chsh /usr/bin/zsh= to set default shell
-7. Update oh-my-zsh
+7. Update oh-my-zsh with =omz update=
 ** To install doom emacs:
-1. append =$HOME/.config/emacs/bin= to path (already set up if using zsh)
-2. =doom sync= will install and compile all core essentials
-3. =doom doctor= will list all dependencies needed for current plugins. Install all that are needed for you
+1. Clone =https://github.com/hlissner/doom-emacs= with a depth of 1 into =~/.config/emacs=
+2. append =$HOME/.config/emacs/bin= to path (already set up if using zsh)
+3. =doom install= will run initial configuration and install core utils
+4. =doom sync= will install and compile all core essentials
+5. =doom doctor= will list all dependencies needed for current plugins. Install all that are needed for you
+** To install spacemcacs:
+1. clone =https://github.com/syl20bnr/spacemacs= into =~/.config/emacs=
+2. launch spacemacs with =SPACEMACSDIR=$HOME/.config/spacemacs=
 ** To install NeoViM:
 1. simply enter and exit repeatedly until update and install messages are no longer received
 * TODO
