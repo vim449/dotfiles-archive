@@ -1,3 +1,4 @@
+/home/dominic/Documents/blender/models/Art/cereal_box.blend
 /home/dominic/Documents/blender/models/parabolic_curve2.blend
 /home/dominic/Documents/blender/models/parabolic_curve.blend
 /home/dominic/Documents/blender/models/forest.blend
