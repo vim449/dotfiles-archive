@@ -2,8 +2,9 @@
 #+DESCRIPTION: Configuration files for all apps I use
 #+AUTHOR: Dominic Adamson
 
-* Supported Apps
-The programs that currently have a proper configuration file are:
+* Basic Information
+ These are my system configuration files for all of the apps that I use regularly. My Awesome, Doom, Picom, and Dmenu configurations are based *heavily* upon the configuration files by DistroTube at [[https://gitlab.com/dwt1/dotfiles][dotfiles]]. These configuration files are likely to break and as such should be used as a learning resource rather than as actual configs. In other words, feel free to steal these, but at least change them!
+ The programs that currently have a proper configuration file are:
 + NeoViM
 + Alacritty
 + AwesomeWM
@@ -16,7 +17,6 @@ The programs that currently have a proper configuration file are:
 + Picom
 + OfflineIMAP
 + Mbsync (Inside Emacs configuration)
-* Many thanks to DistroTube for his sample configurations that these heavily borrow from
 
 * Install
 ** To install the following dependencies are needed:
@@ -52,7 +52,8 @@ These should all be inside of standard repositories or AUR
 2. launch spacemacs with =SPACEMACSDIR=$HOME/.config/spacemacs=
 ** To install NeoViM:
 1. simply enter and exit repeatedly until update and install messages are no longer received
-* TODO
+   
+* TODOs:
 ** TODO Fix Mu4e in doom
 ** TODO add width control for dmenu
 ** TODO move p10k and ohmyzsh into XDG compliant directories
