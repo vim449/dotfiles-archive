@@ -57,3 +57,4 @@ These should all be inside of standard repositories or AUR
 ** TODO Fix Mu4e in doom
 ** TODO add width control for dmenu
 ** TODO move p10k and ohmyzsh into XDG compliant directories
+** TODO convert all doom emacs configuration into LSP and DAP where possible
