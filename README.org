@@ -52,7 +52,7 @@ These should all be inside of standard repositories or AUR
 2. launch spacemacs with =SPACEMACSDIR=$HOME/.config/spacemacs=
 ** To install NeoViM:
 1. simply enter and exit repeatedly until update and install messages are no longer received
-   
+
 * TODOs:
 ** TODO Fix Mu4e in doom
 ** TODO add width control for dmenu
