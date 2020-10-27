@@ -101,7 +101,7 @@ export ARCHFLAGS="-arch x86_64"
 alias cls='clear'
 alias vim='nvim'
 alias vimrc='nvim $HOME/.config/nvim/init.vim'
-alias config='/usr/bin/git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias l="ls -lAh"
 
 source /usr/share/fzf/completion.zsh

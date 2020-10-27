@@ -23,12 +23,12 @@ case "$choice" in
         choice="$HOME/.config/alacritty/alacritty.yml"
     ;;
     awesome)
-        choice="$HOME/.config/awesome/rc.lua"
+        choice="$HOME/.config/awesome/README.org"
     ;;
-   .config/doom/config.el)
+    doom/config.el)
         choice="$HOME/.config/doom/config.el"
     ;;
-   .config/doom/init.el)
+    doom/init.el)
         choice="$HOME/.config/doom/init.el"
     ;;
     neovim)
