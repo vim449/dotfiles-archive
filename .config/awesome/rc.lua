@@ -76,12 +76,11 @@ local mailclient        = "mailspring"
 local mediaplayer       = "vlc"
 local scrlocker         = "lightlocker"
 local terminal          = "alacritty"
-local virtualmachine    = "virtualbox"
+local virtualmachine    = "virt-manager"
 
 -- awesome variables
 awful.util.terminal = terminal
 awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
--- awful.util.tagnames = { " DEV ", " WWW ", " SYS ", " DOC ", " VBOX ", " CHAT ", " MUS ", " VID ", " GFX " }
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -224,16 +223,18 @@ globalkeys = my_table.join(
         {description = "trading programs" , group = "dmenu scripts" }),
 
     -- My applications (Super+Alt+Key)
-    awful.key({ modkey, altkey }, "b", function () awful.util.spawn( "brave" ) end,
-        {description = "brave browser" , group = "gui apps" }),
-    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && emacsclient -c -a emacs" ) end,
+    awful.key({ modkey, altkey }, "b", function () awful.util.spawn(browser) end,
+        {description = browser .. " browser" , group = "gui apps" }),
+    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && " .. editorgui ) end,
         {description = editorgui , group = "gui apps" }),
-    awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( "pcmanfm" ) end,
-        {description = "pcmanfm" , group = "gui apps" }),
-    awful.key({ modkey, altkey }, "l", function () awful.util.spawn( terminal.." -e lynx --cfg=~/.lynx/lynx.cfg --lss=~/.lynx/lynx.lss -vikeys gopher://distro.tube" ) end,
-        {description = "lynx cli browser" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e toot curses" ) end,
-        {description = "toot curses" , group = "terminal apps" }),
+    awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( filemanager ) end,
+        {description = filemanager , group = "gui apps" }),
+    awful.key({ modkey, altkey  }, "v", function () awful.util.spawn( virtualmachine ) end,
+        {description = virtualmachine , group = "gui apps"}),
+    awful.key({ modkey, altkey  }, "g", function () awful.util.spawn( "gimp" ) end,
+        {description = "gimp" , group = "gui apps"}),
+    awful.key({ modkey, altkey  }, "l", function () awful.util.spawn( "blender" ) end,
+        {description = "blender" , group = "gui apps"}),
 
     -- screenshots
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArchLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
@@ -263,12 +264,6 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift"   }, "Tab",  awful.tag.viewprev,
         {description = "view previous", group = "tag"}),
 
-
-    -- Non-empty tag browsing
-    --awful.key({ modkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              --{description = "view  previous nonempty", group = "tag"}),
-   -- awful.key({ modkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-             -- {description = "view  previous nonempty", group = "tag"}),
 
     -- Default client focus
     awful.key({ altkey,           }, "j",
@@ -637,9 +632,6 @@ awful.rules.rules = {
     --{ rule = { class = editorgui },
         --properties = { screen = 1, tag = awful.util.tagnames[2] } },
 
-    --{ rule = { class = "Geany" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2] } },
-
     -- Set applications to always map on the tag 3 on screen 1.
     --{ rule = { class = "Inkscape" },
         --properties = { screen = 1, tag = awful.util.tagnames[3] } },
@@ -663,7 +655,7 @@ awful.rules.rules = {
     { rule = { class = mediaplayer },
           properties = { maximized = true } },
 
-    { rule = { class = "VirtualBox Manager" },
+    { rule = { class = virtualmachine },
           properties = { maximized = true } },
 
     { rule = { class = "VirtualBox Machine" },

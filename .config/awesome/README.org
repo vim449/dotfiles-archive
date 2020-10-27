@@ -24,9 +24,9 @@
 #+ATTR_HTML: :alt Awesome Scrot :title Awesome Scrot :align left
 [[https://gitlab.com/dwt1/dotfiles/-/raw/master/.screenshots/dotfiles09-thumb.png]]
 
-This is the awesome window manager configuration of Derek Taylor (DistroTube)
-- My YouTube: http://www.youtube.com/c/DistroTube
-- My GitLab:  http://www.gitlab.com/dwt1/
+This is the awesome window manager configuration of Dominic Adamson that bases heavily upon the configuration provided by DT
+
+- My GitHub:  http://www.github.com/destroyer449/
 
 My awesome window manager configuration. Keep in mind, that my configs are purposely bloated with examples of what you can do with awesome. It is written more as a study guide rather than a config that you should download and use. Take what works for you; leave the rest!
 
@@ -138,17 +138,16 @@ local mailclient        = "mailspring"
 local mediaplayer       = "vlc"
 local scrlocker         = "lightlocker"
 local terminal          = "alacritty"
-local virtualmachine    = "virtualbox"
+local virtualmachine    = "virt-manager"
 #+END_SRC
 
 * Tags and Layouts
-Tags are essentially our workspaces. There are a ton of layouts available in awesome. I have most of them commented out, but if you want to try them out, then simply uncomment them.
+Tags are essentially our workspaces. There are a ton of layouts available in awesome. I have most of them commented out, but they can be easily enabled by uncommenting the line.
 
 #+BEGIN_SRC lua
 -- awesome variables
 awful.util.terminal = terminal
 awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
--- awful.util.tagnames = { " DEV ", " WWW ", " SYS ", " DOC ", " VBOX ", " CHAT ", " MUS ", " VID ", " GFX " }
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -223,6 +222,8 @@ lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 #+END_SRC
 
+#+RESULTS:
+
 * Menu
 Awesome has a menu system if you want to use it.
 
@@ -285,25 +286,31 @@ root.buttons(my_table.join(
 #+END_SRC
 
 * Keybindings
-| Keybinding              | Action                                                                   |
-|-------------------------+--------------------------------------------------------------------------|
-| MODKEY + RETURN         | opens terminal (alacritty is the terminal but can be easily changed)     |
-| MODKEY + SHIFT + RETURN | opens run launcher (dmenu is the run launcher but can be easily changed) |
-| MODKEY + SHIFT + c      | closes window with focus                                                 |
-| MODKEY + SHIFT + r      | restarts awesome                                                         |
-| MODKEY + SHIFT + q      | quits awesome                                                            |
-| MODKEY + 1-9            | switch focus to workspace (1-9)                                          |
-| MODKEY + SHIFT + 1-9    | send focused window to workspace (1-9)                                   |
-| MODKEY + j              | switches focus between windows in the stack, going down                  |
-| MODKEY + k              | switches focus between windows in the stack, going up                    |
-| MODKEY + h              | switches focus between windows in the stack, going left                  |
-| MODKEY + l              | switches focus between windows in the stack, going right                 |
-| MODKEY + SHIFT + j      | rotates the windows in the stack, going down                             |
-| MODKEY + SHIFT + k      | rotates the windows in the stack, going up                               |
-| MODKEY + SHIFT + h      | rotates the windows in the stack, going left                             |
-| MODKEY + SHIFT + l      | rotates the windows in the stack, going right                            |
-| MODKEY + period         | switch focus to next monitor                                             |
-| MODKEY + comma          | switch focus to prev monitor                                             |
+| Keybinding              | Action                                                                                                  |
+|-------------------------+---------------------------------------------------------------------------------------------------------|
+| MODKEY + RETURN         | opens terminal (alacritty is the terminal but can be easily changed)                                    |
+| MODKEY + SHIFT + RETURN | opens run launcher (dmenu is the run launcher but can be easily changed)                                |
+| MODKEY + ALTKEY + b     | opens browser (brave is the browser but can be easily changed)                                          |
+| MODKEY + ALTKEY + e     | opens GUI editort (emacs client is GUI editor but can be easily changed)                                |
+| MODKEY + ALTKEY + f     | opens file manager (pcmanfm is file manager but can be easily changed)                                  |
+| MODKEY + ALTKEY + v     | opens virtual machine controller (virt-manager is virtual machine controller but can be easily changed) |
+| MODKEY + ALTKEY + g     | opens gimp                                                                                              |
+| MODKEY + ALTKEY + l     | opens blender                                                                                           |
+| MODKEY + SHIFT + c      | closes window with focus                                                                                |
+| MODKEY + SHIFT + r      | restarts awesome                                                                                        |
+| MODKEY + SHIFT + q      | quits awesome                                                                                           |
+| MODKEY + 1-9            | switch focus to workspace (1-9)                                                                         |
+| MODKEY + SHIFT + 1-9    | send focused window to workspace (1-9)                                                                  |
+| MODKEY + j              | switches focus between windows in the stack, going down                                                 |
+| MODKEY + k              | switches focus between windows in the stack, going up                                                   |
+| MODKEY + h              | switches focus between windows in the stack, going left                                                 |
+| MODKEY + l              | switches focus between windows in the stack, going right                                                |
+| MODKEY + SHIFT + j      | rotates the windows in the stack, going down                                                            |
+| MODKEY + SHIFT + k      | rotates the windows in the stack, going up                                                              |
+| MODKEY + SHIFT + h      | rotates the windows in the stack, going left                                                            |
+| MODKEY + SHIFT + l      | rotates the windows in the stack, going right                                                           |
+| MODKEY + period         | switch focus to next monitor                                                                            |
+| MODKEY + comma          | switch focus to prev monitor                                                                            |
 
 #+BEGIN_SRC lua
 globalkeys = my_table.join(
@@ -328,16 +335,18 @@ globalkeys = my_table.join(
         {description = "trading programs" , group = "dmenu scripts" }),
 
     -- My applications (Super+Alt+Key)
-    awful.key({ modkey, altkey }, "b", function () awful.util.spawn( "brave" ) end,
-        {description = "brave browser" , group = "gui apps" }),
-    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && emacsclient -c -a emacs" ) end,
+    awful.key({ modkey, altkey }, "b", function () awful.util.spawn(browser) end,
+        {description = browser .. " browser" , group = "gui apps" }),
+    awful.key({ modkey, altkey }, "e", function () awful.spawn.with_shell( "export SPACEMACSDIR=$HOME/.config/spacemacs/ && " .. editorgui ) end,
         {description = editorgui , group = "gui apps" }),
-    awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( "pcmanfm" ) end,
-        {description = "pcmanfm" , group = "gui apps" }),
-    awful.key({ modkey, altkey }, "l", function () awful.util.spawn( terminal.." -e lynx --cfg=~/.lynx/lynx.cfg --lss=~/.lynx/lynx.lss -vikeys gopher://distro.tube" ) end,
-        {description = "lynx cli browser" , group = "terminal apps" }),
-    awful.key({ modkey, altkey }, "m", function () awful.util.spawn( terminal.." -e toot curses" ) end,
-        {description = "toot curses" , group = "terminal apps" }),
+    awful.key({ modkey, altkey  }, "f", function () awful.util.spawn( filemanager ) end,
+        {description = filemanager , group = "gui apps" }),
+    awful.key({ modkey, altkey  }, "v", function () awful.util.spawn( virtualmachine ) end,
+        {description = virtualmachine , group = "gui apps"}),
+    awful.key({ modkey, altkey  }, "g", function () awful.util.spawn( "gimp" ) end,
+        {description = "gimp" , group = "gui apps"}),
+    awful.key({ modkey, altkey  }, "l", function () awful.util.spawn( "blender" ) end,
+        {description = "blender" , group = "gui apps"}),
 
     -- screenshots
     awful.key({ }, "Print", function () awful.util.spawn("scrot 'ArchLinuxD-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'") end,
@@ -367,12 +376,6 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift"   }, "Tab",  awful.tag.viewprev,
         {description = "view previous", group = "tag"}),
 
-
-    -- Non-empty tag browsing
-    --awful.key({ modkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              --{description = "view  previous nonempty", group = "tag"}),
-   -- awful.key({ modkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-             -- {description = "view  previous nonempty", group = "tag"}),
 
     -- Default client focus
     awful.key({ altkey,           }, "j",
@@ -744,9 +747,6 @@ awful.rules.rules = {
     --{ rule = { class = editorgui },
         --properties = { screen = 1, tag = awful.util.tagnames[2] } },
 
-    --{ rule = { class = "Geany" },
-        --properties = { screen = 1, tag = awful.util.tagnames[2] } },
-
     -- Set applications to always map on the tag 3 on screen 1.
     --{ rule = { class = "Inkscape" },
         --properties = { screen = 1, tag = awful.util.tagnames[3] } },
@@ -770,7 +770,7 @@ awful.rules.rules = {
     { rule = { class = mediaplayer },
           properties = { maximized = true } },
 
-    { rule = { class = "VirtualBox Manager" },
+    { rule = { class = virtualmachine },
           properties = { maximized = true } },
 
     { rule = { class = "VirtualBox Machine" },
@@ -820,6 +820,8 @@ awful.rules.rules = {
 
 }
 #+END_SRC
+
+#+RESULTS:
 
 * Signals
 #+BEGIN_SRC lua
@@ -909,7 +911,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 #+END_SRC
 
 * Autostart
-Autostarting: polkit, background restore, compositor, caps lock to escape remap, emacs daemon, networking, audio server, and firewall
+Autostarting: polkit, background restore, compositor, caps lock to escape remap, emacs daemon, networking, and audio server
 #+BEGIN_SRC lua
 awful.spawn.with_shell("lxsession")
 awful.spawn.with_shell("nitrogen --restore")
