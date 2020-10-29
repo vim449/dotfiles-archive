@@ -153,8 +153,9 @@
 
 (after! neotree
   (setq neo-smart-open t
-        (setq doom-themes-neotree-files-icons t)
-        neo-window-fixed-size nil))
+        neo-window-fixed-size nil)
+  (setq doom-themes-neotree-file-icons t)
+  )
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
@@ -263,3 +264,5 @@
       :leader
       :desc "Winner undo"
       "w <left>" #'winner-undo)
+
+(global-evil-quickscope-always-mode 1)

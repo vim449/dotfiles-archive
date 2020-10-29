@@ -25,6 +25,7 @@
 - [[#splits][SPLITS]]
 - [[#sublimity][SUBLIMITY]]
 - [[#winner-mode][WINNER MODE]]
+- [[#quickscope][QUICKSCOPE]]
 
 * ABOUT THIS CONFIG
 This is my personal Doom Emacs config.  Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box.  I am maintaing this config not just for myself, but also for those that want to explore some of what is possible with Emacs.  I will add a lot of examples of plugins and settings, some of them I may not even use personally.  I do this because many people following me on YouTube look at my configs as "documentation".
@@ -280,13 +281,14 @@ Setting up mu4e which is an email client that works within emacs.  You must inst
 #+END_SRC
 
 * NEOTREE
-Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to neo-smart-open.  The neo-window-fixed-size setting makes the neotree width be adjustable.  Doom Emacs had no keybindings set for neotree.  Since Doom Emacs uses 'SPC t' for 'toggle' keybindings, I used 'SPC t n' for toggle-neotree.
+Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to ~neo-smart-open~.  The neo-window-fixed-size setting makes the neotree width be adjustable.  Doom Emacs had no keybindings set for neotree.  Since Doom Emacs uses 'SPC t' for 'toggle' keybindings, I used 'SPC t n' for toggle-neotree.
 
 #+BEGIN_SRC emacs-lisp
 (after! neotree
   (setq neo-smart-open t
-        (setq doom-themes-neotree-files-icons t)
-        neo-window-fixed-size nil))
+        neo-window-fixed-size nil)
+  (setq doom-themes-neotree-file-icons t)
+  )
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
@@ -454,4 +456,9 @@ Winner mode has been included with GNU Emacs since version 20.  This is a global
       :leader
       :desc "Winner undo"
       "w <left>" #'winner-undo)
+#+END_SRC
+* QUICKSCOPE
+Quicksope is an extension that shows the first word of each word that couble be reached with =F, f, T, t, etc=
+#+BEGIN_SRC emacs-lisp
+(global-evil-quickscope-always-mode 1)
 #+END_SRC

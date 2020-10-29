@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dominic/.oh-my-zsh"
@@ -103,6 +103,7 @@ alias vim='nvim'
 alias vimrc='nvim $HOME/.config/nvim/init.vim'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias l="ls -lAh"
+alias doom-restart="killall emacs; doom sync; emacs --daemon"
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
