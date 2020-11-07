@@ -1,11 +1,11 @@
-dmenu-border-4.9.diff
+dmenu-borderoption-20200217-bf60a1e.diff
 dmenu-caseinsensitive-20200523-db6093f.diff
-dmenu-center-4.8.diff
-dmenu-fuzzymatch-20170603-f428f3e.diff
+dmenu-center-20200111-8cd37e1.diff
+dmenu-fuzzyhighlight-4.9.diff
+dmenu-fuzzymatch-4.9.diff
 dmenu-grid-4.9.diff
-dmenu-highlight-4.9.diff
 dmenu-lineheight-4.9.diff
+dmenu-morecolor-20190922-4bf895b.diff
 dmenu-mousesupport-5.0.diff
 dmenu-numbers-4.9.diff
 dmenu-scroll-20180607-a314412.diff
-dmenu-xyw-4.7.diff
