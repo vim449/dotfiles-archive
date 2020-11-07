@@ -104,6 +104,7 @@ alias vimrc='nvim $HOME/.config/nvim/init.vim'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias l="ls -lAh"
 alias doom-restart="killall emacs; doom sync; emacs --daemon"
+alias vifm="sh $HOME/.config/vifm/scripts/vifmrun"
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh

@@ -1,10 +1,9 @@
  local menu98edb85b00d9527ad5acebe451b3fae6 = {
      {"Archive Manager", "file-roller "},
      {"HP Device Manager", "hp-toolbox", "///usr/share/hplip/data/images/128x128/hp_logo.png" },
-     {"Neovim", "xterm -e nvim ", "/usr/share/pixmaps/nvim.png" },
-     {"compton", "compton", "/usr/share/icons/hicolor/48x48/apps/compton.png" },
+     {"Neovim", "alacritty -e nvim ", "/usr/share/pixmaps/nvim.png" },
      {"nitrogen", "nitrogen", "/usr/share/icons/hicolor/16x16/apps/nitrogen.png" },
-     {"picom", "picom"},
+     {"picom", "picom", "/usr/share/icons/hicolor/48x48/apps/compton.png"},
  }
 
  local menude7a22a0c94aa64ba2449e520aa20c99 = {

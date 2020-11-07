@@ -101,13 +101,32 @@
 
 (setq doom-font (font-spec :family "FiraCode Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 24))
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+
+(require 'ivy-posframe)
+(setq ivy-posframe-display-functions-alist
+      '((swiper                     . ivy-posframe-display-at-point)
+        (complete-symbol            . ivy-posframe-display-at-point)
+        (counsel-M-x                . ivy-display-function-fallback)
+        (counsel-esh-history        . ivy-posframe-display-at-window-center)
+        (counsel-describe-function  . ivy-display-function-fallback)
+        (counsel-describe-variable  . ivy-display-function-fallback)
+        (counsel-find-file          . ivy-display-function-fallback)
+        (counsel-recentf            . ivy-display-function-fallback)
+        (counsel-register           . ivy-posframe-display-at-frame-bottom-window-center)
+        (dmenu                      . ivy-posframe-display-at-frame-top-center)
+        (nil                        . ivy-posframe-display))
+      ivy-posframe-height-alist
+      '((swiper . 20)
+        (dmenu . 20)
+        (t . 10)))
+(ivy-posframe-mode 1) ; 1 enables posframe-mode, 0 disables it.
 
 (map! :leader
       :desc "Ivy push view"
@@ -164,19 +183,19 @@
 
 (map! :leader
       :desc "Edit agenda file"
-      "\\ a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
+      "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
       :leader
       :desc "Edit doom config.org"
-      "\\ c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+      "- c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
       :leader
       :desc "Edit eshell aliases"
-      "\\ e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
+      "- e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
       :leader
       :desc "Edit doom init.el"
-      "\\ i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+      "- i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
       :leader
       :desc "Edit doom packages.el"
-      "\\ p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+      "- p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
 
 (after! org
   (require 'org-bullets)  ; Nicer bullets in org-mode
@@ -243,7 +262,17 @@
       "r SPC" #'point-to-register)
 
 (setq shell-file-name "/bin/zsh"
-      eshell-aliases-file "~/.doom.d/aliases")
+      eshell-aliases-file "~/.config/doom/aliases"
+      eshell-history-size 5000
+      eshell-buffer-maximum-lines 5000
+      eshell-hist-ignoredups t
+      eshell-scroll-to-bottom-on-input t
+      eshell-destroy-buffer-when-process-dies t
+      eshell-visual-commands'("bash" "htop" "ssh" "zsh")
+      vterm-max-scrollback 5000)
+(map! :leader
+      :desc "Counsel eshell history"
+      "e h" #'counsel-esh-history)
 
 (defun prefer-horizontal-split ()
   (set-variable 'split-height-threshold nil t)

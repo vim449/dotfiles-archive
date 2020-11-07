@@ -1,7 +1,7 @@
-#+TITLE: DT's Doom Emacs Config
-#+AUTHOR: Derek Taylor (DT)
+#+TITLE: My personal Doom Emacs config
+#+AUTHOR: Dominic Adamson
 #+DESCRIPTION: DT's personal Doom Emacs config.
-#+STARTUP: showeverything
+#+STARTUP: showstars
 
 * TABLE OF CONTENTS :toc:
 - [[#about-this-config][ABOUT THIS CONFIG]]
@@ -14,6 +14,8 @@
 - [[#eww][EWW]]
 - [[#fonts][FONTS]]
 - [[#ivy][IVY]]
+  - [[#ivy-posframe][IVY-POSFRAME]]
+  - [[#ivy-keybindings][IVY KEYBINDINGS]]
 - [[#line-settings][LINE SETTINGS]]
 - [[#manpages][MANPAGES]]
 - [[#mu4e][MU4E]]
@@ -28,7 +30,7 @@
 - [[#quickscope][QUICKSCOPE]]
 
 * ABOUT THIS CONFIG
-This is my personal Doom Emacs config.  Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box.  I am maintaing this config not just for myself, but also for those that want to explore some of what is possible with Emacs.  I will add a lot of examples of plugins and settings, some of them I may not even use personally.  I do this because many people following me on YouTube look at my configs as "documentation".
+This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides.  Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box.  I am maintaing this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs.  I will add a lot of examples of plugins and settings, some of them I may not even use personally.  I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it.
 
 * BOOKMARKS AND BUFFERS
 Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers.  Bookmarks are somewhat like registers in that they record positions you can jump to.  Unlike registers, they have long names, and they persist automatically from one Emacs session to the next. The prototypical use of bookmarks is to record where you were reading in various files.  Regarding buffers, the text you are editing in Emacs resides in an object called a buffer. Each time you visit a file, a buffer is used to hold the file’s text. Each time you invoke Dired, a buffer is used to hold the directory listing.
@@ -210,7 +212,7 @@ Settings related to fonts within Doom Emacs:
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "FiraCode Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 24))
+      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -220,7 +222,47 @@ Settings related to fonts within Doom Emacs:
 #+END_SRC
 
 * IVY
-Ivy is a generic completion mechanism for Emacs.  By default, Doom Emacs does not use 'SPC v', so the format I use for these bindings is 'SPC v' plus 'key'.
+Ivy is a generic completion mechanism similar to Helm but more lightweight.
+
+** IVY-POSFRAME
+Ivy-posframe is an ivy extension, which lets ivy use posframe to show its candidate menu.  Some of the settings below involve:
++ ivy-posframe-display-functions-alist -- sets the display position for specific programs
++ ivy-posframe-height-alist -- sets the height of the list displayed for specific programs
+
+Available functions (positions) for 'ivy-posframe-display-functions-alist'
++ ivy-posframe-display-at-frame-center
++ ivy-posframe-display-at-window-center
++ ivy-posframe-display-at-frame-bottom-left
++ ivy-posframe-display-at-window-bottom-left
++ ivy-posframe-display-at-frame-bottom-window-center
++ ivy-posframe-display-at-point
++ ivy-posframe-display-at-frame-top-center
+
+=NOTE:= If the setting for 'ivy-posframe-display' is set to 'nil' (false), anything that is set to 'ivy-display-function-fallback' will just default to their normal position in Doom Emacs (usually a bottom split).  However, if this is set to 't' (true), then the fallback position will be centered in the window.
+
+#+BEGIN_SRC emacs-lisp
+(require 'ivy-posframe)
+(setq ivy-posframe-display-functions-alist
+      '((swiper                     . ivy-posframe-display-at-point)
+        (complete-symbol            . ivy-posframe-display-at-point)
+        (counsel-M-x                . ivy-display-function-fallback)
+        (counsel-esh-history        . ivy-posframe-display-at-window-center)
+        (counsel-describe-function  . ivy-display-function-fallback)
+        (counsel-describe-variable  . ivy-display-function-fallback)
+        (counsel-find-file          . ivy-display-function-fallback)
+        (counsel-recentf            . ivy-display-function-fallback)
+        (counsel-register           . ivy-posframe-display-at-frame-bottom-window-center)
+        (dmenu                      . ivy-posframe-display-at-frame-top-center)
+        (nil                        . ivy-posframe-display))
+      ivy-posframe-height-alist
+      '((swiper . 20)
+        (dmenu . 20)
+        (t . 10)))
+(ivy-posframe-mode 1) ; 1 enables posframe-mode, 0 disables it.
+#+END_SRC
+
+** IVY KEYBINDINGS
+By default, Doom Emacs does not use 'SPC v', so the format I use for these bindings is 'SPC v' plus 'key'.
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
@@ -297,32 +339,32 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 #+END_SRC
 
 * OPEN SPECIFIC FILES
-Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs.  These keybindings use find-file non-interactively since we specify exactly what file to open.  The format I use for these bindings is 'SPC /' plus 'key' since Doom Emacs does not use these keybindings.
+Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs.  These keybindings use find-file non-interactively since we specify exactly what file to open.  The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
 
 | PATH TO FILE                | DESCRIPTION           | KEYBINDING |
 |-----------------------------+-----------------------+------------|
-| ~/Documents/org/agenda.org  | Edit agenda file      | SPC \ a    |
-| ~/.config/doom/config.org"  | Edit doom config.org  | SPC \ c    |
-| ~/.config/doom/aliases"     | Edit eshell aliases   | SPC \ e    |
-| ~/.config/doom/init.el"     | Edit doom init.el     | SPC \ i    |
-| ~/.config/doom/packages.el" | Edit doom packages.el | SPC \ p    |
+| ~/Documents/org/agenda.org  | Edit agenda file      | SPC - a    |
+| ~/.config/doom/config.org"  | Edit doom config.org  | SPC - c    |
+| ~/.config/doom/aliases"     | Edit eshell aliases   | SPC - e    |
+| ~/.config/doom/init.el"     | Edit doom init.el     | SPC - i    |
+| ~/.config/doom/packages.el" | Edit doom packages.el | SPC - p    |
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
       :desc "Edit agenda file"
-      "\\ a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
+      "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
       :leader
       :desc "Edit doom config.org"
-      "\\ c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+      "- c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
       :leader
       :desc "Edit eshell aliases"
-      "\\ e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
+      "- e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
       :leader
       :desc "Edit doom init.el"
-      "\\ i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+      "- i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
       :leader
       :desc "Edit doom packages.el"
-      "\\ p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+      "- p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
 #+END_SRC
 
 * ORG MODE
@@ -420,7 +462,17 @@ Settings for the various shells and terminal emulators within Emacs.
 
 #+BEGIN_SRC emacs-lisp
 (setq shell-file-name "/bin/zsh"
-      eshell-aliases-file "~/.doom.d/aliases")
+      eshell-aliases-file "~/.config/doom/aliases"
+      eshell-history-size 5000
+      eshell-buffer-maximum-lines 5000
+      eshell-hist-ignoredups t
+      eshell-scroll-to-bottom-on-input t
+      eshell-destroy-buffer-when-process-dies t
+      eshell-visual-commands'("bash" "htop" "ssh" "zsh")
+      vterm-max-scrollback 5000)
+(map! :leader
+      :desc "Counsel eshell history"
+      "e h" #'counsel-esh-history)
 #+END_SRC
 
 * SPLITS

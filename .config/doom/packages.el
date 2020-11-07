@@ -60,3 +60,5 @@
 (package! tldr)
 (package! wc-mode)
 (package! evil-quickscope)
+(package! ivy-posframe)
+(package! virtualenvwrapper)
