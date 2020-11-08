@@ -205,7 +205,7 @@ globalkeys = my_table.join(
     -- dmenu
     awful.key({ modkey, "Shift" }, "Return",
     function ()
-        awful.spawn(string.format("dmenu_run -h 20 -p run: -fn Fira",
+        awful.spawn(string.format("dmenu_run -h 20 -p run: -bw 2",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),
