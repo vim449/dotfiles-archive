@@ -49,7 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! dmenu)
-(package! elfeed)
 (package! emms)
 (package! emojify)
 (package! evil-tutor)
@@ -62,3 +61,4 @@
 (package! evil-quickscope)
 (package! ivy-posframe)
 (package! virtualenvwrapper)
+(package! rainbow-mode)

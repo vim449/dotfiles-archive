@@ -922,4 +922,5 @@ awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("volumeicon")
 awful.spawn.with_shell("firewalld")
 awful.spawn.with_shell("emacs --daemon")
+-- awful.spawn.with_shell("redshift")
 #+END_SRC

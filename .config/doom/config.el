@@ -99,9 +99,9 @@
       :desc "Search web for text between BEG/END"
       "s w" #'eww-search-words)
 
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 12)
+(setq doom-font (font-spec :family "JetbrainsMono Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      doom-big-font (font-spec :family "FiraCode Nerd Font" :size 17))
+      doom-big-font (font-spec :family "JetbrainsMono Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))

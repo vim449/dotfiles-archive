@@ -3,7 +3,7 @@
 
 declare options=("alacritty
 awesome
-doom/config.el
+doom/config.org
 doom/init.el
 spacemacs
 neovim
@@ -26,7 +26,7 @@ case "$choice" in
         choice="$HOME/.config/awesome/README.org"
     ;;
     doom/config.el)
-        choice="$HOME/.config/doom/config.el"
+        choice="$HOME/.config/doom/config.org"
     ;;
     doom/init.el)
         choice="$HOME/.config/doom/init.el"

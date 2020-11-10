@@ -90,6 +90,11 @@ export LANG=en_US.UTF-8
 export EDITOR=/sbin/nvim
 export VISUAL=/sbin/nvim
 export SPACEMACSDIR=~/.config/spacemacs/
+export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist noma' -\""
+
+# Setting fd as the default source for fzf
+# Now fzf (w/o pipe) will use fd instead of find
+export FZF_DEFAULT_COMMAND='fd --type f --ignore-file .gitignore --hidden'
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"

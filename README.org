@@ -17,6 +17,7 @@
 + Picom
 + OfflineIMAP
 + Mbsync (Inside Emacs configuration)
++ ViFM
 
 * Install
 ** To install the following dependencies are needed:
@@ -28,7 +29,8 @@
 + =hub= for github integration for all editors
 + =spellcheck python-black python-pyflakes python-pytest= (optional) for emacs integration
 + Nerd fonts including: Hack, Dejavu, and Meslo
-+ App that config is for: =dmenu, nvim, alacritty, emacs, blender, tmux, zsh, picom, offlineIMAP/mbsync, awesome=
++ =ueberzug= for image previews in ViFM
++ App that config is for: =dmenu, nvim, alacritty, emacs, blender, tmux, zsh, picom, offlineIMAP/mbsync, awesome, ViFM=
 
 These should all be inside of standard repositories or AUR
 
