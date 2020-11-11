@@ -181,6 +181,12 @@
       :desc "Toggle neotree file viewer"
       "t n" #'neotree-toggle)
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 (map! :leader
       :desc "Edit agenda file"
       "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
