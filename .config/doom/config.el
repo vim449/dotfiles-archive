@@ -288,11 +288,6 @@
       :desc "Clone indirect buffer other window"
       "b c" #'clone-indirect-buffer-other-window)
 
-(require 'sublimity-scroll)
-(require 'sublimity-map)
-(require 'sublimity-attractive)
-(sublimity-mode 0)
-
 (map! :leader
       :desc "Winner redo"
       "w <right>" #'winner-redo

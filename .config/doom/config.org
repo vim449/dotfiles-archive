@@ -1,9 +1,9 @@
 #+TITLE: My personal Doom Emacs config
 #+AUTHOR: Dominic Adamson
-#+DESCRIPTION: DT's personal Doom Emacs config.
+#+DESCRIPTION: my personal Doom Emacs config.
 #+STARTUP: showstars
 
-* TABLE OF CONTENTS :toc:
+* TABLE OF CONTENTS :toc:noexport:
 - [[#about-this-config][ABOUT THIS CONFIG]]
 - [[#bookmarks-and-buffers][BOOKMARKS AND BUFFERS]]
 - [[#centaur-tabs][CENTAUR-TABS]]
@@ -26,7 +26,6 @@
 - [[#registers][REGISTERS]]
 - [[#shells][SHELLS]]
 - [[#splits][SPLITS]]
-- [[#sublimity][SUBLIMITY]]
 - [[#winner-mode][WINNER MODE]]
 - [[#quickscope][QUICKSCOPE]]
 
@@ -340,7 +339,7 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 #+END_SRC
 
 * TREE-SITTER
-Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) that allows for improve understanding of code languages. This is used here primarily to get better syntax highlighting while coding.
+Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) that allows for improved "understanding" of code languages. This is used here primarily to get better syntax highlighting while coding.
 
 #+begin_src emacs-lisp
 (use-package! tree-sitter
@@ -500,16 +499,6 @@ I set splits to default to opening on the right using 'prefer-horizontal-split'.
       "b c" #'clone-indirect-buffer-other-window)
 #+END_SRC
 
-* SUBLIMITY
-The sublimity extension offers Sublime-like smooth scrolling and an experimental minimap.  You can also require sublimity-attractive if you want to center everything for a distraction-free mode.  I do not use this extension, hence the reason I have sublimity-mode set to 0.  Set this to 1 to enable it.
-
-#+BEGIN_SRC emacs-lisp
-(require 'sublimity-scroll)
-(require 'sublimity-map)
-(require 'sublimity-attractive)
-(sublimity-mode 0)
-#+END_SRC
-
 * WINNER MODE
 Winner mode has been included with GNU Emacs since version 20.  This is a global minor mode and, when activated, it allows you to “undo” (and “redo”) changes in the window configuration with the key commands 'SCP w <left>' and 'SPC w <right>'.
 
@@ -522,7 +511,7 @@ Winner mode has been included with GNU Emacs since version 20.  This is a global
       "w <left>" #'winner-undo)
 #+END_SRC
 * QUICKSCOPE
-Quicksope is an extension that shows the first word of each word that couble be reached with =F, f, T, t, etc=
+Quicksope is an extension that shows the first letter of each word that could be reached with =F, f, T, t, etc=
 #+BEGIN_SRC emacs-lisp
 (global-evil-quickscope-always-mode 1)
 #+END_SRC
