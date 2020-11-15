@@ -90,6 +90,8 @@ export LANG=en_US.UTF-8
 export EDITOR=/sbin/nvim
 export VISUAL=/sbin/nvim
 export SPACEMACSDIR=~/.config/spacemacs/
+export PYLINTHOME="XDG_CACHE_HOME"/pylint
+export STACK_ROOT="$XDG_DATA_HOME"/stack
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist noma' -\""
 
 # Setting fd as the default source for fzf

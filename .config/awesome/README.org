@@ -1,4 +1,4 @@
-#+TITLE: Aweomsome WM Config
+#+TITLE: Awesome WM Config
 #+PROPERTY: header-args :tangle rc.lua
 
 * Table of Contents :toc:
@@ -289,7 +289,7 @@ root.buttons(my_table.join(
 | MODKEY + RETURN         | opens terminal (alacritty is the terminal but can be easily changed)                                    |
 | MODKEY + SHIFT + RETURN | opens run launcher (dmenu is the run launcher but can be easily changed)                                |
 | MODKEY + ALTKEY + b     | opens browser (brave is the browser but can be easily changed)                                          |
-| MODKEY + ALTKEY + e     | opens GUI editort (emacs client is GUI editor but can be easily changed)                                |
+| MODKEY + ALTKEY + e     | opens GUI editor (emacs client is GUI editor but can be easily changed)                                |
 | MODKEY + ALTKEY + f     | opens file manager (pcmanfm is file manager but can be easily changed)                                  |
 | MODKEY + ALTKEY + v     | opens virtual machine controller (virt-manager is virtual machine controller but can be easily changed) |
 | MODKEY + ALTKEY + g     | opens gimp                                                                                              |

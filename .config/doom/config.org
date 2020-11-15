@@ -30,10 +30,10 @@
 - [[#quickscope][QUICKSCOPE]]
 
 * ABOUT THIS CONFIG
-This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides.  Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box.  I am maintaing this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs.  I will add a lot of examples of plugins and settings, some of them I may not even use personally.  I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it.
+This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it.
 
 * BOOKMARKS AND BUFFERS
-Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers.  Bookmarks are somewhat like registers in that they record positions you can jump to.  Unlike registers, they have long names, and they persist automatically from one Emacs session to the next. The prototypical use of bookmarks is to record where you were reading in various files.  Regarding buffers, the text you are editing in Emacs resides in an object called a buffer. Each time you visit a file, a buffer is used to hold the file’s text. Each time you invoke Dired, a buffer is used to hold the directory listing.
+Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers. Bookmarks are somewhat like registers in that they record positions you can jump to. Unlike registers, they have long names, and they persist automatically from one Emacs session to the next. The prototypical use of bookmarks is to record where you were reading in various files. Regarding buffers, the text you are editing in Emacs resides in an object called a buffer. Each time you visit a file, a buffer is used to hold the file’s text. Each time you invoke Dired, a buffer is used to hold the directory listing.
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
@@ -45,7 +45,7 @@ Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers.  Bookm
 #+END_SRC
 
 * CENTAUR-TABS
-To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el.  Displays tabs at the top of the window similar to tabbed web browsers such as Firefox.  I don't actually use tabs in Emacs.  I placed this in my config to help others who may want tabs.  In the default configuration of Doom Emacs, 'SPC t' is used for "toggle" keybindings, so I choose 'SPC t c' to toggle centaur-tabs.  The "g" prefix for keybindings is used for a bunch of evil keybindings in Doom, but "g" plus the arrow keys were not used, so I thought I would bind those for tab navigation.  But I did leave the default "g t" and "g T" intact if you prefer to use those for centaur-tabs-forward/backward.
+To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el. Displays tabs at the top of the window similar to tabbed web browsers such as Firefox. I don't actually use tabs in Emacs. I placed this in my config to help others who may want tabs. In the default configuration of Doom Emacs, 'SPC t' is used for "toggle" keybindings, so I choose 'SPC t c' to toggle centaur-tabs. The "g" prefix for keybindings is used for a bunch of evil keybindings in Doom, but "g" plus the arrow keys were not used, so I thought I would bind those for tab navigation. But I did leave the default "g t" and "g T" intact if you prefer to use those for centaur-tabs-forward/backward.
 
 | COMMAND                     | DESCRIPTION          | KEYBINDING       |
 |-----------------------------+----------------------+------------------|
@@ -73,7 +73,7 @@ To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el.  Displ
 #+END_SRC
 
 * DIRED
-Dired is the file manager within Emacs.  Below, I setup keybindings for image previews (peep-dired).  Doom Emacs does not use 'SPC d' for any of its keybindings, so I've chosen the format of 'SPC d' plus 'key'.
+Dired is the file manager within Emacs. Below, I setup keybindings for image previews (peep-dired). Doom Emacs does not use 'SPC d' for any of its keybindings, so I've chosen the format of 'SPC d' plus 'key'.
 
 | COMMAND                                   | DESCRIPTION                                | KEYBINDING |
 |-------------------------------------------+--------------------------------------------+------------|
@@ -105,7 +105,7 @@ Dired is the file manager within Emacs.  Below, I setup keybindings for image pr
 #+END_SRC
 
 * DOOM THEME
-Setting the theme to doom-one.  To try out new themes, I set a keybinding for counsel-load-theme with 'SPC h t'.
+Setting the theme to doom-one. To try out new themes, I set a keybinding for counsel-load-theme with 'SPC h t'.
 
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-gruvbox)
@@ -115,7 +115,7 @@ Setting the theme to doom-one.  To try out new themes, I set a keybinding for co
 #+END_SRC
 
 * EMMS
-One of the media players available for Emacs is emms, which stands for Emacs Multimedia System.  By default, Doom Emacs does not use 'SPC a',' so the format I use for these bindings is 'SPC a' plus 'key'.
+One of the media players available for Emacs is emms, which stands for Emacs Multimedia System. By default, Doom Emacs does not use 'SPC a',' so the format I use for these bindings is 'SPC a' plus 'key'.
 
 | COMMAND               | DESCRIPTION                     | KEYBINDING |
 |-----------------------+---------------------------------+------------|
@@ -157,7 +157,7 @@ One of the media players available for Emacs is emms, which stands for Emacs Mul
 #+END_SRC
 
 * EVALUATE ELISP EXPRESSIONS
-Changing some keybindings from their defaults to better fit with Doom Emacs, and to avoid conflicts with my window managers which sometimes use the control key in their keybindings.  By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eww' keybindings).
+Changing some keybindings from their defaults to better fit with Doom Emacs, and to avoid conflicts with my window managers which sometimes use the control key in their keybindings. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eww' keybindings).
 
 | COMMAND         | DESCRIPTION                                    | KEYBINDING |
 |-----------------+------------------------------------------------+------------|
@@ -186,7 +186,7 @@ Changing some keybindings from their defaults to better fit with Doom Emacs, and
 #+END_SRC
 
 * EWW
-EWW is the Emacs Web Wowser, the builtin browser in Emacs.  Below I set urls to open in a specific browser (eww) with browse-url-browser-function.  By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings).  I chose to use 'SPC s w' for eww-search-words because Doom Emacs uses 'SPC s' for 'search' commands.
+EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to open in a specific browser (eww) with browse-url-browser-function. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings). I chose to use 'SPC s w' for eww-search-words because Doom Emacs uses 'SPC s' for 'search' commands.
 
 #+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'eww-browse-url)
@@ -225,7 +225,7 @@ Settings related to fonts within Doom Emacs:
 Ivy is a generic completion mechanism similar to Helm but more lightweight.
 
 ** IVY-POSFRAME
-Ivy-posframe is an ivy extension, which lets ivy use posframe to show its candidate menu.  Some of the settings below involve:
+Ivy-posframe is an ivy extension, which lets ivy use posframe to show its candidate menu. Some of the settings below involve:
 + ivy-posframe-display-functions-alist -- sets the display position for specific programs
 + ivy-posframe-height-alist -- sets the height of the list displayed for specific programs
 
@@ -238,7 +238,7 @@ Available functions (positions) for 'ivy-posframe-display-functions-alist'
 + ivy-posframe-display-at-point
 + ivy-posframe-display-at-frame-top-center
 
-=NOTE:= If the setting for 'ivy-posframe-display' is set to 'nil' (false), anything that is set to 'ivy-display-function-fallback' will just default to their normal position in Doom Emacs (usually a bottom split).  However, if this is set to 't' (true), then the fallback position will be centered in the window.
+=NOTE:= If the setting for 'ivy-posframe-display' is set to 'nil' (false), anything that is set to 'ivy-display-function-fallback' will just default to their normal position in Doom Emacs (usually a bottom split). However, if this is set to 't' (true), then the fallback position will be centered in the window.
 
 #+BEGIN_SRC emacs-lisp
 (require 'ivy-posframe)
@@ -274,7 +274,7 @@ By default, Doom Emacs does not use 'SPC v', so the format I use for these bindi
 #+END_SRC
 
 * LINE SETTINGS
-I have toggled display-line-numbers-type so I have line numbers displayed.  Doom Emacs uses 'SPC t' for "toggle" commands, so I choose 'SPC t t' for toggle-truncate-lines.
+I have toggled display-line-numbers-type so I have line numbers displayed. Doom Emacs uses 'SPC t' for "toggle" commands, so I choose 'SPC t t' for toggle-truncate-lines.
 
 #+BEGIN_SRC emacs-lisp
 (setq display-line-numbers-type 'relative)
@@ -290,7 +290,7 @@ I have toggled display-line-numbers-type so I have line numbers displayed.  Doom
 #+END_SRC
 
 * MU4E
-Setting up mu4e which is an email client that works within emacs.  You must install mu4e and mbsync through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
+Setting up mu4e which is an email client that works within emacs. You must install mu4e and mbsync through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
 
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
@@ -323,7 +323,7 @@ Setting up mu4e which is an email client that works within emacs.  You must inst
 #+END_SRC
 
 * NEOTREE
-Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to ~neo-smart-open~.  The neo-window-fixed-size setting makes the neotree width be adjustable.  Doom Emacs had no keybindings set for neotree.  Since Doom Emacs uses 'SPC t' for 'toggle' keybindings, I used 'SPC t n' for toggle-neotree.
+Neotree is a file tree viewer. When you open neotree, it jumps to the current file thanks to ~neo-smart-open~. The neo-window-fixed-size setting makes the neotree width be adjustable. Doom Emacs had no keybindings set for neotree. Since Doom Emacs uses 'SPC t' for 'toggle' keybindings, I used 'SPC t n' for toggle-neotree.
 
 #+BEGIN_SRC emacs-lisp
 (after! neotree
@@ -350,7 +350,7 @@ Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) th
 #+end_src
 
 * OPEN SPECIFIC FILES
-Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs.  These keybindings use find-file non-interactively since we specify exactly what file to open.  The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
+Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs. These keybindings use find-file non-interactively since we specify exactly what file to open. The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
 
 | PATH TO FILE                | DESCRIPTION           | KEYBINDING |
 |-----------------------------+-----------------------+------------|
@@ -379,7 +379,7 @@ Keybindings to open files that I work with all the time using the find-file comm
 #+END_SRC
 
 * ORG MODE
-Note that I wrapped most of this in (after! org).  Without this, my settings might be evaluated too early, which will result in my settings being overwritten by Doom's defaults.  I have also enabled org-journal by adding (+journal) to the org section of my Doom Emacs init.el.
+Note that I wrapped most of this in (after! org). Without this, my settings might be evaluated too early, which will result in my settings being overwritten by Doom's defaults. I have also enabled org-journal by adding (+journal) to the org section of my Doom Emacs init.el.
 
 #+BEGIN_SRC emacs-lisp
 (after! org
@@ -414,7 +414,7 @@ Note that I wrapped most of this in (after! org).  Without this, my settings mig
 #+END_SRC
 
 * REGISTERS
-Emacs registers are compartments where you can save text, rectangles and positions for later use. Once you save text or a rectangle in a register, you can copy it into the buffer once or many times; once you save a position in a register, you can jump back to that position once or many times.  The default GNU Emacs keybindings for these commands (with the exception of counsel-register) involves 'C-x r' followed by one or more other keys.  I wanted to make this a little more user friendly, and since I am using Doom Emacs, I choose to replace the 'C-x r' part of the key chords with 'SPC r'.
+Emacs registers are compartments where you can save text, rectangles and positions for later use. Once you save text or a rectangle in a register, you can copy it into the buffer once or many times; once you save a position in a register, you can jump back to that position once or many times. The default GNU Emacs keybindings for these commands (with the exception of counsel-register) involves 'C-x r' followed by one or more other keys. I wanted to make this a little more user friendly, and since I am using Doom Emacs, I choose to replace the 'C-x r' part of the key chords with 'SPC r'.
 
 | COMMAND                          | DESCRIPTION                        | KEYBINDING |
 |----------------------------------+------------------------------------+------------|
@@ -487,7 +487,7 @@ Settings for the various shells and terminal emulators within Emacs.
 #+END_SRC
 
 * SPLITS
-I set splits to default to opening on the right using 'prefer-horizontal-split'.  I set a keybinding for 'clone-indirect-buffer-other-window' for when I want to have the same document in two splits.  The text of the indirect buffer is always identical to the text of its base buffer; changes made by editing either one are visible immediately in the other.  But in all other respects, the indirect buffer and its base buffer are completely separate.  For example, I can fold one split but other will be unfolded.
+I set splits to default to opening on the right using 'prefer-horizontal-split'. I set a keybinding for 'clone-indirect-buffer-other-window' for when I want to have the same document in two splits. The text of the indirect buffer is always identical to the text of its base buffer; changes made by editing either one are visible immediately in the other. But in all other respects, the indirect buffer and its base buffer are completely separate. For example, I can fold one split but other will be unfolded.
 
 #+BEGIN_SRC emacs-lisp
 (defun prefer-horizontal-split ()
@@ -500,7 +500,7 @@ I set splits to default to opening on the right using 'prefer-horizontal-split'.
 #+END_SRC
 
 * WINNER MODE
-Winner mode has been included with GNU Emacs since version 20.  This is a global minor mode and, when activated, it allows you to “undo” (and “redo”) changes in the window configuration with the key commands 'SCP w <left>' and 'SPC w <right>'.
+Winner mode has been included with GNU Emacs since version 20. This is a global minor mode and, when activated, it allows you to “undo” (and “redo”) changes in the window configuration with the key commands 'SCP w <left>' and 'SPC w <right>'.
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
