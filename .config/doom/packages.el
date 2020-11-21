@@ -64,3 +64,4 @@
 (package! rainbow-mode)
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(package! cdlatex)

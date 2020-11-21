@@ -56,7 +56,7 @@ These should all be inside of standard repositories or AUR
 1. simply enter and exit repeatedly until update and install messages are no longer received
 
 * TODOs:
-** TODO Fix Mu4e in doom
-** TODO add width control for dmenu
-** TODO move p10k and ohmyzsh into XDG compliant directories
-** TODO convert all doom emacs configuration into LSP and DAP where possible
+- TODO Fix Mu4e in doom
+- TODO add width control for dmenu
+- TODO move p10k and ohmyzsh into XDG compliant directories
+- TODO convert all doom emacs configuration into LSP and DAP where possible

@@ -113,6 +113,8 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 " :mark mark /full/directory/path [filename]
 
 mark h ~/
+mark b ~/bin
+mark c ~/.config
 
 " ------------------------------------------------------------------------------
 
@@ -397,7 +399,7 @@ source ~/.config/vifm/scripts/vifm_devicons/favicons.vifm
 " Like in previous versions of vifm
 " set vifminfo=options,filetypes,commands,bookmarks,dhistory,state,cs
 " Like in vi
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+set vifminfo=dhistory,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
 " ------------------------------------------------------------------------------
