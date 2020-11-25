@@ -32,8 +32,8 @@ function! StartifyEntryFormat()
 let g:startify_bookmarks = [
             \ { 't': '~/.config/tmux/tmux.conf' },
             \ { 'i': '~/.config/nvim/init.vim' },
-            \ { 'z': '~/.zshrc' },
-            \ '~/vimwiki',
+            \ { 'z': '~/.config/zsh/.zshrc' },
+            \ { 'v': '~/.config/vifm/vifmrc' },
             \ '~/Documents/code',
             \ '~/Pictures',
             \ ]

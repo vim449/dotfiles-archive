@@ -70,6 +70,7 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+nnoremap <leader>ps :Rg<SPACE>
 
 "Git grep
 command! -bang -nargs=* GGrep

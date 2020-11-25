@@ -22,8 +22,6 @@ set foldmethod=indent
 set foldlevel=99
 
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-set termguicolors
 set noshowmode
 
 " Give more space for displaying messages.

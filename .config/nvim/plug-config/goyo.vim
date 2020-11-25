@@ -1,1 +1,1 @@
-nnoremap <leader>z :Goyo
+nnoremap <leader>z :Goyo<CR>
