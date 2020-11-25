@@ -23,17 +23,17 @@
        ;;layout           ; auie,ctrsnm is the superior home row
 
        :completion
-       (company +childframe)      ; the ultimate code completion backend
-       ;;(helm +fuzzy)    ; the *other* search engine for love and life
-       ;;ido              ; the other *other* search engine...
-       (ivy +fuzzy +icons, +fonts)               ; a search engine for love and life
+       (company +childframe)       ; the ultimate code completion backend
+       ;;(helm +fuzzy)             ; the *other* search engine for love and life
+       ;;ido                       ; the other *other* search engine...
+       (ivy +fuzzy +icons, +fonts) ; a search engine for love and life
 
        :ui
        ;;deft             ; notational velocity for Emacs
        doom               ; what makes DOOM look the way it does
        doom-dashboard     ; a nifty splash screen for Emacs
        doom-quit          ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)
+       (emoji +unicode)   ; 🙂
        ;;fill-column      ; a `fill-column' indicator
        hl-todo            ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        hydra              ; transient state controller
@@ -50,7 +50,7 @@
        unicode            ; extended unicode support for various languages
        vc-gutter          ; vcs diff in the fringe
        vi-tilde-fringe    ; fringe tildes to mark beyond EOB
-       ;;window-select    ; visually switch windows
+       window-select      ; visually switch windows
        workspaces         ; tab emulation, persistence & separate workspaces
        zen                ; distraction-free coding or writing
 
@@ -58,7 +58,7 @@
        (evil +everywhere) ; come to the dark side, we have cookies
        file-templates     ; auto-snippets for empty files
        fold               ; (nigh) universal code folding
-       ;;(format +onsave)   ; automated prettiness
+       ;;(format +onsave) ; automated prettiness
        ;;god              ; run Emacs commands without modifier keys
        ;;lispy            ; vim for lisp, for people who don't like vim
        multiple-cursors   ; editing in many places at once
@@ -71,7 +71,7 @@
        :emacs
        (dired +icons)     ; making dired pretty [functional]
        electric           ; smarter, keyword-based electric-indent
-       (ibuffer +icons)            ; interactive buffer management
+       (ibuffer +icons)   ; interactive buffer management
        (undo +tree)       ; persistent, smarter undo for your inevitable mistakes
        vc                 ; version-control and Emacs, sitting in a tree
 
@@ -88,26 +88,29 @@
 
        :tools
        ;;ansible
-       (debugger +lsp)    ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)     ; FIXME stepping through code, to help you add bugs
        ;;direnv
        ;;docker
-       editorconfig       ; let someone else argue about tabs vs spaces
-       ;;ein              ; tame Jupyter notebooks with emacs
-       (eval +overlay)    ; run code, run (also, repls)
-       gist               ; interacting with github gists
-       (lookup dictionary)              ; navigate your code and its documentation
+       editorconfig        ; let someone else argue about tabs vs spaces
+       ;;ein               ; tame Jupyter notebooks with emacs
+       (eval +overlay)     ; run code, run (also, repls)
+       gist                ; interacting with github gists
+       (lookup dictionary) ; navigate your code and its documentation
        (lsp +peek)
-       ;;macos            ; MacOS-specific commands
-       (magit +forge)     ; a git porcelain for Emacs
-       make               ; run make tasks from Emacs
-       ;;pass             ; password manager for nerds
-       pdf                ; pdf enhancements
-       ;;prodigy          ; FIXME managing external services & code builders
-       rgb                ; creating color strings
-       taskrunner         ; taskrunner for all your projects
-       ;;terraform        ; infrastructure as code
-       ;;tmux             ; an API for interacting with tmux
-       ;;upload           ; map local to remote projects via ssh/ftp
+       (magit +forge)      ; a git porcelain for Emacs
+       make                ; run make tasks from Emacs
+       ;;pass              ; password manager for nerds
+       pdf                 ; pdf enhancements
+       ;;prodigy           ; FIXME managing external services & code builders
+       rgb                 ; creating color strings
+       taskrunner          ; taskrunner for all your projects
+       ;;terraform         ; infrastructure as code
+       ;;tmux              ; an API for interacting with tmux
+       ;;upload            ; map local to remote projects via ssh/ftp
+
+       :os
+       (:if IS-MAC macos)  ; improve compatibility with macOS
+       ;;tty               ; improve the terminal Emacs experience
 
        :lang
        ;;agda             ; types of types of types of types...
@@ -122,7 +125,7 @@
        ;;elixir           ; erlang done right
        ;;elm              ; care for a cup of TEA?
        emacs-lisp         ; drown in parentheses
-       ;;erlang           ; an elegant language for a more civilized age
+       ;;erlang          ; an elegant language for a more civilized age
        ;;ess              ; emacs speaks statistics
        ;;faust            ; dsp, but you get to keep your soul
        ;;fsharp           ; ML stands for Microsoft's Language
@@ -131,13 +134,13 @@
        ;;(go +lsp)        ; the hipster dialect
        (haskell +lsp)     ; a language that's lazier than I am
        ;;hy               ; readability of scheme w/ speed of python
-       ;;idris            ;
+       ;;idris            ; a language you can depend on
        ;;json             ; At least it ain't XML
        (java +lsp)        ; the poster child for carpal tunnel syndrome
        ;;javascript       ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia            ; a better, faster MATLAB
        ;;kotlin           ; a better, slicker Java(Script)
-       ;latex             ; writing papers in Emacs has never been so fun
+       ;;latex            ; writing papers in Emacs has never been so fun
        ;;lean
        ;;factor
        ;;ledger           ; an accounting system in Emacs
@@ -146,7 +149,7 @@
        ;;nim              ; python + lisp at the speed of c
        ;;nix              ; I hereby declare "nix geht mehr!"
        ;;ocaml            ; an objective camel
-       (org +brain +dragndrop +pretty +gnuplot +present) ; organize your plain life in plain text
+       (org +brain +pretty +gnuplot +present) ; organize your plain life in plain text
        ;;php              ; perl's insecure younger brother
        ;;plantuml         ; diagrams for confusing people more
        ;;purescript       ; javascript, but functional
@@ -176,7 +179,7 @@
        :app
        calendar
        ;;irc               ; how neckbeards socialize
-       ;; (rss +org)        ; emacs as an RSS reader
+       ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 
        :config

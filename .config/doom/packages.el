@@ -61,7 +61,6 @@
 (package! evil-quickscope)
 (package! ivy-posframe)
 (package! virtualenvwrapper)
-(package! rainbow-mode)
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! cdlatex)
