@@ -11,7 +11,7 @@ ignore_failures = ["stack"]
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-no_retry = true
+#no_retry = true
 
 # Run inside tmux
 #run_in_tmux = true
@@ -49,7 +49,7 @@ cleanup = true
 #arguments = "--rebase --autostash"
 
 #[composer]
-self_update = true
+#self_update = true
 
 # Commands to run before anything
 #[pre_commands]
@@ -59,6 +59,9 @@ self_update = true
 #[commands]
 #"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 
+#[brew]
+#greedy_cask = true
+
 #[linux]
 # Arguments to pass yay when updating packages
 #yay_arguments = "--nodevel"
@@ -67,7 +70,12 @@ self_update = true
 #emerge_sync_flags = "-q"
 #emerge_update_flags = "-uDNa --with-bdeps=y world"
 
+#[windows]
+# Manually select Windows updates
+#accept_all_updates = false
+#open_remotes_in_new_terminal = true
+
 # Causes Topgrade to rename itself during the run to allow package managers
 # to upgrade it. Use this only if you installed Topgrade by using a package
 # manager such as Scoop to Cargo
-#self_rename = true
+#self_rename = trueself_rename = true

@@ -66,7 +66,6 @@ plugins=(
     autojump
     git
     archlinux
-    gradle
     zsh-autosuggestions
     zsh-syntax-highlighting
     vi-mode
