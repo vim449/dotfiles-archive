@@ -1,6 +1,6 @@
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-map gs <Plug>(easymotion-prefix)
+nmap gs <Plug>(easymotion-prefix)
 
 "Snipe alternative
 nmap s <Plug>(easymotion-overwin-f2)

@@ -9,7 +9,7 @@ if dein#load_state('~/.cache/dein')
   "Causes highlight to go away on cursor movement
   call dein#add('junegunn/vim-slash')
   "Adds other part of bracket pairs in insert mode
-  call dein#add('jiangmiao/auto-pairs', {'on_i': 1})
+  call dein#add('jiangmiao/auto-pairs', {'on_event': 'InsertEnter'})
   "Finds root of project and makes that cwd
   call dein#add('airblade/vim-rooter')
   "Highlights first letter of each word that could be reached with F
@@ -36,10 +36,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/fzf.vim', {'on_cmd': "Files"})
   call dein#add('stsewd/fzf-checkout.vim', { 'on_cmd': 'GCheckout' })
   "LSP for vim
-  call dein#add('neoclide/coc.nvim', { 'on_i': 1, 'merged': 0, 'rev': 'master', 'build': 'yarn install --frozen-lockfile' })
+  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'master', 'build': 'yarn install --frozen-lockfile', 'on_event': 'InsertEnter' })
   "Snippets
-  call dein#add('honza/vim-snippets', {'on_i': 1})
-  call dein#add('mattn/emmet-vim', {'on_i': 1})
+  call dein#add('honza/vim-snippets', {'on_event': 'InsertEnter'})
+  call dein#add('mattn/emmet-vim', {'on_event': 'InsertEnter'})
   "Interactive REPL scratchpad
   call dein#add('metakirby5/codi.vim', { 'on_cmd': 'Codi' })
   "Grammar checker
@@ -52,11 +52,11 @@ if dein#load_state('~/.cache/dein')
   "UNIX helper
   call dein#add('tpope/vim-eunuch')
   "Surrounding pair helper
-  call dein#add('tpope/vim-surround', {'lazy': 1, 'depends': ['vim-repeat']})
+  call dein#add('tpope/vim-surround', {'on_map': ['ys', 'cs', 'ds'], 'depends': ['vim-repeat']})
   "Making . great again
   call dein#add('tpope/vim-repeat', {'on_map': '.'})
   "Better comment plugin
-  call dein#add('tpope/vim-commentary')
+  call dein#add('tpope/vim-commentary', {'on_map': 'gcc', 'depends': ['vim-repeat']})
 
   call dein#add('glacambre/firenvim', { 'hook_post_update': { _ -> firenvim#install(0) } })
 
