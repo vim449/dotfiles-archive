@@ -1,0 +1,4 @@
+# Use single line prompt
+add_newline = false
+[line_break]
+disabled = true
