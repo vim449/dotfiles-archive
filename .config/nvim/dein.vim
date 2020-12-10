@@ -36,7 +36,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('junegunn/fzf.vim', {'on_cmd': "Files"})
   call dein#add('stsewd/fzf-checkout.vim', { 'on_cmd': 'GCheckout' })
   "LSP for vim
-  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'master', 'build': 'yarn install --frozen-lockfile', 'on_event': 'InsertEnter' })
+  call dein#add('neoclide/coc.nvim', { 'merged': 0 })
   "Snippets
   call dein#add('honza/vim-snippets', {'on_event': 'InsertEnter'})
   call dein#add('mattn/emmet-vim', {'on_event': 'InsertEnter'})
@@ -64,4 +64,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('ryanoasis/vim-devicons')
   call dein#end()
   call dein#save_state()
+endif
+
+"Install missing plugins on startup
+if dein#check_install()
+  call dein#install()
 endif
