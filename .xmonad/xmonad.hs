@@ -110,16 +110,16 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "lxsession &"
+          spawnOnce "dunst &"
           spawnOnce "nitrogen --restore &"
           spawnOnce "picom --config $HOME/.config/picom/picom.conf &"
           spawnOnce "redshift-gtk -t 6300:3000 &"
           spawnOnce "nm-applet &"
-          spawnOnce "volumeicon &"
-          spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 24 &"
+          spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 24 &"
           spawnOnce "/usr/bin/emacs --daemon &"
-          spawnOnce "setxkbmap --option caps:escape &"
           spawnOnce "firewalld &"
           setWMName "LG3D"
+          spawnOnce "setxkbmap --option caps:escape"
 
 myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
@@ -309,9 +309,9 @@ treeselectAction a = TS.treeselectAction a
        ]
    , Node (TS.TSNode "+ Config Files" "config files that edit often" (return ()))
        [ Node (TS.TSNode "+ emacs configs" "My xmonad config files" (return ()))
-         [ Node (TS.TSNode "doom emacs config.org" "doom emacs config" (spawn (myEditor ++ "/home/dominic/.doom.d/config.org"))) []
-         , Node (TS.TSNode "doom emacs init.el" "doom emacs init" (spawn (myEditor ++ "/home/dominic/.doom.d/init.el"))) []
-         , Node (TS.TSNode "doom emacs packages.el" "doom emacs packages" (spawn (myEditor ++ "/home/dominic/.doom.d/packages.el"))) []
+         [ Node (TS.TSNode "doom emacs config.org" "doom emacs config" (spawn (myEditor ++ "/home/dominic/.config/doom/config.org"))) []
+         , Node (TS.TSNode "doom emacs init.el" "doom emacs init" (spawn (myEditor ++ "/home/dominic/.config/doom/init.el"))) []
+         , Node (TS.TSNode "doom emacs packages.el" "doom emacs packages" (spawn (myEditor ++ "/home/dominic/.config/doom/packages.el"))) []
          ]
        , Node (TS.TSNode "+ xmobar configs" "My xmobar config file" (return ()))
            [ Node (TS.TSNode "xmobar mon1" "status bar on monitor 1" (spawn (myEditor ++ "/home/dominic/.config/xmobar/xmobar"))) []
@@ -818,9 +818,9 @@ myKeys =
         , ("<XF86AudioPlay>", spawn (myTerminal ++ "mocp --play"))
         , ("<XF86AudioPrev>", spawn (myTerminal ++ "mocp --previous"))
         , ("<XF86AudioNext>", spawn (myTerminal ++ "mocp --next"))
-        -- , ("<XF86AudioMute>",   spawn "amixer set Master toggle")  -- Bug prevents it from toggling correctly in 12.04.
-        , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
-        , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+        , ("<XF86AudioMute>",   spawn "sh $HOME/.local/bin/volumeControl mute")  -- Bug prevents it from toggling correctly in 12.04.
+        , ("<XF86AudioLowerVolume>", spawn "sh $HOME/.local/bin/volumeControl down")
+        , ("<XF86AudioRaiseVolume>", spawn "sh $HOME/.local/bin/volumeControl up")
         , ("<XF86HomePage>", spawn "brave")
         , ("<XF86Search>", safeSpawn "brave" ["https://www.duckduckgo.com/"])
         , ("<XF86Mail>", runOrRaise "geary" (resource =? "thunderbird"))
