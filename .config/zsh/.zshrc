@@ -27,6 +27,7 @@ EOBUNDLES
 antigen apply
 
 # My attempt at XDG compliance
+export PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.local/bin:$PATH
 export EDITOR=/sbin/nvim
 export VISUAL=/sbin/nvim
 export PYLINTHOME="$XDG_CACHE_HOME/pylint"

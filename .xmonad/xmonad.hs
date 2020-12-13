@@ -751,7 +751,7 @@ myKeys =
         , ("C-g b", bringSelected $ mygridConfig myColorizer) -- bring selected window
 
     -- Tree Select
-        , ("C-t t", treeselectAction tsDefaultConfig)
+        , ("M-S-t", treeselectAction tsDefaultConfig)
 
     -- Windows navigation
         , ("M-m", windows W.focusMaster)  -- Move focus to the master window
