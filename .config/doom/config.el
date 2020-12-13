@@ -145,14 +145,15 @@
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
-(setq mu4e-get-mail-command "mbsync -c ~/.config/doom/mu4e/.mbsyncrc -a"
+(setq mu4e-mu4e-mail-path "~/.local/share/local-mail/")
+(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
       mu4e-update-interval  300
       user-mail-address "adamson.dom@gmail.com"
       user-full-name  "Dominic Adamson"
       mu4e-compose-signature
-       (concat
-         "Dominic Adamson\n"
-         "Sent From Mu4e inside Doom Emacs\n")
+      (concat
+       "Dominic Adamson\n"
+       "Sent from GNU Emacs\n")
       message-send-mail-function 'smtpmail-send-it
       starttls-use-gnutls t
       smtpmail-starttls-credentials '(("smtp.1and1.com" 587 nil nil))
@@ -160,15 +161,15 @@
       smtpmail-default-smtp-server "smtp.1and1.com"
       smtpmail-smtp-server "smtp.1and1.com"
       smtpmail-smtp-service 587
-      mu4e-sent-folder "/Sent"
-      mu4e-drafts-folder "/Drafts"
-      mu4e-trash-folder "/Trash"
-      mu4e-refile-folder "/All Mail"
+      mu4e-sent-folder "/gmail.com/Sent"
+      mu4e-drafts-folder "/gmail.com/Drafts"
+      mu4e-trash-folder "/gmail.com/Trash"
+      mu4e-refile-folder "/gmail.com/All Mail"
       mu4e-maildir-shortcuts
-      '(("/personal/Inbox"    . ?i)
-        ("/personal/Sent"     . ?s)
-        ("/personal/All Mail" . ?a)
-        ("/personal/Trash"    . ?t)))
+      '(("/gmail.com/Inbox"    . ?i)
+        ("/gmail.com/Sent"     . ?s)
+        ("/gmail.com/All Mail" . ?a)
+        ("/gmail.com/Trash"    . ?t)))
 
 (after! neotree
   (setq neo-smart-open t
