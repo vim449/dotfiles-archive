@@ -85,7 +85,7 @@ myTerminal :: String
 myTerminal = "alacritty"   -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "firefox "               -- Sets brave as browser for tree select
+myBrowser = "firefox "               -- Sets firefox as browser for tree select
 -- myBrowser = myTerminal ++ " -e lynx " -- Sets lynx as browser for tree select
 
 myEditor :: String
@@ -112,8 +112,8 @@ myStartupHook = do
           spawnOnce "lxsession &"
           spawnOnce "dunst &"
           spawnOnce "nitrogen --restore &"
-          spawnOnce "picom --config $HOME/.config/picom/picom.conf &"
-          spawnOnce "redshift-gtk -t 6300:3000 &"
+          spawnOnce "picom --experimental-backend &"
+          spawnOnce "redshift-gtk -t 4500:3000 &"
           spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 24 &"
           spawnOnce "/usr/bin/emacs --daemon &"
@@ -737,7 +737,7 @@ myKeys =
     -- Floating windows
         , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
         , ("M-t", withFocused $ windows . W.sink)  -- Push floating window back to tile
-        , ("M-S-t", sinkAll)                       -- Push ALL floating windows to tile
+        -- , ("M-S-t", sinkAll)                       -- Push ALL floating windows to tile
 
     -- Increase/decrease spacing (gaps)
         , ("M-d", decWindowSpacing 4)           -- Decrease window spacing
@@ -821,8 +821,8 @@ myKeys =
         , ("<XF86AudioMute>",   spawn "sh $HOME/.local/bin/volumeControl mute")  -- Bug prevents it from toggling correctly in 12.04.
         , ("<XF86AudioLowerVolume>", spawn "sh $HOME/.local/bin/volumeControl down")
         , ("<XF86AudioRaiseVolume>", spawn "sh $HOME/.local/bin/volumeControl up")
-        , ("<XF86HomePage>", spawn "brave")
-        , ("<XF86Search>", safeSpawn "brave" ["https://www.duckduckgo.com/"])
+        , ("<XF86HomePage>", spawn myBrowser)
+        , ("<XF86Search>", safeSpawn myBrowser ["https://www.duckduckgo.com/"])
         , ("<XF86Mail>", runOrRaise "geary" (resource =? "thunderbird"))
         , ("<XF86Calculator>", runOrRaise "gcalctool" (resource =? "gcalctool"))
         , ("<XF86Eject>", spawn "toggleeject")
@@ -843,7 +843,7 @@ myKeys =
 main :: IO ()
 main = do
     -- Launching instances of xmobar on their monitors.
-    xmproc0 <- spawnPipe "xmobar /home/dominic/.config/xmobar/xmobar"
+    xmproc0 <- spawnPipe ".cabal/bin/xmobar /home/dominic/.config/xmobar/xmobar"
     -- the xmonad, ya know...what the WM is named after!
     xmonad $ ewmh def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
@@ -858,7 +858,8 @@ main = do
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
-        , layoutHook         = showWName' myShowWNameTheme $ myLayoutHook
+        , layoutHook         = myLayoutHook
+        -- , layoutHook         = showWName' myShowWNameTheme $ myLayoutHook
         , workspaces         = myClickableWorkspaces
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
