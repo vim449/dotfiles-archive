@@ -414,6 +414,30 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
              "CANCELLED(c)" )))) ; Task has been cancelled
 #+END_SRC
 
+I was tired of having to run org-babel-tangle after saving my literate dotfiles. So the following function runs org-babel-tangle upon saving any org-mode buffer. This is asynchronous meaning that it dispatches the tangle function to a subprocess, so that the main Emacs is not blocked while it runs.
+
+#+BEGIN_SRC emacs-lisp
+(defun dt/org-babel-tangle-async (file)
+  "Invoke `org-babel-tangle-file' asynchronously."
+  (message "Tangling %s..." (buffer-file-name))
+  (async-start
+   (let ((args (list file)))
+     `(lambda ()
+        (require 'org)
+        ;;(load "~/.emacs.d/init.el")
+        (let ((start-time (current-time)))
+          (apply #'org-babel-tangle-file ',args)
+          (format "%.2f" (float-time (time-since start-time))))))
+   (let ((message-string (format "Tangling %S completed after " file)))
+     `(lambda (tangle-time)
+        (message (concat ,message-string
+                         (format "%s seconds" tangle-time)))))))
+
+(defun dt/org-babel-tangle-current-buffer-async ()
+  "Tangle current buffer asynchronously."
+  (dt/org-babel-tangle-async (buffer-file-name)))
+#+END_SRC
+
 * REGISTERS
 Emacs registers are compartments where you can save text, rectangles and positions for later use. Once you save text or a rectangle in a register, you can copy it into the buffer once or many times; once you save a position in a register, you can jump back to that position once or many times. The default GNU Emacs keybindings for these commands (with the exception of counsel-register) involves 'C-x r' followed by one or more other keys. I wanted to make this a little more user friendly, and since I am using Doom Emacs, I choose to replace the 'C-x r' part of the key chords with 'SPC r'.
 
@@ -511,8 +535,9 @@ Winner mode has been included with GNU Emacs since version 20. This is a global 
       :desc "Winner undo"
       "w <left>" #'winner-undo)
 #+END_SRC
+
 * QUICKSCOPE
-Quicksope is an extension that shows the first letter of each word that could be reached with =F, f, T, t, etc=
+Quickscope is an extension that shows the first letter of each word that could be reached with =F, f, T, t, etc=
 #+BEGIN_SRC emacs-lisp
 (global-evil-quickscope-always-mode 1)
 #+END_SRC

@@ -234,6 +234,26 @@
              "DONE(d)"           ; Task has been completed
              "CANCELLED(c)" )))) ; Task has been cancelled
 
+(defun dt/org-babel-tangle-async (file)
+  "Invoke `org-babel-tangle-file' asynchronously."
+  (message "Tangling %s..." (buffer-file-name))
+  (async-start
+   (let ((args (list file)))
+     `(lambda ()
+        (require 'org)
+        ;;(load "~/.emacs.d/init.el")
+        (let ((start-time (current-time)))
+          (apply #'org-babel-tangle-file ',args)
+          (format "%.2f" (float-time (time-since start-time))))))
+   (let ((message-string (format "Tangling %S completed after " file)))
+     `(lambda (tangle-time)
+        (message (concat ,message-string
+                         (format "%s seconds" tangle-time)))))))
+
+(defun dt/org-babel-tangle-current-buffer-async ()
+  "Tangle current buffer asynchronously."
+  (dt/org-babel-tangle-async (buffer-file-name)))
+
 (map! :leader
       :desc "Copy to register"
       "r c" #'copy-to-register
