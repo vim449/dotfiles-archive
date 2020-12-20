@@ -174,8 +174,6 @@ These are commands we want XMonad to execute on startup, such as running a compo
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "lxsession &"
-          spawnOnce "dunst &"
-          spawnOnce "nitrogen --restore &"
           spawnOnce "picom --experimental-backend &"
           spawnOnce "redshift-gtk -t 4500:3000 &"
           spawnOnce "nm-applet &"
@@ -183,7 +181,6 @@ myStartupHook = do
           spawnOnce "/usr/bin/emacs --daemon &"
           spawnOnce "light-locker &"
           setWMName "LG3D"
-          spawnOnce "setxkbmap --option caps:escape"
 #+END_SRC
 
 * Gridselect
