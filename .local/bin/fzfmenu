@@ -1,0 +1,1 @@
+exec $(ls $(echo $PATH | sed -e 's/:/\n/g') | sed '/^\//d'| awk '!seen[$0]++' | sort | fzf)

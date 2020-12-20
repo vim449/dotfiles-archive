@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+choice=$(fc-list -f "%{file}\n" | dmenu -c -l 20)
+echo $choice
+display "$choice"
