@@ -224,14 +224,16 @@ myAppGrid = [ ("Blender", "blender")
                  , ("VirtManager", "virt-manager")
                  , ("LibreOffice Impress", "loimpress")
                  , ("LibreOffice Writer", "lowriter")
+                 , ("LibreOffice Calc", "localc")
                  , ("OBS", "obs")
                  , ("PCManFM", "pcmanfm")
                  , ("ViFM", (myTerminal ++ " -e vifm"))
                  , ("VLC", "vlc")
                  , ("Update", (myTerminal ++ "-e yay -Syu"))
                  , ("Terminal", myTerminal)
-                 , ("Nitrogen", "nitrogen")
                  , ("HTop", (myTerminal ++ " -e htop"))
+                 , ("Wal", (myTerminal ++ " -e setbg"))
+                 , ("Lxappearance", "lxappearance")
                  ]
 #+END_SRC
 
@@ -299,7 +301,6 @@ treeselectAction a = TS.treeselectAction a
        , Node (TS.TSNode "Firewall-config" "GUI uncomplicated firewall" (spawn "firewall-config")) []
        , Node (TS.TSNode "Htop" "Terminal process viewer" (spawn (myTerminal ++ " -e htop"))) []
        , Node (TS.TSNode "LXAppearance" "Customize look and feel" (spawn "lxappearance")) []
-       , Node (TS.TSNode "Nitrogen" "Wallpaper viewer and setter" (spawn "nitrogen")) []
        , Node (TS.TSNode "PCManFM" "Lightweight graphical file manager" (spawn "pcmanfm")) []
        , Node (TS.TSNode "Vifm" "Vim-like file manager" (spawn (myTerminal ++ " -e vifm"))) []
        ]
@@ -407,9 +408,9 @@ treeselectAction a = TS.treeselectAction a
        , Node (TS.TSNode "zshrc" "Config for the z shell" (spawn (myEditor ++ "/home/dominic/.config/zsh/.zshrc"))) []
        ]
    , Node (TS.TSNode "+ Screenshots" "take a screenshot" (return ()))
-       [ Node (TS.TSNode "Quick fullscreen" "take screenshot immediately" (spawn "scrot -d 1 ~/scrot/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
-       , Node (TS.TSNode "Delayed fullscreen" "take screenshot in 5 secs" (spawn "scrot -d 5 ~/scrot/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
-       , Node (TS.TSNode "Section screenshot" "take screenshot of section" (spawn "scrot -s ~/scrot/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
+       [ Node (TS.TSNode "Quick fullscreen" "take screenshot immediately" (spawn "scrot -d 1 ~/Pictures/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
+       , Node (TS.TSNode "Delayed fullscreen" "take screenshot in 5 secs" (spawn "scrot -d 5 ~/Pictures/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
+       , Node (TS.TSNode "Section screenshot" "take screenshot of section" (spawn "scrot -s ~/Pictures/%Y-%m-%d-@%H-%M-%S-scrot.png")) []
        ]
    , Node (TS.TSNode "------------------------" "" (spawn "xdotool key Escape")) []
    , Node (TS.TSNode "+ XMonad" "window manager commands" (return ()))
@@ -992,7 +993,7 @@ myKeys =
         , ("<XF86Mail>", runOrRaise "geary" (resource =? "thunderbird"))
         , ("<XF86Calculator>", runOrRaise "gcalctool" (resource =? "gcalctool"))
         , ("<XF86Eject>", spawn "toggleeject")
-        , ("<Print>", spawn "scrotd 0")
+        , ("<Print>", spawn "scrot -d 0")
         ]
     -- Appending search engine prompts to keybindings list.
     -- Look at "search engines" section of this config for values for "k".
