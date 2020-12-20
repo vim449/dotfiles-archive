@@ -43,34 +43,34 @@
       :desc "Load new theme"
       "h t" #'counsel-load-theme)
 
-(require 'emms-setup)
-(require 'emms-info)
-(require 'emms-cue)
-(require 'emms-mode-line)
-(require 'emms-playing-time)
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
-(emms-playing-time 1)
-(setq emms-source-file-default-directory "~/Music/Non-Classical/70s-80s/"
-      emms-playlist-buffer-name "*Music*"
-      emms-info-asynchronously t
-      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-(map! :leader
-      :desc "Go to emms playlist"
-      "a a" #'emms-playlist-mode-go
-      :leader
-      :desc "Emms pause track"
-      "a x" #'emms-pause
-      :leader
-      :desc "Emms stop track"
-      "a s" #'emms-stop
-      :leader
-      :desc "Emms play previous track"
-      "a p" #'emms-previous
-      :leader
-      :desc "Emms play next track"
-      "a n" #'emms-next)
+;; (require 'emms-setup)
+;; (require 'emms-info)
+;; (require 'emms-cue)
+;; (require 'emms-mode-line)
+;; (require 'emms-playing-time)
+;; (emms-all)
+;; (emms-default-players)
+;; (emms-mode-line 1)
+;; (emms-playing-time 1)
+;; (setq emms-source-file-default-directory "~/Music/Non-Classical/70s-80s/"
+;;       emms-playlist-buffer-name "*Music*"
+;;       emms-info-asynchronously t
+;;       emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+;; (map! :leader
+;;       :desc "Go to emms playlist"
+;;       "a a" #'emms-playlist-mode-go
+;;       :leader
+;;       :desc "Emms pause track"
+;;       "a x" #'emms-pause
+;;       :leader
+;;       :desc "Emms stop track"
+;;       "a s" #'emms-stop
+;;       :leader
+;;       :desc "Emms play previous track"
+;;       "a p" #'emms-previous
+;;       :leader
+;;       :desc "Emms play next track"
+;;       "a n" #'emms-next)
 
 (map! :leader
       :desc "Evaluate elisp in buffer"
@@ -99,9 +99,9 @@
       :desc "Search web for text between BEG/END"
       "s w" #'eww-search-words)
 
-(setq doom-font (font-spec :family "JetbrainsMono Nerd Font" :size 12)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "Hack" :size 12)
-      doom-big-font (font-spec :family "JetbrainsMono Nerd Font" :size 17))
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
