@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #This file is run when a DM logs into a graphical session
-remaps &
-setbg &
+.local/bin/remaps &
+.local/bin/setbg &
 unclutter &
 dunst &
-[[ -f ~/.config/zsh/.zprofile ]] && source ~/.config/zsh/.zshenv
+[[ -f ~/.config/zsh/zprofile ]] && source ~/.config/zsh/zprofile
