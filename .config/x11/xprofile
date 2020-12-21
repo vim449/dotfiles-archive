@@ -5,4 +5,4 @@
 .local/bin/setbg &
 unclutter &
 dunst &
-[[ -f ~/.config/zsh/zprofile ]] && source ~/.config/zsh/zprofile
+ssh-agent xmonad
