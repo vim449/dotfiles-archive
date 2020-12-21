@@ -20,9 +20,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tommcdo/vim-lion')
 
   "Adds nice status line to vim
-  "call dein#add('vim-airline/vim-airline')
-  "Better status line that I am testing
-  call dein#add('glepnir/galaxyline.nvim')
+  call dein#add('vim-airline/vim-airline')
   "Only tolerable theme
   call dein#add('gruvbox-community/gruvbox')
   "Distraction free minor mode

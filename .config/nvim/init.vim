@@ -6,8 +6,7 @@ source $HOME/.config/nvim/keys/mappings.vim
 "Themes
 source $HOME/.config/nvim/themes/syntax.vim
 source $HOME/.config/nvim/themes/gruvbox.vim
-" source $HOME/.config/nvim/themes/airline.vim
-luafile $HOME/.config/nvim/themes/galaxyline.lua
+source $HOME/.config/nvim/themes/airline.vim
 
 "Plugin config
 source $HOME/.config/nvim/plug-config/fzf.vim
