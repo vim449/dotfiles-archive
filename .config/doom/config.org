@@ -211,7 +211,7 @@ Settings related to fonts within Doom Emacs:
 
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
-      doom-variable-pitch-font (font-spec :family "Hack" :size 12)
+      doom-variable-pitch-font (font-spec :family "DejaVuSerif" :size 12)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -293,7 +293,7 @@ I have toggled display-line-numbers-type so I have line numbers displayed. Doom 
 Setting up mu4e which is an email client that works within emacs. You must install mu4e and mbsync (isync in arch) through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
 
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
 (setq mu4e-mu4e-mail-path "~/.local/share/local-mail/")
@@ -412,30 +412,6 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
              "|"                 ; The pipe necessary to separate "active" states and "inactive" states
              "DONE(d)"           ; Task has been completed
              "CANCELLED(c)" )))) ; Task has been cancelled
-#+END_SRC
-
-I was tired of having to run org-babel-tangle after saving my literate dotfiles. So the following function runs org-babel-tangle upon saving any org-mode buffer. This is asynchronous meaning that it dispatches the tangle function to a subprocess, so that the main Emacs is not blocked while it runs.
-
-#+BEGIN_SRC emacs-lisp
-(defun dt/org-babel-tangle-async (file)
-  "Invoke `org-babel-tangle-file' asynchronously."
-  (message "Tangling %s..." (buffer-file-name))
-  (async-start
-   (let ((args (list file)))
-     `(lambda ()
-        (require 'org)
-        ;;(load "~/.emacs.d/init.el")
-        (let ((start-time (current-time)))
-          (apply #'org-babel-tangle-file ',args)
-          (format "%.2f" (float-time (time-since start-time))))))
-   (let ((message-string (format "Tangling %S completed after " file)))
-     `(lambda (tangle-time)
-        (message (concat ,message-string
-                         (format "%s seconds" tangle-time)))))))
-
-(defun dt/org-babel-tangle-current-buffer-async ()
-  "Tangle current buffer asynchronously."
-  (dt/org-babel-tangle-async (buffer-file-name)))
 #+END_SRC
 
 * REGISTERS

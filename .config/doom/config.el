@@ -100,7 +100,7 @@
       "s w" #'eww-search-words)
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
-      doom-variable-pitch-font (font-spec :family "Hack" :size 12)
+      doom-variable-pitch-font (font-spec :family "DejaVuSerif" :size 12)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 17))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -142,7 +142,7 @@
 
 (require 'ox-groff)
 
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
 (setq mu4e-mu4e-mail-path "~/.local/share/local-mail/")
@@ -233,26 +233,6 @@
              "|"                 ; The pipe necessary to separate "active" states and "inactive" states
              "DONE(d)"           ; Task has been completed
              "CANCELLED(c)" )))) ; Task has been cancelled
-
-(defun dt/org-babel-tangle-async (file)
-  "Invoke `org-babel-tangle-file' asynchronously."
-  (message "Tangling %s..." (buffer-file-name))
-  (async-start
-   (let ((args (list file)))
-     `(lambda ()
-        (require 'org)
-        ;;(load "~/.emacs.d/init.el")
-        (let ((start-time (current-time)))
-          (apply #'org-babel-tangle-file ',args)
-          (format "%.2f" (float-time (time-since start-time))))))
-   (let ((message-string (format "Tangling %S completed after " file)))
-     `(lambda (tangle-time)
-        (message (concat ,message-string
-                         (format "%s seconds" tangle-time)))))))
-
-(defun dt/org-babel-tangle-current-buffer-async ()
-  "Tangle current buffer asynchronously."
-  (dt/org-babel-tangle-async (buffer-file-name)))
 
 (map! :leader
       :desc "Copy to register"
