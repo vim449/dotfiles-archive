@@ -7,3 +7,4 @@
 {Intel Open Source Technology Center/Mesa DRI Intel(R) HD Graphics 4000 (IVB GT2)/4.2 (Core Profile) Mesa 20.2.1}=SUPPORTED
 {Intel Open Source Technology Center/Mesa DRI Intel(R) HD Graphics 4000 (IVB GT2)/4.2 (Core Profile) Mesa 20.2.2}=SUPPORTED
 {Intel Open Source Technology Center/Mesa DRI Intel(R) HD Graphics 4000 (IVB GT2)/4.2 (Core Profile) Mesa 20.2.3}=SUPPORTED
+{Intel Open Source Technology Center/Mesa DRI Intel(R) HD Graphics 4000 (IVB GT2)/4.2 (Core Profile) Mesa 20.3.1}=SUPPORTED
