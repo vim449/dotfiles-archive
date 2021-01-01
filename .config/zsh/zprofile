@@ -31,6 +31,8 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export STACK_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/stack"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 
 # Other program settings:
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
@@ -48,5 +50,5 @@ export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 
 # Autostart X if on tty1 and not already running
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-	pgrep xmonad || startx "$XDG_CONFIG_HOME/X11/xinitrc"
+	pgrep xmonad || startx /home/dominic/.config/x11/xinitrc
 fi
