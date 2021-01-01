@@ -5,3 +5,4 @@
 .local/bin/setbg &
 unclutter &
 dunst &
+xss-lock i3lock-fancy &

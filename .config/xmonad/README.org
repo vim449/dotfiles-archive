@@ -179,7 +179,6 @@ myStartupHook = do
           spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           spawnOnce "/usr/bin/emacs --daemon &"
-          spawnOnce "light-locker &"
           setWMName "LG3D"
 #+END_SRC
 
@@ -876,7 +875,7 @@ myKeys =
         [ ("M-C-r", spawn "xmonad --recompile") -- Recompiles xmonad
         , ("M-S-r", spawn "xmonad --restart")   -- Restarts xmonad
         , ("M-S-q", io exitSuccess)             -- Quits xmonad
-        , ("M-S-l", spawn "dm-tool lock")       -- Locks screen
+        , ("M-S-l", spawn "systemctl suspend")       -- Locks screen
 
     -- Run Prompt
         , ("M-S-<Return>", shellPrompt dtXPConfig) -- Shell Prompt
