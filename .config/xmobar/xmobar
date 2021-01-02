@@ -24,7 +24,7 @@ Config { font    = "xft:JetBrains Nerd Font:weight=bold:pixelsize=10:antialias=t
                       -- Disk space free
                     , Run DiskU [("/", "<fn=1>\xf0c7</fn> hdd: <free> free")] [] 60
                       -- Runs custom script to check for pacman updates.
-                    , Run Com "/home/dominic/.local/bin/pacupdate" [] "pacupdate" 36000
+                    , Run Com "/home/dominic/.local/bin/pacupdate" [] "pacupdate" 900
                       -- Network up and down
                     , Run Network "wlp3s0" ["-t", "<fn=1>\xf0ab</fn> <rx>kb  <fn=1>\xf0aa</fn> <tx>kb"] 20
                       -- Runs a standard shell command 'uname -r' to get kernel version
