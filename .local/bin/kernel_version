@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-kernel=$(uname -r | sed 's/-/ /g' | awk '{print $1}')
+kernel=$(uname -r)
+kernel=${kernel%%-*}
 echo "$kernel"
