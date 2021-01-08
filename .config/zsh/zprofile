@@ -48,7 +48,12 @@ export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 
+export GTK_IM_MODULE='fcitx'
+export QT_IM_MODUle='fcitx'
+export SDL_IM_MODULE='fcitx'
+export XMODIFIERS='@im=fcitx'
+
 # Autostart X if on tty1 and not already running
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep xmonad || startx /home/dominic/.config/x11/xinitrc
-fi
+i
