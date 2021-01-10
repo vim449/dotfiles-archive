@@ -39,6 +39,7 @@
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
 (setq doom-theme 'doom-gruvbox)
+(setq doom-modeline-icon t)
 (map! :leader
       :desc "Load new theme"
       "h t" #'counsel-load-theme)
@@ -108,6 +109,7 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+(setq all-the-icons-scale-factor 1.1)
 
 (require 'ivy-posframe)
 (setq ivy-posframe-display-functions-alist
@@ -188,6 +190,25 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+(defun doom/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package! lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . doom/lsp-mode-setup))
+
+(use-package! company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+   ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1))
+
 (map! :leader
       :desc "Edit agenda file"
       "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
@@ -220,19 +241,19 @@
         ;; ex. of org-link-abbrev-alist in action
         ;; [[arch-wiki:Name_of_Page][Description]]
         org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-          '(("google" . "http://www.google.com/search?q=")
-            ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-            ("ddg" . "https://duckduckgo.com/?q=")
-            ("wiki" . "https://en.wikipedia.org/wiki/"))
+        '(("google" . "http://www.google.com/search?q=")
+          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
+          ("ddg" . "https://duckduckgo.com/?q=")
+          ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-          '((sequence
-             "TODO(t)"           ; A task that is ready to be tackled
-             "School(s)"         ; School related assignments
-             "PROJ(p)"           ; A project that contains other tasks
-             "WAIT(w)"           ; Something is holding up this task
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "DONE(d)"           ; Task has been completed
-             "CANCELLED(c)" )))) ; Task has been cancelled
+        '((sequence
+           "TODO(t)"           ; A task that is ready to be tackled
+           "School(s)"         ; School related assignments
+           "PROJ(p)"           ; A project that contains other tasks
+           "WAIT(w)"           ; Something is holding up this task
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "DONE(d)"           ; Task has been completed
+           "CANCELLED(c)" )))) ; Task has been cancelled
 
 (map! :leader
       :desc "Copy to register"

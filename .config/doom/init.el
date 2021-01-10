@@ -29,30 +29,30 @@
        (ivy +fuzzy +icons, +fonts) ; a search engine for love and life
 
        :ui
-       deft             ; notational velocity for Emacs
-       doom               ; what makes DOOM look the way it does
-       doom-dashboard     ; a nifty splash screen for Emacs
-       doom-quit          ; DOOM quit-message prompts when you quit Emacs
-       (emoji +unicode)   ; 🙂
-       ;;fill-column      ; a `fill-column' indicator
-       hl-todo            ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       hydra              ; transient state controller
-       indent-guides      ; highlighted indent columns
-       minimap            ; show a map of the code on the side
-       modeline           ; snazzy, Atom-inspired modeline, plus API
-       ;;nav-flash        ; blink cursor line after big motions
-       neotree            ; a project drawer, like NERDTree for vim
-       ophints            ; highlight the region an operation acts on
-       (popup +defaults)  ; tame sudden yet inevitable temporary windows
-       ;;ligatures        ; ligatures or substitute text with pretty symbols
-       ;;tabs             ; an tab bar for Emacs
-       ;;treemacs         ; a project drawer, like neotree but cooler
-       unicode            ; extended unicode support for various languages
-       vc-gutter          ; vcs diff in the fringe
-       vi-tilde-fringe    ; fringe tildes to mark beyond EOB
-       window-select      ; visually switch windows
-       workspaces         ; tab emulation, persistence & separate workspaces
-       zen                ; distraction-free coding or writing
+       ;;deft                  ; notational velocity for Emacs
+       doom                    ; what makes DOOM look the way it does
+       doom-dashboard          ; a nifty splash screen for Emacs
+       doom-quit               ; DOOM quit-message prompts when you quit Emacs
+       (emoji +unicode +ascii) ; 🙂
+       ;;fill-column           ; a `fill-column' indicator
+       hl-todo                 ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       hydra                   ; transient state controller
+       indent-guides           ; highlighted indent columns
+       minimap                 ; show a map of the code on the side
+       modeline                ; snazzy, Atom-inspired modeline, plus API
+       ;;nav-flash             ; blink cursor line after big motions
+       neotree                 ; a project drawer, like NERDTree for vim
+       ophints                 ; highlight the region an operation acts on
+       (popup +defaults)       ; tame sudden yet inevitable temporary windows
+       ;;ligatures             ; ligatures or substitute text with pretty symbols
+       ;;tabs                  ; an tab bar for Emacs
+       ;;treemacs              ; a project drawer, like neotree but cooler
+       unicode                 ; extended unicode support for various languages
+       vc-gutter               ; vcs diff in the fringe
+       vi-tilde-fringe         ; fringe tildes to mark beyond EOB
+       window-select           ; visually switch windows
+       workspaces              ; tab emulation, persistence & separate workspaces
+       zen                     ; distraction-free coding or writing
 
        :editor
        (evil +everywhere) ; come to the dark side, we have cookies
@@ -116,7 +116,7 @@
        ;;agda             ; types of types of types of types...
        (cc +lsp)          ; C/C++/Obj-C madness
        ;;clojure          ; java with a lisp
-                                        ;common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;common-lisp      ; if you've seen one lisp, you've seen them all
        ;;coq              ; proofs-as-programs
        ;;crystal          ; ruby at the speed of c
        ;;csharp           ; unity, .NET, and mono shenanigans

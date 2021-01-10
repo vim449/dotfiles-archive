@@ -21,6 +21,8 @@
 - [[#mu4e][MU4E]]
 - [[#neotree][NEOTREE]]
 - [[#tree-sitter][TREE-SITTER]]
+- [[#lsp][LSP]]
+- [[#company-mode][Company Mode]]
 - [[#open-specific-files][OPEN SPECIFIC FILES]]
 - [[#org-mode][ORG MODE]]
 - [[#registers][REGISTERS]]
@@ -109,6 +111,7 @@ Setting the theme to doom-one. To try out new themes, I set a keybinding for cou
 
 #+BEGIN_SRC emacs-lisp
 (setq doom-theme 'doom-gruvbox)
+(setq doom-modeline-icon t)
 (map! :leader
       :desc "Load new theme"
       "h t" #'counsel-load-theme)
@@ -208,6 +211,7 @@ Settings related to fonts within Doom Emacs:
 + 'doom-big-font' -- used in doom-big-font-mode; useful for presentations.
 + 'font-lock-comment-face' -- for comments.
 + 'font-lock-keyword-face' -- for keywords with special significance, like ‘for’ and ‘if’ in C.
+This also fixes the truncated mode line problem that occurs occasionally
 
 #+BEGIN_SRC emacs-lisp
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
@@ -219,6 +223,7 @@ Settings related to fonts within Doom Emacs:
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+(setq all-the-icons-scale-factor 1.1)
 #+END_SRC
 
 * IVY
@@ -350,6 +355,36 @@ Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) th
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+end_src
 
+* LSP
+lsp, or Language Server Protocol, is a standard created by microsoft for visual studio code that now is functional on almost every editor. It allows for a consistent interface to receive powerful IDE-like features across many languages.
+
+#+begin_src emacs-lisp
+(defun doom/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package! lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . doom/lsp-mode-setup))
+#+end_src
+
+
+* Company Mode
+Company mode is the preferred completion engine of doom emacs and integrates well with most plugins. The way it is configured in doom is almost perfect but I need to make a few adjustments, namely <TAB> functionality, to make it ideal.
+
+#+begin_src emacs-lisp
+(use-package! company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+   ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1))
+#+end_src
+
 * OPEN SPECIFIC FILES
 Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs. These keybindings use find-file non-interactively since we specify exactly what file to open. The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
 
@@ -399,19 +434,19 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
         ;; ex. of org-link-abbrev-alist in action
         ;; [[arch-wiki:Name_of_Page][Description]]
         org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-          '(("google" . "http://www.google.com/search?q=")
-            ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-            ("ddg" . "https://duckduckgo.com/?q=")
-            ("wiki" . "https://en.wikipedia.org/wiki/"))
+        '(("google" . "http://www.google.com/search?q=")
+          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
+          ("ddg" . "https://duckduckgo.com/?q=")
+          ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-          '((sequence
-             "TODO(t)"           ; A task that is ready to be tackled
-             "School(s)"         ; School related assignments
-             "PROJ(p)"           ; A project that contains other tasks
-             "WAIT(w)"           ; Something is holding up this task
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "DONE(d)"           ; Task has been completed
-             "CANCELLED(c)" )))) ; Task has been cancelled
+        '((sequence
+           "TODO(t)"           ; A task that is ready to be tackled
+           "School(s)"         ; School related assignments
+           "PROJ(p)"           ; A project that contains other tasks
+           "WAIT(w)"           ; Something is holding up this task
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "DONE(d)"           ; Task has been completed
+           "CANCELLED(c)" )))) ; Task has been cancelled
 #+END_SRC
 
 * REGISTERS
