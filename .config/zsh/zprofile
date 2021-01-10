@@ -3,6 +3,7 @@
 # profile file. Runs on login. Environmental variables are set here.
 
 # Adds `~/.local/bin` recursively to $PATH
+export PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.cabal/bin:$PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
 
 # Default programs:
@@ -10,6 +11,7 @@ export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 
+# My attempt at XDG compliance
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -56,4 +58,4 @@ export XMODIFIERS='@im=fcitx'
 # Autostart X if on tty1 and not already running
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep xmonad || startx /home/dominic/.config/x11/xinitrc
-i
+fi

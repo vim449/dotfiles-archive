@@ -26,8 +26,6 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 antigen apply
 
-# My attempt at XDG compliance
-export PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.local/bin:$HOME/.cabal/bin:$PATH
 
 # Default apps
 export EDITOR="nvim"
@@ -54,18 +52,18 @@ export NNN_TRASH=1
 export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# plugins, and themes.
 # For a full list of active aliases, run `alias`.
 alias cls="clear"
 alias vim="nvim"
-alias vimrc="nvim $HOME/.config/nvim/init.vim"
-alias zshrc="nvim $HOME/.config/zsh/.zshrc"
+alias vimrc="$EDITOR $HOME/.config/nvim/init.vim"
+alias zshrc="$EDITOR $HOME/.config/zsh/.zshrc"
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias ls="exa --sort .name --icons"
 alias l="ls -lah"
 alias doom-restart="killall emacs; doom sync; emacs --daemon"
 alias vifm="sh $HOME/.config/vifm/scripts/vifmrun"
+alias cat="bat"
 
 # Keybindings
 bindkey "^ " autosuggest-accept
