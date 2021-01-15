@@ -41,4 +41,10 @@ fun! TrimWhitespace()
     call winrestview(l:save)
 endfun
 
+function Inc(...)
+  let result = g:i
+  let g:i += a:0 > 0 ? a:1 : 1
+  return result
+endfunction
+
 autocmd BufWritePre * :call TrimWhitespace()
