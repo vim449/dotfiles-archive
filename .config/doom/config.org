@@ -22,7 +22,7 @@
 - [[#neotree][NEOTREE]]
 - [[#tree-sitter][TREE-SITTER]]
 - [[#lsp][LSP]]
-- [[#company-mode][Company Mode]]
+- [[#company-mode][COMPANY MODE]]
 - [[#open-specific-files][OPEN SPECIFIC FILES]]
 - [[#org-mode][ORG MODE]]
 - [[#registers][REGISTERS]]
@@ -30,6 +30,7 @@
 - [[#splits][SPLITS]]
 - [[#winner-mode][WINNER MODE]]
 - [[#quickscope][QUICKSCOPE]]
+- [[#magit-forge][MAGIT FORGE]]
 
 * ABOUT THIS CONFIG
 This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it.
@@ -39,15 +40,13 @@ Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers. Bookma
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "List bookmarks"
-      "b L" #'list-bookmarks
-      :leader
-      :desc "Save current bookmarks to bookmark file"
-      "b w" #'bookmark-save)
+      (:prefix-map ("b" . "buffer")
+       :desc "List bookmarks" "L" #'list-bookmarks
+       :desc "Save current bookmarks to bookmark file" "w" #'bookmark-save))
 #+END_SRC
 
 * CENTAUR-TABS
-To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el. Displays tabs at the top of the window similar to tabbed web browsers such as Firefox. I don't actually use tabs in Emacs. I placed this in my config to help others who may want tabs. In the default configuration of Doom Emacs, 'SPC t' is used for "toggle" keybindings, so I choose 'SPC t c' to toggle centaur-tabs. The "g" prefix for keybindings is used for a bunch of evil keybindings in Doom, but "g" plus the arrow keys were not used, so I thought I would bind those for tab navigation. But I did leave the default "g t" and "g T" intact if you prefer to use those for centaur-tabs-forward/backward.
+To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el. Displays tabs at the top of the window similar to tabbed web browsers such as Firefox. I don't actually use tabs in Emacs. I placed this here mainly to practice E-Lisp, also in case I ever need it. In the default configuration of Doom Emacs, 'SPC t' is used for "toggle" keybindings, so I choose 'SPC t c' to toggle centaur-tabs. The "g" prefix for keybindings is used for a bunch of evil keybindings in Doom, but "g" plus the arrow keys were not used, so I thought I would bind those for tab navigation. But I did leave the default "g t" and "g T" intact if you prefer to use those for centaur-tabs-forward/backward.
 
 | COMMAND                     | DESCRIPTION          | KEYBINDING       |
 |-----------------------------+----------------------+------------------|
@@ -77,32 +76,27 @@ To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el. Displa
 * DIRED
 Dired is the file manager within Emacs. Below, I setup keybindings for image previews (peep-dired). Doom Emacs does not use 'SPC d' for any of its keybindings, so I've chosen the format of 'SPC d' plus 'key'.
 
-| COMMAND                                   | DESCRIPTION                                | KEYBINDING |
-|-------------------------------------------+--------------------------------------------+------------|
-| dired                                     | Open dired file manager                    | SPC d d    |
-| dired-jump                                | Jump to current directory in dired         | SPC d j    |
-| (in dired) peep-dired                     | Toggle image previews within dired         | SPC d p    |
-| (in dired) dired-view-file                | View file in dired                         | SPC d v    |
-| (in peep-dired-mode) peep-dired-next-file | Move to next file in peep-dired-mode       | j          |
-| (in peep-dired-mode) peep-dired-prev-file | Move to previous file in peep-dired-mode   | k          |
+| COMMAND                                   | DESCRIPTION                              | KEYBINDING |
+|-------------------------------------------+------------------------------------------+------------|
+| dired                                     | Open dired file manager                  | SPC d d    |
+| dired-jump                                | Jump to current directory in dired       | SPC d j    |
+| (in dired) peep-dired                     | Toggle image previews within dired       | SPC d p    |
+| (in dired) dired-view-file                | View file in dired                       | SPC d v    |
+| (in peep-dired-mode) peep-dired-next-file | Move to next file in peep-dired-mode     | j          |
+| (in peep-dired-mode) peep-dired-prev-file | Move to previous file in peep-dired-mode | k          |
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "Dired"
-      "d d" #'dired
-      :leader
-      :desc "Dired jump to current"
-      "d j" #'dired-jump
+      (:prefix-map ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Dired jump to current" "j" #'dired-jump)
       (:after dired
-        (:map dired-mode-map
-         :leader
-         :desc "Peep-dired image previews"
-         "d p" #'peep-dired
-         :leader
-         :desc "Dired view file"
-         "d v" #'dired-view-file)))
+       (:map dired-mode-map
+        :leader
+        :desc "Peep-dired image previews" "d p" #'peep-dired
+        :desc "Dired view file" "d v" #'dired-view-file)))
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-                                             (kbd "k") 'peep-dired-prev-file)
+  (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 #+END_SRC
 
@@ -110,7 +104,7 @@ Dired is the file manager within Emacs. Below, I setup keybindings for image pre
 Setting the theme to doom-one. To try out new themes, I set a keybinding for counsel-load-theme with 'SPC h t'.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-dracula)
 (setq doom-modeline-icon t)
 (map! :leader
       :desc "Load new theme"
@@ -172,36 +166,24 @@ Changing some keybindings from their defaults to better fit with Doom Emacs, and
 
 #+Begin_src emacs-lisp
 (map! :leader
-      :desc "Evaluate elisp in buffer"
-      "e b" #'eval-buffer
-      :leader
-      :desc "Evaluate defun"
-      "e d" #'eval-defun
-      :leader
-      :desc "Evaluate elisp expression"
-      "e e" #'eval-expression
-      :leader
-      :desc "Evaluate last sexpression"
-      "e l" #'eval-last-sexp
-      :leader
-      :desc "Evaluate elisp in region"
-      "e r" #'eval-region)
+      (:prefix-map ("e" . "evaluate/eww")
+       :desc "Evaluate elisp in buffer" "b" #'eval-buffer
+       :desc "Evaluate defun" "d" #'eval-defun
+       :desc "Evaluate elisp expression" "e" #'eval-expression
+       :desc "Evaluate last sexpression" "l" #'eval-last-sexp
+       :desc "Evaluate elisp in region" "r" #'eval-region))
 #+END_SRC
 
 * EWW
-EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to open in a specific browser (eww) with browse-url-browser-function. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings). I chose to use 'SPC s w' for eww-search-words because Doom Emacs uses 'SPC s' for 'search' commands.
+EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to open in a specific browser (eww) with browse-url-browser-function. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings).
 
 #+BEGIN_SRC emacs-lisp
 (setq browse-url-browser-function 'eww-browse-url)
 (map! :leader
-      :desc "Eww web browser"
-      "e w" #'eww
-      :leader
-      :desc "Eww reload page"
-      "e R" #'eww-reload
-      :leader
-      :desc "Search web for text between BEG/END"
-      "s w" #'eww-search-words)
+      (:prefix-map ("e" . "evaluate/Eww")
+       :desc "Eww web browser" "w" #'eww
+       :desc "Eww reload page" "R" #'eww-reload
+       :desc "Seach web for text in region" "s" #'eww-search-words))
 #+END_SRC
 
 * FONTS
@@ -267,15 +249,14 @@ Available functions (positions) for 'ivy-posframe-display-functions-alist'
 #+END_SRC
 
 ** IVY KEYBINDINGS
-By default, Doom Emacs does not use 'SPC v', so the format I use for these bindings is 'SPC v' plus 'key'.
+By default, Doom Emacs has 'SPC w' for window related commands, so I put these bindings under 'SPC w i'
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "Ivy push view"
-      "v p" #'ivy-push-view
-      :leader
-      :desc "Ivy switch view"
-      "v s" #'ivy-switch-view)
+      (:prefix-map ("w i" . "posframe")
+       :desc "Push view" "p" #'ivy-push-view
+       :desc "Switch view" "s" #'ivy-switch-view
+       :desc "Pop view" "P" #'ivy-pop-view))
 #+END_SRC
 
 * LINE SETTINGS
@@ -301,31 +282,54 @@ Setting up mu4e which is an email client that works within emacs. You must insta
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
-(setq mu4e-mu4e-mail-path "~/.local/share/local-mail/")
-(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
-      mu4e-update-interval  300
-      user-mail-address "adamson.dom@gmail.com"
-      user-full-name  "Dominic Adamson"
-      mu4e-compose-signature
-      (concat
-       "Dominic Adamson\n"
-       "Sent from GNU Emacs\n")
-      message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t
-      smtpmail-starttls-credentials '(("smtp.1and1.com" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.1and1.com" 587 "adamson.dom@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.1and1.com"
-      smtpmail-smtp-server "smtp.1and1.com"
-      smtpmail-smtp-service 587
-      mu4e-sent-folder "/gmail.com/Sent"
-      mu4e-drafts-folder "/gmail.com/Drafts"
-      mu4e-trash-folder "/gmail.com/Trash"
-      mu4e-refile-folder "/gmail.com/All Mail"
-      mu4e-maildir-shortcuts
-      '(("/gmail.com/Inbox"    . ?i)
-        ("/gmail.com/Sent"     . ?s)
-        ("/gmail.com/All Mail" . ?a)
-        ("/gmail.com/Trash"    . ?t)))
+(setq mu4e-maildir "~/.local/share/mail")
+(setq mu4e-change-filenames-when-moving t)
+(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a")
+(setq mu4e-update-interval (* 10 60))
+
+(setq mu4e-contexts
+      (list
+       ;; Personal account
+       (make-mu4e-context
+        :name "Personal"
+        :match-func
+        (lambda (msg)
+          (when msg
+            (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "adamson.dom@gmail.com")
+                (user-full-name    . "Dominic Adamson")
+                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
+
+       ;; School account
+       (make-mu4e-context
+        :name "School"
+        :match-func
+        (lambda (msg)
+          (when msg
+            (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
+                (user-full-name    . "Dominic Adamson")
+                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
+
+(setq mu4e-maildir-shortcuts
+      '(("/Gmail/Inbox"             . ?i)
+        ("/Gmail/[Gmail]/Sent Mail" . ?s)
+        ("/Gmail/[Gmail]/Trash"     . ?t)
+        ("/Gmail/[Gmail]/Drafts"    . ?d)
+        ("/Gmail/[Gmail]/All Mail"  . ?a)
+        ("/SLCC/Inbox"              . ?k)
+        ("/SLCC/[Gmail]/Sent Mail" . ?w)
+        ("/SLCC/[Gmail]/Trash"     . ?g)
+        ("/SLCC/[Gmail]/Drafts"    . ?e)
+        ("/SLCC/[Gmail]/All Mail"  . ?q)))
 #+END_SRC
 
 * NEOTREE
@@ -335,8 +339,7 @@ Neotree is a file tree viewer. When you open neotree, it jumps to the current fi
 (after! neotree
   (setq neo-smart-open t
         neo-window-fixed-size nil)
-  (setq doom-themes-neotree-file-icons t)
-  )
+  (setq doom-themes-neotree-file-icons t))
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
@@ -356,30 +359,32 @@ Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) th
 #+end_src
 
 * LSP
-lsp, or Language Server Protocol, is a standard created by microsoft for visual studio code that now is functional on almost every editor. It allows for a consistent interface to receive powerful IDE-like features across many languages.
+LSP, or Language Server Protocol, is a standard created by microsoft for visual studio code that now is functional on almost every editor. It allows for a consistent interface to receive powerful IDE-like features across many languages.
 
 #+begin_src emacs-lisp
 (defun doom/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+  (lsp-ui-mode 1)
+  (lsp-headerline-breadcrumb-mode 1)
+  (lsp-ui-peek-enable 1)
+  (setq lsp-ui-sideline-show-hover t))
 
 (use-package! lsp-mode
-  :commands (lsp lsp-deferred)
   :hook (lsp-mode . doom/lsp-mode-setup))
 #+end_src
 
-
-* Company Mode
+* COMPANY MODE
 Company mode is the preferred completion engine of doom emacs and integrates well with most plugins. The way it is configured in doom is almost perfect but I need to make a few adjustments, namely <TAB> functionality, to make it ideal.
 
 #+begin_src emacs-lisp
 (use-package! company
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook ((lsp-mode . company-mode)
+         (emacs-lisp-mode . company-mode))
   :bind (:map company-active-map
          ("<tab>" . company-complete-selection))
   (:map lsp-mode-map
-   ("<tab>" . company-indent-or-complete-common))
+   ("<tab>" . company-complete-selection))
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1))
@@ -388,30 +393,22 @@ Company mode is the preferred completion engine of doom emacs and integrates wel
 * OPEN SPECIFIC FILES
 Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs. These keybindings use find-file non-interactively since we specify exactly what file to open. The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
 
-| PATH TO FILE                | DESCRIPTION           | KEYBINDING |
-|-----------------------------+-----------------------+------------|
-| ~/Documents/org/agenda.org  | Edit agenda file      | SPC - a    |
-| ~/.config/doom/config.org"  | Edit doom config.org  | SPC - c    |
-| ~/.config/doom/aliases"     | Edit eshell aliases   | SPC - e    |
-| ~/.config/doom/init.el"     | Edit doom init.el     | SPC - i    |
-| ~/.config/doom/packages.el" | Edit doom packages.el | SPC - p    |
+| PATH TO FILE               | DESCRIPTION           | KEYBINDING |
+|----------------------------+-----------------------+------------|
+| ~/Documents/org/agenda.org | Edit agenda file      | SPC - a    |
+| ~/.config/doom/config.org  | Edit doom config.org  | SPC - c    |
+| ~/.config/doom/aliases     | Edit eshell aliases   | SPC - e    |
+| ~/.config/doom/init.el     | Edit doom init.el     | SPC - i    |
+| ~/.config/doom/packages.el | Edit doom packages.el | SPC - p    |
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "Edit agenda file"
-      "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
-      :leader
-      :desc "Edit doom config.org"
-      "- c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-      :leader
-      :desc "Edit eshell aliases"
-      "- e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
-      :leader
-      :desc "Edit doom init.el"
-      "- i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-      :leader
-      :desc "Edit doom packages.el"
-      "- p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+      (:prefix-map ("-" . "open file")
+      :desc "Edit agenda file" "a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
+      :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+      :desc "Edit eshell aliases" "e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
+      :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+      :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
 #+END_SRC
 
 * ORG MODE
@@ -441,7 +438,7 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to be tackled
-           "School(s)"         ; School related assignments
+           "SCHOOL(s)"         ; School related assignments
            "PROJ(p)"           ; A project that contains other tasks
            "WAIT(w)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
@@ -468,38 +465,18 @@ Emacs registers are compartments where you can save text, rectangles and positio
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "Copy to register"
-      "r c" #'copy-to-register
-      :leader
-      :desc "Frameset to register"
-      "r f" #'frameset-to-register
-      :leader
-      :desc "Insert contents of register"
-      "r i" #'insert-register
-      :leader
-      :desc "Jump to register"
-      "r j" #'jump-to-register
-      :leader
-      :desc "List registers"
-      "r l" #'list-registers
-      :leader
-      :desc "Number to register"
-      "r n" #'number-to-register
-      :leader
-      :desc "Interactively choose a register"
-      "r r" #'counsel-register
-      :leader
-      :desc "View a register"
-      "r v" #'view-register
-      :leader
-      :desc "Window configuration to register"
-      "r w" #'window-configuration-to-register
-      :leader
-      :desc "Increment register"
-      "r +" #'increment-register
-      :leader
-      :desc "Point to register"
-      "r SPC" #'point-to-register)
+      (:prefix-map ("r" . "registers")
+       :desc "Copy to register" "c" #'copy-to-register
+       :desc "Frameset to register" "f" #'frameset-to-register
+       :desc "Insert contents of register" "i" #'insert-register
+       :desc "Jump to register" "j" #'jump-to-register
+       :desc "List registers" "l" #'list-registers
+       :desc "Number to register" "n" #'number-to-register
+       :desc "Interactively choose a register" "r" #'counsel-register
+       :desc "View a register" "v" #'view-register
+       :desc "Window configuration to register" "w" #'window-configuration-to-register
+       :desc "Increment register" "+" #'increment-register
+       :desc "Point to register" "SPC" #'point-to-register))
 #+END_SRC
 
 * SHELLS
@@ -552,3 +529,10 @@ Quickscope is an extension that shows the first letter of each word that could b
 #+BEGIN_SRC emacs-lisp
 (global-evil-quickscope-always-mode 1)
 #+END_SRC
+
+* MAGIT FORGE
+Forge is an extension to magit that allows access to remote ="forges"= such as GitHub. This makes it so that magit can be used to access /everything/ about the repo, like issues, from the comfort of emacs. Doom already sets up magit, so I only need to add verification data to forge
+
+#+begin_src emacs-lisp
+(setq auth-sources '("~/.authinfo.gpg"))
+#+end_src

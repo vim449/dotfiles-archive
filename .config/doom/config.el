@@ -1,9 +1,7 @@
 (map! :leader
-      :desc "List bookmarks"
-      "b L" #'list-bookmarks
-      :leader
-      :desc "Save current bookmarks to bookmark file"
-      "b w" #'bookmark-save)
+      (:prefix-map ("b" . "buffer")
+       :desc "List bookmarks" "L" #'list-bookmarks
+       :desc "Save current bookmarks to bookmark file" "w" #'bookmark-save))
 
 (setq centaur-tabs-set-bar 'over
       centaur-tabs-set-icons t
@@ -21,24 +19,19 @@
                                                (kbd "g <up>") 'centaur-tabs-backward-group)
 
 (map! :leader
-      :desc "Dired"
-      "d d" #'dired
-      :leader
-      :desc "Dired jump to current"
-      "d j" #'dired-jump
+      (:prefix-map ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Dired jump to current" "j" #'dired-jump)
       (:after dired
-        (:map dired-mode-map
-         :leader
-         :desc "Peep-dired image previews"
-         "d p" #'peep-dired
-         :leader
-         :desc "Dired view file"
-         "d v" #'dired-view-file)))
+       (:map dired-mode-map
+        :leader
+        :desc "Peep-dired image previews" "d p" #'peep-dired
+        :desc "Dired view file" "d v" #'dired-view-file)))
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-                                             (kbd "k") 'peep-dired-prev-file)
+  (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-dracula)
 (setq doom-modeline-icon t)
 (map! :leader
       :desc "Load new theme"
@@ -74,31 +67,19 @@
 ;;       "a n" #'emms-next)
 
 (map! :leader
-      :desc "Evaluate elisp in buffer"
-      "e b" #'eval-buffer
-      :leader
-      :desc "Evaluate defun"
-      "e d" #'eval-defun
-      :leader
-      :desc "Evaluate elisp expression"
-      "e e" #'eval-expression
-      :leader
-      :desc "Evaluate last sexpression"
-      "e l" #'eval-last-sexp
-      :leader
-      :desc "Evaluate elisp in region"
-      "e r" #'eval-region)
+      (:prefix-map ("e" . "evaluate/eww")
+       :desc "Evaluate elisp in buffer" "b" #'eval-buffer
+       :desc "Evaluate defun" "d" #'eval-defun
+       :desc "Evaluate elisp expression" "e" #'eval-expression
+       :desc "Evaluate last sexpression" "l" #'eval-last-sexp
+       :desc "Evaluate elisp in region" "r" #'eval-region))
 
 (setq browse-url-browser-function 'eww-browse-url)
 (map! :leader
-      :desc "Eww web browser"
-      "e w" #'eww
-      :leader
-      :desc "Eww reload page"
-      "e R" #'eww-reload
-      :leader
-      :desc "Search web for text between BEG/END"
-      "s w" #'eww-search-words)
+      (:prefix-map ("e" . "evaluate/Eww")
+       :desc "Eww web browser" "w" #'eww
+       :desc "Eww reload page" "R" #'eww-reload
+       :desc "Seach web for text in region" "s" #'eww-search-words))
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "DejaVuSerif" :size 12)
@@ -131,11 +112,10 @@
 (ivy-posframe-mode 1) ; 1 enables posframe-mode, 0 disables it.
 
 (map! :leader
-      :desc "Ivy push view"
-      "v p" #'ivy-push-view
-      :leader
-      :desc "Ivy switch view"
-      "v s" #'ivy-switch-view)
+      (:prefix-map ("w i" . "posframe")
+       :desc "Push view" "p" #'ivy-push-view
+       :desc "Switch view" "s" #'ivy-switch-view
+       :desc "Pop view" "P" #'ivy-pop-view))
 
 (setq display-line-numbers-type 'relative)
 (map! :leader
@@ -147,37 +127,59 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
-(setq mu4e-mu4e-mail-path "~/.local/share/local-mail/")
-(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
-      mu4e-update-interval  300
-      user-mail-address "adamson.dom@gmail.com"
-      user-full-name  "Dominic Adamson"
-      mu4e-compose-signature
-      (concat
-       "Dominic Adamson\n"
-       "Sent from GNU Emacs\n")
-      message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t
-      smtpmail-starttls-credentials '(("smtp.1and1.com" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.1and1.com" 587 "adamson.dom@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.1and1.com"
-      smtpmail-smtp-server "smtp.1and1.com"
-      smtpmail-smtp-service 587
-      mu4e-sent-folder "/gmail.com/Sent"
-      mu4e-drafts-folder "/gmail.com/Drafts"
-      mu4e-trash-folder "/gmail.com/Trash"
-      mu4e-refile-folder "/gmail.com/All Mail"
-      mu4e-maildir-shortcuts
-      '(("/gmail.com/Inbox"    . ?i)
-        ("/gmail.com/Sent"     . ?s)
-        ("/gmail.com/All Mail" . ?a)
-        ("/gmail.com/Trash"    . ?t)))
+(setq mu4e-maildir "~/.local/share/mail")
+(setq mu4e-change-filenames-when-moving t)
+(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a")
+(setq mu4e-update-interval (* 10 60))
+
+(setq mu4e-contexts
+      (list
+       ;; Personal account
+       (make-mu4e-context
+        :name "Personal"
+        :match-func
+        (lambda (msg)
+          (when msg
+            (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "adamson.dom@gmail.com")
+                (user-full-name    . "Dominic Adamson")
+                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
+
+       ;; School account
+       (make-mu4e-context
+        :name "School"
+        :match-func
+        (lambda (msg)
+          (when msg
+            (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
+        :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
+                (user-full-name    . "Dominic Adamson")
+                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
+                (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
+                (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
+                (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
+
+(setq mu4e-maildir-shortcuts
+      '(("/Gmail/Inbox"             . ?i)
+        ("/Gmail/[Gmail]/Sent Mail" . ?s)
+        ("/Gmail/[Gmail]/Trash"     . ?t)
+        ("/Gmail/[Gmail]/Drafts"    . ?d)
+        ("/Gmail/[Gmail]/All Mail"  . ?a)
+        ("/SLCC/Inbox"              . ?k)
+        ("/SLCC/[Gmail]/Sent Mail" . ?w)
+        ("/SLCC/[Gmail]/Trash"     . ?g)
+        ("/SLCC/[Gmail]/Drafts"    . ?e)
+        ("/SLCC/[Gmail]/All Mail"  . ?q)))
 
 (after! neotree
   (setq neo-smart-open t
         neo-window-fixed-size nil)
-  (setq doom-themes-neotree-file-icons t)
-  )
+  (setq doom-themes-neotree-file-icons t))
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
@@ -192,38 +194,33 @@
 
 (defun doom/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+  (lsp-ui-mode 1)
+  (lsp-headerline-breadcrumb-mode 1)
+  (lsp-ui-peek-enable 1)
+  (setq lsp-ui-sideline-show-hover t))
 
 (use-package! lsp-mode
-  :commands (lsp lsp-deferred)
   :hook (lsp-mode . doom/lsp-mode-setup))
 
 (use-package! company
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook ((lsp-mode . company-mode)
+         (emacs-lisp-mode . company-mode))
   :bind (:map company-active-map
          ("<tab>" . company-complete-selection))
   (:map lsp-mode-map
-   ("<tab>" . company-indent-or-complete-common))
+   ("<tab>" . company-complete-selection))
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1))
 
 (map! :leader
-      :desc "Edit agenda file"
-      "- a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
-      :leader
-      :desc "Edit doom config.org"
-      "- c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-      :leader
-      :desc "Edit eshell aliases"
-      "- e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
-      :leader
-      :desc "Edit doom init.el"
-      "- i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-      :leader
-      :desc "Edit doom packages.el"
-      "- p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el")))
+      (:prefix-map ("-" . "open file")
+      :desc "Edit agenda file" "a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
+      :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+      :desc "Edit eshell aliases" "e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
+      :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+      :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
 
 (after! org
   (require 'org-bullets)  ; Nicer bullets in org-mode
@@ -248,7 +245,7 @@
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to be tackled
-           "School(s)"         ; School related assignments
+           "SCHOOL(s)"         ; School related assignments
            "PROJ(p)"           ; A project that contains other tasks
            "WAIT(w)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
@@ -256,38 +253,18 @@
            "CANCELLED(c)" )))) ; Task has been cancelled
 
 (map! :leader
-      :desc "Copy to register"
-      "r c" #'copy-to-register
-      :leader
-      :desc "Frameset to register"
-      "r f" #'frameset-to-register
-      :leader
-      :desc "Insert contents of register"
-      "r i" #'insert-register
-      :leader
-      :desc "Jump to register"
-      "r j" #'jump-to-register
-      :leader
-      :desc "List registers"
-      "r l" #'list-registers
-      :leader
-      :desc "Number to register"
-      "r n" #'number-to-register
-      :leader
-      :desc "Interactively choose a register"
-      "r r" #'counsel-register
-      :leader
-      :desc "View a register"
-      "r v" #'view-register
-      :leader
-      :desc "Window configuration to register"
-      "r w" #'window-configuration-to-register
-      :leader
-      :desc "Increment register"
-      "r +" #'increment-register
-      :leader
-      :desc "Point to register"
-      "r SPC" #'point-to-register)
+      (:prefix-map ("r" . "registers")
+       :desc "Copy to register" "c" #'copy-to-register
+       :desc "Frameset to register" "f" #'frameset-to-register
+       :desc "Insert contents of register" "i" #'insert-register
+       :desc "Jump to register" "j" #'jump-to-register
+       :desc "List registers" "l" #'list-registers
+       :desc "Number to register" "n" #'number-to-register
+       :desc "Interactively choose a register" "r" #'counsel-register
+       :desc "View a register" "v" #'view-register
+       :desc "Window configuration to register" "w" #'window-configuration-to-register
+       :desc "Increment register" "+" #'increment-register
+       :desc "Point to register" "SPC" #'point-to-register))
 
 (setq shell-file-name "/bin/zsh"
       eshell-aliases-file "~/.config/doom/aliases"
@@ -318,3 +295,5 @@
       "w <left>" #'winner-undo)
 
 (global-evil-quickscope-always-mode 1)
+
+(setq auth-sources '("~/.authinfo.gpg"))
