@@ -109,12 +109,10 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
-          spawnOnce "lxsession &"
           spawnOnce "picom --experimental-backend &"
           spawnOnce "redshift-gtk -t 4500:3000 &"
           spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-          spawnOnce "/usr/bin/emacs --daemon &"
           setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)
