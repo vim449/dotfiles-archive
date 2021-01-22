@@ -1,5 +1,5 @@
 (map! :leader
-      (:prefix-map ("b" . "buffer")
+      (:prefix ("b" . "buffer")
        :desc "List bookmarks" "L" #'list-bookmarks
        :desc "Save current bookmarks to bookmark file" "w" #'bookmark-save))
 
@@ -11,20 +11,14 @@
       centaur-tabs-style "slant"
       centaur-tabs-modified-marker "•")
 (map! :leader
-      :desc "Toggle tabs on/off"
-      "t c" #'centaur-tabs-local-mode)
-(evil-define-key 'normal centaur-tabs-mode-map (kbd "g <right>") 'centaur-tabs-forward       ; default Doom binding is 'g t'
-                                               (kbd "g <left>") 'centaur-tabs-backward       ; default Doom binding is 'g T'
-                                               (kbd "g <down>") 'centaur-tabs-forward-group
-                                               (kbd "g <up>") 'centaur-tabs-backward-group)
+      :desc "Toggle tabs on/off" "t c" #'centaur-tabs-local-mode)
 
 (map! :leader
-      (:prefix-map ("d" . "dired")
+      (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
        :desc "Dired jump to current" "j" #'dired-jump)
       (:after dired
        (:map dired-mode-map
-        :leader
         :desc "Peep-dired image previews" "d p" #'peep-dired
         :desc "Dired view file" "d v" #'dired-view-file)))
 (evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
@@ -34,40 +28,31 @@
 (setq doom-theme 'doom-dracula)
 (setq doom-modeline-icon t)
 (map! :leader
-      :desc "Load new theme"
-      "h t" #'counsel-load-theme)
+      :desc "Load new theme" "t h" #'counsel-load-theme)
 
-;; (require 'emms-setup)
-;; (require 'emms-info)
-;; (require 'emms-cue)
-;; (require 'emms-mode-line)
-;; (require 'emms-playing-time)
-;; (emms-all)
-;; (emms-default-players)
-;; (emms-mode-line 1)
-;; (emms-playing-time 1)
-;; (setq emms-source-file-default-directory "~/Music/Non-Classical/70s-80s/"
-;;       emms-playlist-buffer-name "*Music*"
-;;       emms-info-asynchronously t
-;;       emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-;; (map! :leader
-;;       :desc "Go to emms playlist"
-;;       "a a" #'emms-playlist-mode-go
-;;       :leader
-;;       :desc "Emms pause track"
-;;       "a x" #'emms-pause
-;;       :leader
-;;       :desc "Emms stop track"
-;;       "a s" #'emms-stop
-;;       :leader
-;;       :desc "Emms play previous track"
-;;       "a p" #'emms-previous
-;;       :leader
-;;       :desc "Emms play next track"
-;;       "a n" #'emms-next)
+(require 'emms-setup)
+(require 'emms-info)
+(require 'emms-cue)
+(require 'emms-mode-line)
+(require 'emms-playing-time)
+(emms-all)
+(emms-default-players)
+(emms-mode-line 1)
+(emms-playing-time 1)
+(setq emms-source-file-default-directory "~/Music"
+      emms-playlist-buffer-name "*Music*"
+      emms-info-asynchronously t
+      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+(map! :leader
+      (:prefix ("a" . "emms")
+       :desc "Go to emms playlist" "a" #'emms-playlist-mode-go
+       :desc "Emms pause track" "x" #'emms-pause
+       :desc "Emms stop track" "s" #'emms-stop
+       :desc "Emms play previous track" "p" #'emms-previous
+       :desc "Emms play next track" "n" #'emms-next))
 
 (map! :leader
-      (:prefix-map ("e" . "evaluate/eww")
+      (:prefix ("e" . "evaluate/eww")
        :desc "Evaluate elisp in buffer" "b" #'eval-buffer
        :desc "Evaluate defun" "d" #'eval-defun
        :desc "Evaluate elisp expression" "e" #'eval-expression
@@ -76,10 +61,11 @@
 
 (setq browse-url-browser-function 'eww-browse-url)
 (map! :leader
-      (:prefix-map ("e" . "evaluate/Eww")
+      (:prefix ("e" . "evaluate/Eww")
        :desc "Eww web browser" "w" #'eww
        :desc "Eww reload page" "R" #'eww-reload
-       :desc "Seach web for text in region" "s" #'eww-search-words))
+       :desc "Seach web for text in region" "s" #'eww-search-words
+       :desc "Copy URL to clipboard" "c" #'eww-copy-page-url))
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
       doom-variable-pitch-font (font-spec :family "DejaVuSerif" :size 12)
@@ -90,7 +76,7 @@
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-(setq all-the-icons-scale-factor 1.1)
+(setq all-the-icons-scale-factor 1.2)
 
 (require 'ivy-posframe)
 (setq ivy-posframe-display-functions-alist
@@ -112,19 +98,17 @@
 (ivy-posframe-mode 1) ; 1 enables posframe-mode, 0 disables it.
 
 (map! :leader
-      (:prefix-map ("w i" . "posframe")
+      (:prefix ("w i" . "ivy")
        :desc "Push view" "p" #'ivy-push-view
        :desc "Switch view" "s" #'ivy-switch-view
        :desc "Pop view" "P" #'ivy-pop-view))
 
 (setq display-line-numbers-type 'relative)
 (map! :leader
-      :desc "Toggle truncate lines"
-      "t t" #'toggle-truncate-lines)
+      :desc "Toggle truncate lines" "t t" #'toggle-truncate-lines)
 
 (require 'ox-groff)
 
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (require 'smtpmail)
 (setq mu4e-maildir "~/.local/share/mail")
@@ -143,7 +127,10 @@
             (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
         :vars '((user-mail-address . "adamson.dom@gmail.com")
                 (user-full-name    . "Dominic Adamson")
-                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (smtpmail-smtp-server  . "smtp.gmail.com")
+                (smtpmail-smtp-service . 587)
+                (smptmail-stream-type . 'starttls)
                 (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
                 (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
                 (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
@@ -158,39 +145,37 @@
             (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
         :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
                 (user-full-name    . "Dominic Adamson")
-                (mu4e-compose-signature "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                (smtpmail-smtp-server  . "smtp.gmail.com")
+                (smtpmail-smtp-service . 587)
+                (smptmail-stream-type . 'starttls)
                 (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
                 (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
                 (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
                 (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
 
 (setq mu4e-maildir-shortcuts
-      '(("/Gmail/Inbox"             . ?i)
-        ("/Gmail/[Gmail]/Sent Mail" . ?s)
-        ("/Gmail/[Gmail]/Trash"     . ?t)
-        ("/Gmail/[Gmail]/Drafts"    . ?d)
-        ("/Gmail/[Gmail]/All Mail"  . ?a)
-        ("/SLCC/Inbox"              . ?k)
-        ("/SLCC/[Gmail]/Sent Mail" . ?w)
-        ("/SLCC/[Gmail]/Trash"     . ?g)
-        ("/SLCC/[Gmail]/Drafts"    . ?e)
-        ("/SLCC/[Gmail]/All Mail"  . ?q)))
+      '(("/Personal/Inbox"             . ?i)
+        ("/Personal/[Gmail]/Sent Mail" . ?s)
+        ("/Personal/[Gmail]/Trash"     . ?t)
+        ("/Personal/[Gmail]/Drafts"    . ?d)
+        ("/Personal/[Gmail]/All Mail"  . ?a)
+
+        ("/SLCC/Inbox"                 . ?k)
+        ("/SLCC/[Gmail]/Sent Mail"     . ?w)
+        ("/SLCC/[Gmail]/Trash"         . ?g)
+        ("/SLCC/[Gmail]/Drafts"        . ?e)
+        ("/SLCC/[Gmail]/All Mail"      . ?q)))
 
 (after! neotree
   (setq neo-smart-open t
-        neo-window-fixed-size nil)
-  (setq doom-themes-neotree-file-icons t))
+        neo-window-fixed-size nil
+        doom-themes-neotree-file-icons t))
 (after! doom-themes
   (setq doom-neotree-enable-variable-pitch t))
 (map! :leader
       :desc "Toggle neotree file viewer"
       "t n" #'neotree-toggle)
-
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (defun doom/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -201,6 +186,12 @@
 
 (use-package! lsp-mode
   :hook (lsp-mode . doom/lsp-mode-setup))
+
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package! company
   :after lsp-mode
@@ -215,16 +206,15 @@
   (company-idle-delay 0.1))
 
 (map! :leader
-      (:prefix-map ("-" . "open file")
-      :desc "Edit agenda file" "a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
-      :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
-      :desc "Edit eshell aliases" "e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
-      :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
-      :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
+      (:prefix ("-" . "open file")
+       :desc "Edit agenda file" "a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
+       :desc "Edit doom config.org" "c" #'(lambda () (interactive) (find-file "~/.config/doom/config.org"))
+       :desc "Edit eshell aliases" "e" #'(lambda () (interactive) (find-file "~/.config/doom/aliases"))
+       :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
+       :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
 
 (after! org
-  (require 'org-bullets)  ; Nicer bullets in org-mode
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   (setq org-directory "~/Documents/org/"
         org-agenda-files '("~/Documents/org/agenda.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -253,7 +243,7 @@
            "CANCELLED(c)" )))) ; Task has been cancelled
 
 (map! :leader
-      (:prefix-map ("r" . "registers")
+      (:prefix ("r" . "registers")
        :desc "Copy to register" "c" #'copy-to-register
        :desc "Frameset to register" "f" #'frameset-to-register
        :desc "Insert contents of register" "i" #'insert-register
@@ -296,4 +286,11 @@
 
 (global-evil-quickscope-always-mode 1)
 
+(setq ispell-dictionary "en")
+
 (setq auth-sources '("~/.authinfo.gpg"))
+(defun lookup-password (&rest keys)
+  (let ((result (apply #'auth-source-search keys)))
+    (if result
+        (funcall (plist-get (car result) :secret))
+      nil)))
