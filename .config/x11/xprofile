@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #This file is run when a DM logs into a graphical session
-.local/bin/remaps &
-.local/bin/setbg &
+remaps &
+setbg &
 unclutter &
 dunst &
 xss-lock i3lock-fancy &
