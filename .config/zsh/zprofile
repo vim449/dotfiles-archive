@@ -3,8 +3,9 @@
 # profile file. Runs on login. Environmental variables are set here.
 
 # Adds `~/.local/bin` recursively to $PATH
-export PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.cabal/bin:$PATH
-export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
+PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.cabal/bin:$PATH
+PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
+export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 # Default programs:
 export EDITOR="nvim"
