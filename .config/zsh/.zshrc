@@ -47,10 +47,6 @@ export FZF_DEFAULT_COMMAND="fd --type f --ignore-file .gitignore --hidden"
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# NNN config
-export NNN_TRASH=1
-export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes.
 # For a full list of active aliases, run `alias`.
@@ -75,7 +71,6 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
 # Additional files to source
-source /usr/share/nnn/quitcd/quitcd.bash_zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 

@@ -35,7 +35,6 @@ export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export STACK_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/stack"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 
 # Other program settings:
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
