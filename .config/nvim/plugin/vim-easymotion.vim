@@ -1,12 +1,12 @@
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" Force cursor to stay in same column on JK
+let g:EasyMotion_startofline = 0
 
-nmap gs <Plug>(easymotion-prefix)
+map gs <Plug>(easymotion-prefix)
 
 "Snipe alternative
-nmap s <Plug>(easymotion-overwin-f2)
+map s <Plug>(easymotion-overwin-f2)
 
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 " Keep cursor column when JK motion
 let g:EasyMotion_startofline = 0
-

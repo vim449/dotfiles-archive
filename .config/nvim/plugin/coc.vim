@@ -11,7 +11,6 @@ let g:coc_global_extensions = [
     \ 'coc-cssmodules',
     \ 'coc-python',
     \ 'coc-explorer',
-    \ 'coc-prettier',
     \ 'coc-vimlsp',
     \ 'coc-json',
     \ 'coc-marketplace',
