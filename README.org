@@ -3,60 +3,50 @@
 #+AUTHOR: Dominic Adamson
 
 * Basic Information
- These are my system configuration files for all of the apps that I use regularly. My Awesome, Doom, Picom, and Dmenu configurations are based *heavily* upon the configuration files by DistroTube at [[https://gitlab.com/dwt1/dotfiles][dotfiles]]. These configuration files are likely to break and as such should be used as a learning resource rather than as actual configs. In other words, feel free to steal these, but at least change them!
- The programs that currently have a proper configuration file are:
-+ NeoViM
+ The programs that currently have a proper configuration file (but may still be buggy) are:
++ NeoViM (with dein plugin manager)
 + Alacritty
-+ AwesomeWM
 + Blender
 + Dmenu
-+ Spacemacs
 + Doom Emacs
-+ Tmux
-+ Zsh
-+ Picom
-+ OfflineIMAP
-+ Mbsync (Inside Emacs configuration)
++ Zsh (with antigen plugin manager)
++ Picom (jonaburg fork)
++ Mbsync
 + ViFM
++ Xmonad
++ XMobar (needs flag "all-extensions")
++ Starship Prompt
++ X11
++ SXIV
++ Dunst
++ Xkbmap
++ Bat
++ Many Small Shell Scripts
 
 * Install
 ** To install the following dependencies are needed:
-+ =git= for install and updates for all
-+ =fd= required by vim, spacemacs(I think), and doom emacs
++ =git= for install and updates
 + =ripgrep= required by all editors
-+ =rtags= for coc(vim extension) and doom emacs
-+ =mu= for email and mu4e in all emacs
-+ =hub= for github integration for all editors
-+ =spellcheck python-black python-pyflakes python-pytest= (optional) for emacs integration
-+ Nerd fonts including: Hack, Dejavu, and Meslo
++ =mu= for email indexing in mu4e
++ Nerd fonts including: Hack, Dejavu, Meslo, and JetBrainsMono. (not strictly needed, but will make every app basically unusable)
 + =ueberzug= for image previews in ViFM
-+ App that config is for: =dmenu, nvim, alacritty, emacs, blender, tmux, zsh, picom, offlineIMAP/mbsync, awesome, ViFM=
++ =xorg-xinit= to use startx scripts
++ =arandr= to manage screen resolution
++ =exa, xdg-open, autojump, and fd= for zsh aliases
++ =blueman, redshift-gtk, network-manager-applet, trayer, xfce4-power-manager= for full xmonad
 
 These should all be inside of standard repositories or AUR
 
-** Clone this repo into a folder at =~/.config/dotfiles=
-** Please install oh-my-zsh and powerlevel10k for zsh:
-1. Run =sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"= to install oh-my-zsh
-2. Run =git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k= to install powerlevel10k
-3. Run =git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions= to install zsh-autosuggestions
-4. Run =git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting= to install proper syntax highlighting
-5. Run =p10k configure= to create the default config for p10k
-6. Run =chsh /usr/bin/zsh= to set default shell
-7. Update oh-my-zsh with =omz update=
+** Clone this repo into a folder at =~/.config/.dotfiles --bare=
 ** To install doom emacs:
 1. Clone =https://github.com/hlissner/doom-emacs= with a depth of 1 into =~/.config/emacs=
 2. append =$HOME/.config/emacs/bin= to path (already set up if using zsh)
 3. =doom install= will run initial configuration and install core utils
-4. =doom sync= will install and compile all core essentials
+4. =doom sync= will install and compile all enabled modules and plugins
 5. =doom doctor= will list all dependencies needed for current plugins. Install all that are needed for you
-** To install spacemcacs:
-1. clone =https://github.com/syl20bnr/spacemacs= into =~/.config/emacs=
-2. launch spacemacs with =SPACEMACSDIR=$HOME/.config/spacemacs=
 ** To install NeoViM:
 1. simply enter and exit repeatedly until update and install messages are no longer received
 
 * TODOs:
 - TODO Fix Mu4e in doom
 - TODO add width control for dmenu
-- TODO move p10k and ohmyzsh into XDG compliant directories
-- TODO convert all doom emacs configuration into LSP and DAP where possible
