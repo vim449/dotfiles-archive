@@ -2,20 +2,20 @@
 import:
   - ~/.config/alacritty/themes.yml
 
-background_opacity: 0.85
+background_opacity: 0.8
 
 font:
   normal:
-    family: "JetBrainsMono Nerd Font"
+    family: JetBrainsMono Nerd Font
     style: Regular
   bold:
-    family: "JetBrainsMono Nerd Font"
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: "JetBrainsMono Nerd Font"
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: "JetBrainsMono Nerd Font"
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
 
   # Point size
@@ -57,3 +57,4 @@ key_bindings:
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
   - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: T, mods: Control|Shift, chars: "sh ~/.config/alacritty/themes.sh" }
