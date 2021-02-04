@@ -25,7 +25,7 @@
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-gruvbox)
 (setq doom-modeline-icon t)
 (map! :leader
       :desc "Load new theme" "t h" #'counsel-load-theme)
@@ -109,63 +109,60 @@
 
 (require 'ox-groff)
 
-(require 'mu4e)
 (require 'smtpmail)
-(setq mu4e-maildir "~/.local/share/mail")
-(setq mu4e-change-filenames-when-moving t)
-(setq mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a")
-(setq mu4e-update-interval (* 10 60))
+(after! mu4e
+  (setq mu4e-maildir "~/.local/share/mail"
+        mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
+        mu4e-update-interval (* 10 60))
 
-(setq mu4e-contexts
-      (list
-       ;; Personal account
-       (make-mu4e-context
-        :name "Personal"
-        :match-func
-        (lambda (msg)
-          (when msg
-            (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "adamson.dom@gmail.com")
-                (user-full-name    . "Dominic Adamson")
-                (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
-                (smtpmail-smtp-server  . "smtp.gmail.com")
-                (smtpmail-smtp-service . 587)
-                (smptmail-stream-type . 'starttls)
-                (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
-                (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
-                (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
-                (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
+  (setq mu4e-contexts
+        (list
+         ;; Personal account
+         (make-mu4e-context
+          :name "Personal"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "adamson.dom@gmail.com")
+                  (user-full-name    . "Dominic Adamson")
+                  (mu4e-compose-signature . "Dominic Adamson via GMail")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 587)
+                  (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
 
-       ;; School account
-       (make-mu4e-context
-        :name "School"
-        :match-func
-        (lambda (msg)
-          (when msg
-            (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
-        :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
-                (user-full-name    . "Dominic Adamson")
-                (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
-                (smtpmail-smtp-server  . "smtp.gmail.com")
-                (smtpmail-smtp-service . 587)
-                (smptmail-stream-type . 'starttls)
-                (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
-                (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
-                (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
-                (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
+         ;; School account
+         (make-mu4e-context
+          :name "School"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
+                  (user-full-name    . "Dominic Adamson")
+                  (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 587)
+                  (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
 
-(setq mu4e-maildir-shortcuts
-      '(("/Personal/Inbox"             . ?i)
-        ("/Personal/[Gmail]/Sent Mail" . ?s)
-        ("/Personal/[Gmail]/Trash"     . ?t)
-        ("/Personal/[Gmail]/Drafts"    . ?d)
-        ("/Personal/[Gmail]/All Mail"  . ?a)
+  (setq mu4e-maildir-shortcuts
+        '(("/Personal/Inbox"             . ?i)
+          ("/Personal/[Gmail]/Sent Mail" . ?s)
+          ("/Personal/[Gmail]/Trash"     . ?t)
+          ("/Personal/[Gmail]/Drafts"    . ?d)
+          ("/Personal/[Gmail]/All Mail"  . ?a)
 
-        ("/SLCC/Inbox"                 . ?k)
-        ("/SLCC/[Gmail]/Sent Mail"     . ?w)
-        ("/SLCC/[Gmail]/Trash"         . ?g)
-        ("/SLCC/[Gmail]/Drafts"        . ?e)
-        ("/SLCC/[Gmail]/All Mail"      . ?q)))
+          ("/SLCC/Inbox"                 . ?k)
+          ("/SLCC/[Gmail]/Sent Mail"     . ?w)
+          ("/SLCC/[Gmail]/Trash"         . ?g)
+          ("/SLCC/[Gmail]/Drafts"        . ?e)
+          ("/SLCC/[Gmail]/All Mail"      . ?q))))
 
 (after! neotree
   (setq neo-smart-open t
