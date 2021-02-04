@@ -9,3 +9,4 @@ xss-lock i3lock-fancy &
 fcitx5 &
 lxsession &
 emacs --daemon &
+xsetroot -cursor_name left_ptr &
