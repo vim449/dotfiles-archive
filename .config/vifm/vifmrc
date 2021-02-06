@@ -31,7 +31,7 @@ set sortnumbers
 set vimhelp
 set norunexec
 
-colorscheme gruvbox
+colorscheme gruvbox.vifm
 
 set timefmt=%m/%d\ %H:%M
 
@@ -54,7 +54,7 @@ set scrolloff=4
 if !has('win')
     set slowfs=curlftpfs
 endif
-set previewoptions+=graphicsdelay:0
+" set previewoptions+=graphicsdelay:0
 
 set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
@@ -336,9 +336,6 @@ filextype */
 " For Windows:
 " filetype * start, explorer
 
-" GETTING ICONS TO DISPLAY IN VIFM
-source ~/.config/vifm/scripts/vifm_devicons/favicons.vifm
-
 " ------------------------------------------------------------------------------
 
 " What should be saved automatically between vifm runs
@@ -412,3 +409,6 @@ nnoremap <f5> :copy<cr>
 nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
+
+" GETTING ICONS TO DISPLAY IN VIFM
+source ~/.config/vifm/scripts/favicons.vifm
