@@ -12,11 +12,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 Plug 'junegunn/vim-slash' "Causes highlight to go away on cursor movement
 Plug 'jiangmiao/auto-pairs' "Adds other part of bracket pairs in insert mode
 Plug 'airblade/vim-rooter' "Finds root of project and makes that cwd
-Plug 'unblevable/quick-scope' "Highlights first letter of each word that could be reached with F
+Plug 'unblevable/quick-scope' "Makes f faster
 Plug 'mhinz/vim-startify' "Simple start screen
 Plug 'tommcdo/vim-lion' "Adds alignment operators
 Plug 'dbeniamine/cheat.sh-vim' "Cheatsheet
 Plug 'rhysd/vim-grammarous' "Grammar checker
+Plug 'theprimeagen/vim-be-good' "What it sounds like
 
 " Themes and aesthetics
 Plug 'vim-airline/vim-airline' "Adds nice status line to vim
@@ -31,13 +32,15 @@ Plug 'mbbill/undotree', {'on': 'UndotreeToggle' } "Adds undo tree visualizer to 
 Plug 'junegunn/fzf', { 'do': { ->fzf#install() } } "Fuzzy finder
 Plug 'junegunn/fzf.vim' "Second half
 Plug 'stsewd/fzf-checkout.vim', { 'on': 'GCheckout' } "Addon to FZF for git
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "LSP for vim
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "LSP for vim
+Plug 'neovim/nvim-lspconfig'
 Plug 'honza/vim-snippets' "Snippets
 Plug 'mattn/emmet-vim'
 Plug 'metakirby5/codi.vim', { 'on': 'Codi' } "Interactive REPL scratchpad
 Plug 'easymotion/vim-easymotion' "Uses prompts instead of number for motions
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "Treesitter
 Plug 'nvim-treesitter/playground' "Treesitter devel playground
+Plug 'vifm/vifm.vim' "Only functional file manager
 
 Plug 'voldikss/vim-floaterm' "Basically posframe
 Plug 'nvim-lua/popup.nvim' " Random dep for telescope

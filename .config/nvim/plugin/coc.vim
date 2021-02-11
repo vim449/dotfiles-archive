@@ -7,10 +7,8 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-html',
     \ 'coc-css',
-    \ 'coc-emoji',
     \ 'coc-cssmodules',
     \ 'coc-python',
-    \ 'coc-explorer',
     \ 'coc-vimlsp',
     \ 'coc-json',
     \ 'coc-marketplace',
@@ -49,23 +47,3 @@ endfunction
 "Set coc support for airline
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-"Explorer
-let g:coc_explorer_global_presets = {
-\   'floating': {
-\      'position': 'floating',
-\   },
-\   'floatingLeftside': {
-\      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 30,
-\   },
-\   'floatingRightside': {
-\      'position': 'floating',
-\      'floating-position': 'right-center',
-\      'floating-width': 30,
-\   },
-\   'simplify': {
-\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-\   }
-\ }
-nnoremap <silent> <leader>e :CocCommand explorer<CR>
