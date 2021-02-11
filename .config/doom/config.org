@@ -5,6 +5,7 @@
 
 * TABLE OF CONTENTS :toc:noexport:
 - [[#about-this-config][ABOUT THIS CONFIG]]
+- [[#ui-tweaks][UI TWEAKS]]
 - [[#bookmarks-and-buffers][BOOKMARKS AND BUFFERS]]
 - [[#centaur-tabs][CENTAUR-TABS]]
 - [[#dired][DIRED]]
@@ -17,7 +18,6 @@
   - [[#ivy-posframe][IVY-POSFRAME]]
   - [[#ivy-keybindings][IVY KEYBINDINGS]]
 - [[#line-settings][LINE SETTINGS]]
-- [[#manpages][MANPAGES]]
 - [[#mu4e][MU4E]]
 - [[#neotree][NEOTREE]]
 - [[#lsp][LSP]]
@@ -25,6 +25,10 @@
 - [[#company-mode][COMPANY MODE]]
 - [[#open-specific-files][OPEN SPECIFIC FILES]]
 - [[#org-mode][ORG MODE]]
+  - [[#exporters][EXPORTERS]]
+  - [[#ui][UI]]
+  - [[#structure-templates][STRUCTURE TEMPLATES]]
+  - [[#general-setup][GENERAL SETUP]]
 - [[#registers][REGISTERS]]
 - [[#shells][SHELLS]]
 - [[#splits][SPLITS]]
@@ -36,8 +40,16 @@
   - [[#root][root]]
 
 * ABOUT THIS CONFIG
-This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it.
+This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it. Any functions or variables that I declare will be under =doom=.
 
+* UI TWEAKS
+Doom sets up the ui to be almost perfect by default, but there are a few additions that I like to add that are not dependent on any mode or package. I put all of these such tweaks into this source block
+#+begin_src emacs-lisp
+(defvar doom/frame-transparency '(85 . 85))
+;; Set frame transparency
+(set-frame-parameter (selected-frame) 'alpha doom/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,doom/frame-transparency))
+#+end_src
 * BOOKMARKS AND BUFFERS
 Doom Emacs uses 'SPC b' for keybindings related to bookmarks and buffers. Bookmarks are somewhat like registers in that they record positions you can jump to. Unlike registers, they have long names, and they persist automatically from one Emacs session to the next. The prototypical use of bookmarks is to record where you were reading in various files. Regarding buffers, the text you are editing in Emacs resides in an object called a buffer. Each time you visit a file, a buffer is used to hold the file’s text. Each time you invoke Dired, a buffer is used to hold the directory listing.
 
@@ -101,8 +113,9 @@ Dired is the file manager within Emacs. Below, I setup keybindings for image pre
 Setting the theme to doom-gruvbox. To try out new themes, I set a keybinding for counsel-load-theme with 'SPC t h'. Also fixes odd issues with modeline.
 
 #+BEGIN_SRC emacs-lisp
-(setq doom-theme 'doom-gruvbox)
-(setq doom-modeline-icon t)
+(setq doom-modeline-icon t
+      doom-gruvbox-dark-variant "hard"
+      doom-theme 'doom-gruvbox)
 (map! :leader
       :desc "Load new theme" "t h" #'counsel-load-theme)
 #+END_SRC
@@ -257,13 +270,6 @@ I have toggled display-line-numbers-type so I have relative line numbers display
       :desc "Toggle truncate lines" "t t" #'toggle-truncate-lines)
 #+END_SRC
 
-* MANPAGES
-This adds an org-export mode for groff, specifically the mgs macros, but also the ms ones as well. These will show up under 'g' in the export dispatcher.
-
-#+BEGIN_SRC emacs-lisp
-(require 'ox-groff)
-#+END_SRC
-
 * MU4E
 Setting up mu4e which is an email client that works within emacs. You must install mu4e and mbsync (isync in arch) through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
 
@@ -272,7 +278,7 @@ Setting up mu4e which is an email client that works within emacs. You must insta
 (after! mu4e
   (setq mu4e-maildir "~/.local/share/mail"
         mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
-        mu4e-update-interval (* 10 60))
+       mu4e-update-interval (* 10 60))
 
   (setq mu4e-contexts
         (list
@@ -404,11 +410,71 @@ Keybindings to open files that I work with all the time using the find-file comm
 #+END_SRC
 
 * ORG MODE
-Note that I wrapped most of this in (after! org). Without this, my settings might be evaluated too early, which will result in my settings being overwritten by Doom's defaults. I have also enabled org-journal by adding (+journal) to the org section of my Doom Emacs init.el.
+** EXPORTERS
+This adds an org-export mode for groff, specifically the mgs macros, but also the ms ones as well. These will show up under 'g' in the export dispatcher.
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-groff)
+#+END_SRC
+
+** UI
+This changes the fonts and formatting of org mode to make it much better looking.
+#+begin_src emacs-lisp
+(defun doom/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+  (setq visual-fill-column-width 170
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+#+end_src
+
+** STRUCTURE TEMPLATES
+Org Mode’s structure templates feature enables you to quickly insert code blocks into your Org files in combination with org-tempo by typing < followed by the template name like el or py and then press TAB. For example, to insert an empty emacs-lisp block below, you can type <el and press TAB to expand into such a block.
+
+You can add more src block templates below by copying one of the lines and changing the two strings at the end, the first to be the template name and the second to contain the name of the language as it is known by Org Babel.
+
+#+begin_src emacs-lisp
+;; This is needed as of Org 9.2
+(add-to-list 'org-modules 'org-tempo t)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+#+end_src
+
+** GENERAL SETUP
+Note that I wrapped most of this in (after! org). Without this, my settings might be evaluated too early, which will result in my settings being overwritten by Doom's defaults. I have also enabled org-journal by adding (+journal) to the org section of my Doom Emacs init.el. I have this at the bottom of org mode so I can use my utility functions
 
 #+BEGIN_SRC emacs-lisp
 (after! org
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (add-hook 'org-mode-hook 'doom/org-font-setup)
   (setq org-directory "~/Documents/org/"
         org-agenda-files '("~/Documents/org/agenda.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -428,13 +494,13 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
           ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
-           "TODO(t)"           ; A task that is ready to be tackled
+           "TODO(t)"           ; A task that is ready to tackle
            "SCHOOL(s)"         ; School related assignments
            "PROJ(p)"           ; A project that contains other tasks
            "WAIT(w)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-           "DONE(d)"           ; Task has been completed
-           "CANCELLED(c)" )))) ; Task has been cancelled
+           "DONE(d)"           ; Task has completed
+           "CANCELLED(c)" )))) ; Task has cancelled
 #+END_SRC
 
 * REGISTERS

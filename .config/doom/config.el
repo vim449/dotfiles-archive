@@ -1,3 +1,8 @@
+(defvar doom/frame-transparency '(85 . 85))
+;; Set frame transparency
+(set-frame-parameter (selected-frame) 'alpha doom/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,doom/frame-transparency))
+
 (map! :leader
       (:prefix ("b" . "buffer")
        :desc "List bookmarks" "L" #'list-bookmarks
@@ -25,8 +30,9 @@
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
 
-(setq doom-theme 'doom-gruvbox)
-(setq doom-modeline-icon t)
+(setq doom-modeline-icon t
+      doom-gruvbox-dark-variant "hard"
+      doom-theme 'doom-gruvbox)
 (map! :leader
       :desc "Load new theme" "t h" #'counsel-load-theme)
 
@@ -107,13 +113,11 @@
 (map! :leader
       :desc "Toggle truncate lines" "t t" #'toggle-truncate-lines)
 
-(require 'ox-groff)
-
 (require 'smtpmail)
 (after! mu4e
   (setq mu4e-maildir "~/.local/share/mail"
         mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
-        mu4e-update-interval (* 10 60))
+       mu4e-update-interval (* 10 60))
 
   (setq mu4e-contexts
         (list
@@ -210,8 +214,51 @@
        :desc "Edit doom init.el" "i" #'(lambda () (interactive) (find-file "~/.config/doom/init.el"))
        :desc "Edit doom packages.el" "p" #'(lambda () (interactive) (find-file "~/.config/doom/packages.el"))))
 
+(require 'ox-groff)
+
+(defun doom/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.15)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil    :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil    :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil     :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil  :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+  (setq visual-fill-column-width 170
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+;; This is needed as of Org 9.2
+(add-to-list 'org-modules 'org-tempo t)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
 (after! org
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (add-hook 'org-mode-hook 'doom/org-font-setup)
   (setq org-directory "~/Documents/org/"
         org-agenda-files '("~/Documents/org/agenda.org")
         org-default-notes-file (expand-file-name "notes.org" org-directory)
@@ -231,13 +278,13 @@
           ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
-           "TODO(t)"           ; A task that is ready to be tackled
+           "TODO(t)"           ; A task that is ready to tackle
            "SCHOOL(s)"         ; School related assignments
            "PROJ(p)"           ; A project that contains other tasks
            "WAIT(w)"           ; Something is holding up this task
            "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-           "DONE(d)"           ; Task has been completed
-           "CANCELLED(c)" )))) ; Task has been cancelled
+           "DONE(d)"           ; Task has completed
+           "CANCELLED(c)" )))) ; Task has cancelled
 
 (map! :leader
       (:prefix ("r" . "registers")

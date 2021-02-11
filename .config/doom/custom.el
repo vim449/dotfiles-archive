@@ -17,7 +17,7 @@
  '(ibuffer-deletion-face 'modus-theme-mark-del)
  '(ibuffer-marked-face 'modus-theme-mark-sel)
  '(ibuffer-title-face 'modus-theme-pseudo-header)
- '(package-selected-packages '(vimrc-mode lsp-treemacs))
+ '(package-selected-packages '(command-log-mode vimrc-mode lsp-treemacs))
  '(send-mail-function 'mailclient-send-it)
  '(vc-annotate-background-mode nil)
  '(xterm-color-names

@@ -23,10 +23,13 @@
        ;;layout           ; auie,ctrsnm is the superior home row
 
        :completion
-       (company +childframe)                   ; the ultimate code completion backend
-       ;;(helm +fuzzy)                         ; the *other* search engine for love and life
-       ;;ido                                   ; the other *other* search engine...
-       (ivy +fuzzy +icons, +fonts +childframe) ; a search engine for love and life
+       (company +childframe)   ; the ultimate code completion backend
+       ;;(helm +fuzzy)         ; the *other* search engine for love and life
+       ;;ido                   ; the other *other* search engine...
+       (ivy +fuzzy             ; *the* search engine for love and life
+            +icons             ; wasting clock cycles for nothing
+            +prescient         ; typing less to remember more
+            +childframe)       ; ivy anywhere you want it
 
        :ui
        ;;deft                  ; notational velocity for Emacs
@@ -151,8 +154,10 @@
        ;;nim             ; python + lisp at the speed of c
        ;;nix             ; I hereby declare "nix geht mehr!"
        ;;ocaml           ; an objective camel
-       (org +pretty      ; organize your plain life in plain text
+       (org +pretty      ; organize your plain life in less plain text
+            +dragndrop   ; images are a pain to insert
             +brain       ; notes are useful if you remember them
+            +noter       ; notes are even more useful when they are with content
             +gnuplot     ; we all hate excel
             +present     ; beamer is hard
             +pandoc)     ; org already exports enough
