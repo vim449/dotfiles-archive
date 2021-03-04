@@ -6,6 +6,7 @@ set relativenumber number
 set nowrap
 set smartcase
 set incsearch
+set nohlsearch
 set ignorecase
 
 set noswapfile
@@ -14,7 +15,7 @@ set undodir=$HOME/.config/nvim/undodir
 set undofile
 set hidden
 
-set scrolloff=8
+set scrolloff=2
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
