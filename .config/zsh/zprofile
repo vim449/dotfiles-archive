@@ -35,6 +35,11 @@ export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export STACK_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/stack"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export ANDROID_PREFS_ROOT="${XDG_CONFIG_HOME:-$HOME/.config}/android"
+export ADB_KEYS_PATH="$ANDROID_PREFS_ROOT"
+export ANDROID_EMULATOR_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/android/emulator"
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}/java"
+export GRADLE_USER_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gradle"
 
 # Other program settings:
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
@@ -54,6 +59,9 @@ export GTK_IM_MODULE='fcitx'
 export QT_IM_MODUle='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
+
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Autostart X if on tty1 and not already running
 if [[ "$(tty)" = "/dev/tty1" ]]; then
