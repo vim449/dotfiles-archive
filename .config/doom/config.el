@@ -1,4 +1,4 @@
-(defvar doom/frame-transparency '(85 . 85))
+(defvar doom/frame-transparency '(100 . 100))
 ;; Set frame transparency
 (set-frame-parameter (selected-frame) 'alpha doom/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,doom/frame-transparency))
@@ -206,6 +206,8 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1))
 
+(setq projectile-project-search-path '("~/Documents/code/" "~/.config/"))
+
 (map! :leader
       (:prefix ("-" . "open file")
        :desc "Edit agenda file" "a" #'(lambda () (interactive) (find-file "~/Documents/org/agenda.org"))
@@ -261,6 +263,7 @@
   (add-hook 'org-mode-hook 'doom/org-font-setup)
   (setq org-directory "~/Documents/org/"
         org-agenda-files '("~/Documents/org/agenda.org")
+        +org-capture-todo-file "agenda.org"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▼ "
         org-log-done 'time
@@ -269,13 +272,6 @@
         org-journal-date-format "%B %d, %Y (%A)"
         org-journal-file-format "%Y-%m-%d.org"
         org-hide-emphasis-markers t
-        ;; ex. of org-link-abbrev-alist in action
-        ;; [[arch-wiki:Name_of_Page][Description]]
-        org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-        '(("google" . "http://www.google.com/search?q=")
-          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-          ("ddg" . "https://duckduckgo.com/?q=")
-          ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to tackle
@@ -322,11 +318,8 @@
       "b c" #'clone-indirect-buffer-other-window)
 
 (map! :leader
-      :desc "Winner redo"
-      "w <right>" #'winner-redo
-      :leader
-      :desc "Winner undo"
-      "w <left>" #'winner-undo)
+      :desc "Winner redo" "w <right>" #'winner-redo
+      :desc "Winner undo" "w <left>" #'winner-undo)
 
 (global-evil-quickscope-always-mode 1)
 

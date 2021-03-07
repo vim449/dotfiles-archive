@@ -52,12 +52,11 @@
 (package! emms)
 (package! evil-tutor)
 (package! peep-dired)
-;; (package! sublimity)
 (package! wc-mode)
 (package! evil-quickscope)
 (package! virtualenvwrapper)
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! vimrc-mode) ; I know this is blasphemy, but I need it
-(package! solaire-mode :disable t)
+;; (package! solaire-mode :disable t)
 (package! command-log-mode)

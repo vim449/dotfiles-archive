@@ -23,6 +23,7 @@
 - [[#lsp][LSP]]
 - [[#tree-sitter][TREE-SITTER]]
 - [[#company-mode][COMPANY MODE]]
+- [[#projectile-mode][PROJECTILE MODE]]
 - [[#open-specific-files][OPEN SPECIFIC FILES]]
 - [[#org-mode][ORG MODE]]
   - [[#exporters][EXPORTERS]]
@@ -45,7 +46,7 @@ This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][
 * UI TWEAKS
 Doom sets up the ui to be almost perfect by default, but there are a few additions that I like to add that are not dependent on any mode or package. I put all of these such tweaks into this source block
 #+begin_src emacs-lisp
-(defvar doom/frame-transparency '(85 . 85))
+(defvar doom/frame-transparency '(100 . 100))
 ;; Set frame transparency
 (set-frame-parameter (selected-frame) 'alpha doom/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,doom/frame-transparency))
@@ -387,6 +388,10 @@ Company mode is the preferred completion engine of doom emacs and integrates wel
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1))
 #+END_SRC
+* PROJECTILE MODE
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/Documents/code/" "~/.config/"))
+#+end_src
 
 * OPEN SPECIFIC FILES
 Keybindings to open files that I work with all the time using the find-file command, which is the interactive file search that opens with 'C-x C-f' in GNU Emacs or 'SPC f f' in Doom Emacs. These keybindings use find-file non-interactively since we specify exactly what file to open. The format I use for these bindings is 'SPC -' plus 'key' since Doom Emacs does not use these keybindings.
@@ -418,7 +423,7 @@ This adds an org-export mode for groff, specifically the mgs macros, but also th
 #+END_SRC
 
 ** UI
-This changes the fonts and formatting of org mode to make it much better looking.
+This change the fonts and formatting of org mode to make it much better looking.
 #+begin_src emacs-lisp
 (defun doom/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -477,6 +482,7 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
   (add-hook 'org-mode-hook 'doom/org-font-setup)
   (setq org-directory "~/Documents/org/"
         org-agenda-files '("~/Documents/org/agenda.org")
+        +org-capture-todo-file "agenda.org"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▼ "
         org-log-done 'time
@@ -485,13 +491,6 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
         org-journal-date-format "%B %d, %Y (%A)"
         org-journal-file-format "%Y-%m-%d.org"
         org-hide-emphasis-markers t
-        ;; ex. of org-link-abbrev-alist in action
-        ;; [[arch-wiki:Name_of_Page][Description]]
-        org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-        '(("google" . "http://www.google.com/search?q=")
-          ("arch-wiki" . "https://wiki.archlinux.org/index.php/")
-          ("ddg" . "https://duckduckgo.com/?q=")
-          ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
         '((sequence
            "TODO(t)"           ; A task that is ready to tackle
@@ -574,11 +573,8 @@ Winner mode has been included with GNU Emacs since version 20. This is a global 
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
-      :desc "Winner redo"
-      "w <right>" #'winner-redo
-      :leader
-      :desc "Winner undo"
-      "w <left>" #'winner-undo)
+      :desc "Winner redo" "w <right>" #'winner-redo
+      :desc "Winner undo" "w <left>" #'winner-undo)
 #+END_SRC
 
 * QUICKSCOPE
