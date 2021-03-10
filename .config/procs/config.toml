@@ -121,5 +121,5 @@ path = "unix:///var/run/docker.sock"
 
 [pager]
 mode = "Auto"
-detect_width = true
+detect_width = false
 
