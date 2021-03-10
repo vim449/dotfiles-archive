@@ -21,7 +21,7 @@ highlight CurrLine ctermfg=0 ctermbg=12 cterm=reverse
 highlight OtherLine ctermfg=0 ctermbg=4 cterm=reverse
 highlight LineNr ctermfg=243 ctermbg=-1 cterm=none
 
-highlight Selected ctermfg=0 ctermbg=241 cterm=reverse
+highlight Selected ctermfg=0 ctermbg=241 cterm=none
 highlight CmpMismatch ctermfg=108 ctermbg=234 cterm=reverse
 
 highlight SuggestBox ctermfg=223 ctermbg=234 cterm=none
