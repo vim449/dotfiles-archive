@@ -60,3 +60,4 @@
 (package! vimrc-mode) ; I know this is blasphemy, but I need it
 ;; (package! solaire-mode :disable t)
 (package! command-log-mode)
+(package! skeletor)

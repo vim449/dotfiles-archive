@@ -39,6 +39,7 @@
 - [[#passwords][PASSWORDS]]
 - [[#elfeed][ELFEED]]
   - [[#root][root]]
+- [[#skeletor][SKELETOR]]
 
 * ABOUT THIS CONFIG
 This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it. Any functions or variables that I declare will be under =doom=.
@@ -388,6 +389,7 @@ Company mode is the preferred completion engine of doom emacs and integrates wel
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.1))
 #+END_SRC
+
 * PROJECTILE MODE
 #+begin_src emacs-lisp
 (setq projectile-project-search-path '("~/Documents/code/" "~/.config/"))
@@ -604,3 +606,9 @@ This sets up the auth-source library and adds functions to access passwords outs
 Doom adds the elfeed-org plugin with elfeed, meaning that feeds can be configured with org.
 ** root :elfeed:
 *** [[https://archlinux.org/feeds/news/][ArchLinux News]] :arch:
+* SKELETOR
+Skeletor is a package from MELPA that aids in project creation. It allows you to create "skeleton" project templates, or specify system commands to run to make the project. Skeletor also provides a few options that require configuration.
+#+begin_src emacs-lisp
+(setq skeletor-project-directory "~/Documents/code"
+      skeletor-user-directory "~/Documents/code/skeletons")
+#+end_src

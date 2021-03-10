@@ -331,3 +331,6 @@
     (if result
         (funcall (plist-get (car result) :secret))
       nil)))
+
+(setq skeletor-project-directory "~/Documents/code"
+      skeletor-user-directory "~/Documents/code/skeletons")
