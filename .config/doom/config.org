@@ -10,7 +10,6 @@
 - [[#centaur-tabs][CENTAUR-TABS]]
 - [[#dired][DIRED]]
 - [[#doom-theme][DOOM THEME]]
-- [[#emms][EMMS]]
 - [[#evaluate-elisp-expressions][EVALUATE ELISP EXPRESSIONS]]
 - [[#eww][EWW]]
 - [[#fonts][FONTS]]
@@ -120,40 +119,6 @@ Setting the theme to doom-gruvbox. To try out new themes, I set a keybinding for
       doom-theme 'doom-gruvbox)
 (map! :leader
       :desc "Load new theme" "t h" #'counsel-load-theme)
-#+END_SRC
-
-* EMMS
-One of the media players available for Emacs is emms, which stands for Emacs Multimedia System. By default, Doom Emacs does not use 'SPC a', so the format I use for these bindings is 'SPC a' plus 'key'.
-
-| COMMAND               | DESCRIPTION                     | KEYBINDING |
-|-----------------------+---------------------------------+------------|
-| emms-playlist-mode-go | Switch to the playlist buffer   | SPC a a    |
-| emms-pause            | Pause the track                 | SPC a x    |
-| emms-stop             | Stop the track                  | SPC a s    |
-| emms-previous         | Play previous track in playlist | SPC a p    |
-| emms-next             | Play next track in playlist     | SPC a n    |
-
-#+BEGIN_SRC emacs-lisp
-(require 'emms-setup)
-(require 'emms-info)
-(require 'emms-cue)
-(require 'emms-mode-line)
-(require 'emms-playing-time)
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
-(emms-playing-time 1)
-(setq emms-source-file-default-directory "~/Music"
-      emms-playlist-buffer-name "*Music*"
-      emms-info-asynchronously t
-      emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-(map! :leader
-      (:prefix ("a" . "emms")
-       :desc "Go to emms playlist" "a" #'emms-playlist-mode-go
-       :desc "Emms pause track" "x" #'emms-pause
-       :desc "Emms stop track" "s" #'emms-stop
-       :desc "Emms play previous track" "p" #'emms-previous
-       :desc "Emms play next track" "n" #'emms-next))
 #+END_SRC
 
 * EVALUATE ELISP EXPRESSIONS
@@ -606,6 +571,7 @@ This sets up the auth-source library and adds functions to access passwords outs
 Doom adds the elfeed-org plugin with elfeed, meaning that feeds can be configured with org.
 ** root :elfeed:
 *** [[https://archlinux.org/feeds/news/][ArchLinux News]] :arch:
+
 * SKELETOR
 Skeletor is a package from MELPA that aids in project creation. It allows you to create "skeleton" project templates, or specify system commands to run to make the project. Skeletor also provides a few options that require configuration.
 #+begin_src emacs-lisp

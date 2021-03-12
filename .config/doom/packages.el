@@ -49,7 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! dmenu)
-(package! emms)
 (package! evil-tutor)
 (package! peep-dired)
 (package! wc-mode)
@@ -58,6 +57,5 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! vimrc-mode) ; I know this is blasphemy, but I need it
-;; (package! solaire-mode :disable t)
 (package! command-log-mode)
 (package! skeletor)
