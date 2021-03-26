@@ -1,3 +1,4 @@
+-- [[file:README.org::*Imports][Imports:1]]
   -- Base
 import XMonad
 import System.IO (hPutStrLn)
@@ -46,7 +47,7 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+-- import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
@@ -75,6 +76,11 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
+  -- Adds Wal compatability
+import Colors
+-- Imports:1 ends here
+
+-- [[file:README.org::*Variables][Variables:1]]
 myFont :: String
 myFont = "xft:JetBrains Nerd Font:bold:size=9:antialias=true:hinting=true"
 
@@ -106,15 +112,19 @@ altMask = mod1Mask         -- Setting this for use in xprompts
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+-- Variables:1 ends here
 
+-- [[file:README.org::*Autostart][Autostart:1]]
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "picom --experimental-backend &"
-          spawnOnce "redshift-gtk -t 4500:3000 &"
+          spawnOnce "redshift-gtk -t 3500:3000 &"
           spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           setWMName "LG3D"
+-- Autostart:1 ends here
 
+-- [[file:README.org::*Gridselect][Gridselect:1]]
 myColorizer :: Window -> Bool -> X (String, String)
 myColorizer = colorRangeFromClassName
                   (0x28,0x2c,0x34) -- lowest inactive bg
@@ -163,7 +173,9 @@ myAppGrid = [ ("Blender", "blender")
                  , ("Wal", (myTerminal ++ " -e setbg"))
                  , ("Lxappearance", "lxappearance")
                  ]
+-- Gridselect:1 ends here
 
+-- [[file:README.org::*Treeselect Menu Entries][Treeselect Menu Entries:1]]
 treeselectAction :: TS.TSConfig (X ()) -> X ()
 treeselectAction a = TS.treeselectAction a
    [ Node (TS.TSNode "+ Accessories" "Accessory applications" (return ()))
@@ -364,7 +376,9 @@ treeselectAction a = TS.treeselectAction a
        , Node (TS.TSNode "Quit" "Restart XMonad" (io exitSuccess)) []
        ]
    ]
+-- Treeselect Menu Entries:1 ends here
 
+-- [[file:README.org::*Treeselect Settings][Treeselect Settings:1]]
 tsDefaultConfig :: TS.TSConfig a
 tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
                               , TS.ts_background   = 0xdd282c34
@@ -414,7 +428,9 @@ myTreeNavigation = M.fromList
     , ((mod4Mask .|. altMask, xK_n), TS.moveTo ["+ Bookmarks", "+ Linux", "+ Linux News"])
     , ((mod4Mask .|. altMask, xK_w), TS.moveTo ["+ Bookmarks", "+ Linux", "+ Window Managers"])
     ]
+-- Treeselect Settings:1 ends here
 
+-- [[file:README.org::*Xprompt Settings][Xprompt Settings:1]]
 dtXPConfig :: XPConfig
 dtXPConfig = def
       { font                = myFont
@@ -464,14 +480,18 @@ promptList = [ ("m", manPrompt)          -- manpages prompt
 promptList' :: [(String, XPConfig -> String -> X (), String)]
 promptList' = [ ("c", calcPrompt, "qalc")         -- requires qalculate-gtk
               ]
+-- Xprompt Settings:1 ends here
 
+-- [[file:README.org::*Custom Prompts][Custom Prompts:1]]
 calcPrompt c ans =
     inputPrompt c (trim ans) ?+ \input ->
         liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
     where
         trim  = f . f
             where f = reverse . dropWhile isSpace
+-- Custom Prompts:1 ends here
 
+-- [[file:README.org::*Xprompt Keymap][Xprompt Keymap:1]]
 dtXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
 dtXPKeymap = M.fromList $
      map (first $ (,) controlMask)   -- control + <key>
@@ -510,7 +530,9 @@ dtXPKeymap = M.fromList $
      , (xK_Up, moveHistory W.focusDown')
      , (xK_Escape, quit)
      ]
+-- Xprompt Keymap:1 ends here
 
+-- [[file:README.org::*Search Engines][Search Engines:1]]
 archwiki, ebay, news, stackOverflow :: S.SearchEngine
 
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
@@ -537,7 +559,9 @@ searchList = [ ("a", archwiki)
              , ("y", S.youtube)
              , ("z", S.amazon)
              ]
+-- Search Engines:1 ends here
 
+-- [[file:README.org::*Scratchpads][Scratchpads:1]]
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                 , NS "mocp" spawnMocp findMocp manageMocp
@@ -559,7 +583,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
+-- Scratchpads:1 ends here
 
+-- [[file:README.org::*Layouts][Layouts:1]]
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
@@ -662,10 +688,14 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| spirals
                                  ||| threeCol
                                  ||| threeRow
+-- Layouts:1 ends here
 
+-- [[file:README.org::*Standard Non-Clickable Workspaces][Standard Non-Clickable Workspaces:1]]
 -- myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
 myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+-- Standard Non-Clickable Workspaces:1 ends here
 
+-- [[file:README.org::*Clickable Workspaces][Clickable Workspaces:1]]
 xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
   where
@@ -680,7 +710,9 @@ myClickableWorkspaces = clickable . (map xmobarEscape)
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
                       (i,ws) <- zip [1..9] l,
                       let n = i ]
+-- Clickable Workspaces:1 ends here
 
+-- [[file:README.org::*Managehook][Managehook:1]]
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
      -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
@@ -695,11 +727,15 @@ myManageHook = composeAll
      , className =? "Blender"      --> doShift ( myClickableWorkspaces !! 5 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
+-- Managehook:1 ends here
 
+-- [[file:README.org::*Loghook][Loghook:1]]
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1.0
+-- Loghook:1 ends here
 
+-- [[file:README.org::*Keybindings][Keybindings:1]]
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
@@ -836,7 +872,9 @@ myKeys =
     -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
+-- Keybindings:1 ends here
 
+-- [[file:README.org::*Main][Main:1]]
 main :: IO ()
 main = do
     -- Launching instances of xmobar on their monitors.
@@ -874,3 +912,4 @@ main = do
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
         } `additionalKeysP` myKeys
+-- Main:1 ends here

@@ -43,10 +43,8 @@ This is my personal config of xmonad that I based off Distrotube's config and my
 - C-t and C-g will cause some problems with apps as these are bound to grid and tree select menus.
 
 ** TODO
-- Fix tree and grid select menus
+- Fix grid select menus
 - Add M1-TAB and M1-S-TAB functionality in one form or another
-- Fix icons in xmobar
-- Redo how fonts are configured
 
 * Imports
 These are Haskell modules that we must import so that we can use their functions later in the config.
@@ -100,7 +98,7 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+-- import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
@@ -128,6 +126,9 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
+
+  -- Adds Wal compatability
+import Colors
 #+END_SRC
 
 * Variables
@@ -174,7 +175,7 @@ These are commands we want XMonad to execute on startup, such as running a compo
 myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "picom --experimental-backend &"
-          spawnOnce "redshift-gtk -t 4500:3000 &"
+          spawnOnce "redshift-gtk -t 3500:3000 &"
           spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           setWMName "LG3D"
