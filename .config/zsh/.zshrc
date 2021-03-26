@@ -10,7 +10,6 @@ antigen bundles <<EOBUNDLES
     python
     pip
     command-not-found
-    autojump
     archlinux
     colorize
     github
@@ -54,15 +53,16 @@ alias cls="clear"
 alias vim="nvim"
 alias vimrc="$EDITOR $HOME/.config/nvim/init.vim"
 alias zshrc="$EDITOR $HOME/.config/zsh/.zshrc"
-alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias ls="exa --sort .name --icons -G"
+alias config="/usr/bin/git --git-dir=$HOME/.config/dotfiles --work-tree=$HOME"
+alias ls="exa --sort .name --icons -G --git"
 alias l="ls -lah"
 alias doom-restart="killall emacs; doom sync; emacs --daemon"
 alias vifm="sh $HOME/.config/vifm/scripts/vifmrun"
 alias cat="bat"
 alias du="dust"
 alias grep"rg"
-alias top="btm -b --color gruvbox"
+alias btm="btm --color gruvbox"
+alias top="btm -b"
 alias "sudo nvim"="sudo -e"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
@@ -75,8 +75,9 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
-# Additional files to source
+# ZSH config
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+export FZF_COMPLETION_OPTS='--border --info=inline'
 
 eval "$(starship init zsh)"
