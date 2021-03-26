@@ -780,17 +780,17 @@ Emacs registers are compartments where you can save text, rectangles and positio
 
 | COMMAND                          | DESCRIPTION                      | KEYBINDING |
 |----------------------------------+----------------------------------+------------|
-| copy-to-register                 | Copy to register                 | SPC r c    |
-| frameset-to-register             | Frameset to register             | SPC r f    |
-| insert-register                  | Insert contents of register      | SPC r i    |
-| jump-to-register                 | Jump to register                 | SPC r j    |
-| list-registers                   | List registers                   | SPC r l    |
-| number-to-register               | Number to register               | SPC r n    |
-| counsel-register                 | Interactively choose a register  | SPC r r    |
-| view-register                    | View a register                  | SPC r v    |
-| window-configuration-to-register | Window configuration to register | SPC r w    |
-| increment-register               | Increment register               | SPC r +    |
-| point-to-register                | Point to register                | SPC r SPC  |
+| copy-to-register                 | Copy to register                 | SPC R c    |
+| frameset-to-register             | Frameset to register             | SPC R f    |
+| insert-register                  | Insert contents of register      | SPC R i    |
+| jump-to-register                 | Jump to register                 | SPC R j    |
+| list-registers                   | List registers                   | SPC R l    |
+| number-to-register               | Number to register               | SPC R n    |
+| counsel-register                 | Interactively choose a register  | SPC R r    |
+| view-register                    | View a register                  | SPC R v    |
+| window-configuration-to-register | Window configuration to register | SPC R w    |
+| increment-register               | Increment register               | SPC R +    |
+| point-to-register                | Point to register                | SPC R SPC  |
 
 #+BEGIN_SRC emacs-lisp
 (map! :leader
