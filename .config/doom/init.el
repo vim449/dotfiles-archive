@@ -1,36 +1,17 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; This file controls what Doom modules are enabled and what order they load
-;; in. Remember to run 'doom sync' after modifying it!
+;; This file controls what Doom modules are enabled and what order they load in.
+;; Press 'K' on a module to view its documentation, and 'gd' to browse its directory.
 
-;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
-;;      documentation. There you'll find a "Module Index" link where you'll find
-;;      a comprehensive list of Doom's modules and what flags they support.
-
-;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
-;;      'C-c c k' for non-vim users) to view its documentation. This works on
-;;      flags as well (those symbols that start with a plus).
-;;
-;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
-;;      directory (for easy access to its source code).
-
-;; Adding path to mu4e
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-
-(doom! :input
-       ;;chinese
-       ;;japanese
-       ;;layout           ; auie,ctrsnm is the superior home row
-
-       :completion
+(doom! :completion
        (company           ; the ultimate code completion backend
-        +childframe)      ; the ultimate ui for code completion
+           +childframe)      ; the ultimate ui for code completion
        ;;(helm +fuzzy)    ; the *other* search engine for love and life
        ;;ido              ; the other *other* search engine...
        (ivy +fuzzy        ; *the* search engine for love and life
-            +icons        ; wasting clock cycles for nothing
-            +prescient    ; typing less to remember more
-            +childframe)  ; ivy anywhere you want it
+           +icons         ; wasting clock cycles for nothing
+           +prescient     ; typing less to remember more
+           +childframe)   ; ivy anywhere you want it
 
        :ui
        ;;deft             ; notational velocity for Emacs
@@ -89,7 +70,8 @@
 
        :checkers
        syntax             ; tasing you for every semicolon you forget
-       (spell +aspell)    ; tasing you for misspelling mispelling
+       (:if (executable-find "aspell") (spell +aspell))
+       ;; tasing you for every misspelling mispelling
        grammar            ; tasing grammar mistake every you make
 
        :tools
@@ -118,7 +100,6 @@
        upload             ; map local to remote projects via ssh/ftp
 
        :os
-       (:if IS-MAC macos) ; improve compatibility with macOS
        tty                ; improve the terminal Emacs experience
 
        :lang
@@ -167,6 +148,7 @@
             +noter        ; notes are even more useful when they are with content
             +gnuplot      ; we all hate excel
             +present      ; beamer is hard
+            +roam         ; I don't know what this does, but it fixes a bug
             +pandoc)      ; org already exports enough
        ;;php              ; perl's insecure younger brother
        ;;plantuml         ; diagrams for confusing people more
@@ -194,18 +176,19 @@
        (yaml +lsp)        ; JSON, but readable
 
        :email
-       (mu4e +gmail)      ; life, liberty, and email in emacs
+       (:if (executable-find "mu") (mu4e +org +gmail))
        ;;notmuch
        ;;(wanderlust +gmail)
 
        :app
-       calendar
-       emms               ; who needs spotify?
-       everywhere         ; *leave* Emacs!? You must be joking
+       ;;calendar         ; A dated approach to timetabling
+       ;;emms             ; Multimedia in Emacs is music to my ears
+       everywhere         ; *leave* Emacs!? You must be joking.
        irc                ; how neckbeards socialize
        (rss +org)         ; emacs as an RSS reader
        ;;twitter          ; twitter client https://twitter.com/vnought
 
        :config
-       literate           ; org is life
-       (default +bindings +smartparens))
+       literate
+       (default +bindings +smartparens)
+       )
