@@ -1,4 +1,20 @@
 set exrc " Needs to be here for security reasons
+lua << END
+-- This file can be loaded by calling `lua require('plugins')` from your init.vim
+
+-- Only required if you have packer in your `opt` pack
+local execute = vim.api.nvim_command
+local fn = vim.fn
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  execute 'packadd packer.nvim'
+end
+END
+
+lua require('conf.plugins')
 
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 let mapleader=" "

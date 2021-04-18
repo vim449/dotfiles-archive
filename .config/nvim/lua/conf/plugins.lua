@@ -1,6 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Only required if you have packer in your `opt` pack
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -12,9 +9,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 vim.cmd [[packadd packer.nvim]]
+
+vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
+
 return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
-    use {'wbthomason/packer.nvim', opt = true}
+    use {'wbthomason/packer.nvim'}
 
     use 'jiangmiao/auto-pairs' -- Adds other part of bracket pairs in insert mode
     use 'airblade/vim-rooter' -- Finds root of project and makes that cwd
@@ -28,7 +28,7 @@ return require('packer').startup(function(use)
     -- Themes and aesthetics
     use 'vim-airline/vim-airline' -- Adds nice status line to vim
     use 'gruvbox-community/gruvbox' -- Only tolerable theme
-    use {'junegunn/goyo.vim', cmd = 'Goyo'} -- Distraction free minor mode
+    use 'junegunn/goyo.vim' -- Distraction free minor mode
     use {'rrethy/vim-hexokinase', run = 'make hexokinase'} -- Highlights colors
     use 'mhinz/vim-signify' -- Puts CVS status in gutter for each line
 
@@ -37,19 +37,18 @@ return require('packer').startup(function(use)
     use {
         -- Adds undo tree visualizer to vim
         'mbbill/undotree',
-        cmd = 'UndotreeToggle',
-        ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'vim', 'tex',}
+        -- cmd = 'UndotreeToggle',
+        -- ft = {'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'vim', 'tex', 'lua',}
     }
     use {
-        'junegunn/fzf',
-        'junegunn/fzf.vim', -- Second half
-        -- 'stsewd/fzf-checkout.vim', { 'on': 'GCheckout' } -- Addon to FZF for git
-        -- run = { ->fzf#install() }  -- Fuzzy finder
-    }
-    use {'neoclide/coc.nvim', branch = 'release',} -- LSP for vim
-    use {'honza/vim-snippets', after = 'neoclide/coc.nvim'} -- Snipptes
+        'neoclide/coc.nvim', branch = 'release',
+    } -- LSP for vim
+    use {
+        'honza/vim-snippets',
+        after = 'neoclide/coc.nvim',
+        event = "InsertEnter"} -- Snipptes
     use 'mattn/emmet-vim'
-    use {'metakirby5/codi.vim', cmd = 'Codi'} -- Interactive REPL scratchpad
+    use {'metakirby5/codi.vim', opt = true, cmd = 'Codi'} -- Interactive REPL scratchpad
     use 'easymotion/vim-easymotion' -- Uses prompts instead of number for motions
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -78,19 +77,4 @@ return require('packer').startup(function(use)
     -- Load on specific commands
     use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
 
-    -- Load on an autocommand event
-    use {'andymass/vim-matchup', event = 'VimEnter'}
-
-    -- Plugins can have dependencies on other plugins
-    use {
-        'haorenW1025/completion-nvim',
-        opt = true,
-        requires = {{'hrsh7th/vim-vsnip', opt = true}, {'hrsh7th/vim-vsnip-integ', opt = true}}
-    }
-
-    -- Use dependency and run lua function after load
-    use {
-        'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
-        config = function() require('gitsigns').setup() end
-    }
 end)

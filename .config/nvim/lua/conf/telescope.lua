@@ -52,7 +52,7 @@ end
             --
 function set_background(content)
     vim.fn.system(
-        "dconf write /org/mate/desktop/background/picture-filename \"'" .. content .. "'\"")
+        "setbg ~/.config/backgrounds/ \"'" .. content .. "'\"")
 end
 
 M.background_selector = function()
