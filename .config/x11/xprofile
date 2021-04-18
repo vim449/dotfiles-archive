@@ -8,5 +8,6 @@ dunst &
 xss-lock i3lock-fancy &
 fcitx5 &
 lxsession &
+nm-applet &
 emacs --daemon &
 xsetroot -cursor_name left_ptr &
