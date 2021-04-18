@@ -16,6 +16,7 @@
 - [[#dired][DIRED]]
 - [[#evaluate-elisp-expressions][EVALUATE ELISP EXPRESSIONS]]
 - [[#eww][EWW]]
+- [[#calc][CALC]]
 - [[#fonts][FONTS]]
 - [[#ivy][IVY]]
   - [[#ivy-posframe][IVY-POSFRAME]]
@@ -53,6 +54,8 @@
 - [[#packages][PACKAGES]]
   - [[#loading-instructions][Loading instructions]]
   - [[#general-packages][General packages]]
+- [[#initel][init.el]]
+  - [[#modules][Modules]]
 
 * ABOUT THIS CONFIG
 This is my personal Doom Emacs config based off what [[https://gitlab.com/dwt1][Distrotube]] provides. Doom Emacs is a distribution of Emacs that uses the "evil" keybindings (Vim keybindings) and includes a number of nice extensions and a bit of configuration out of the box. I am maintaining this config not just for my own use, but also to keep record of some of the more useful things that are possible within Emacs. I will add a lot of examples of plugins and settings, some of them I may not even use personally. I do this so that if I ever need to enable some feature, I will just need to change a flag rather than do lots of research for it. Any functions or variables that I declare will be under =doom=.
@@ -136,7 +139,7 @@ Doom sets up the ui to be almost perfect by default, but there are a few additio
 Setting the theme to doom-gruvbox. To try out new themes, I set a keybinding for counsel-load-theme with 'SPC t h'. Also fixes odd issues with modeline.
 #+BEGIN_SRC emacs-lisp
 (setq doom-modeline-icon t
-      doom-gruvbox-dark-variant "medium"
+      doom-gruvbox-dark-variant "hard"
       doom-gruvbox-brighter-comments t
       doom-theme 'doom-gruvbox)
 (map! :leader
@@ -397,6 +400,63 @@ EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to o
        :desc "Copy URL to clipboard" "c" #'eww-copy-page-url))
 #+END_SRC
 
+* CALC
+Any sane person prefers radians and exact values
+#+begin_src emacs-lisp
+(setq calc-angle-mode 'rad  ; radians are rad
+      calc-symbolic-mode t) ; keeps expressions like \sqrt{2} irrational for as long as possible
+#+end_src
+
+Embedded calc is a lovely feature which let’s us use calc to operate on LaTeX maths expressions. The standard keybinding is a bit janky however (C-x * e), so we’ll add a localleader-based alternative.
+#+begin_src emacs-lisp
+(map! :map calc-mode-map
+      :after calc
+      :localleader
+      :desc "Embedded calc (toggle)" "e" #'calc-embedded)
+(map! :map org-mode-map
+      :after org
+      :localleader
+      :desc "Embedded calc (toggle)" "E" #'calc-embedded)
+(map! :map latex-mode-map
+      :after latex
+      :localleader
+      :desc "Embedded calc (toggle)" "e" #'calc-embedded)
+#+end_src
+
+Unfortunately this operates without the (rather informative) calculator and trail buffers, but we can advice it that we would rather like those in a side panel.
+#+begin_src emacs-lisp
+(defvar calc-embedded-trail-window nil)
+(defvar calc-embedded-calculator-window nil)
+
+(defadvice! calc-embedded-with-side-pannel (&rest _)
+  :after #'calc-do-embedded
+  (when calc-embedded-trail-window
+    (ignore-errors
+      (delete-window calc-embedded-trail-window))
+    (setq calc-embedded-trail-window nil))
+  (when calc-embedded-calculator-window
+    (ignore-errors
+      (delete-window calc-embedded-calculator-window))
+    (setq calc-embedded-calculator-window nil))
+  (when (and calc-embedded-info
+             (> (* (window-width) (window-height)) 1200))
+    (let ((main-window (selected-window))
+          (vertical-p (> (window-width) 80)))
+      (select-window
+       (setq calc-embedded-trail-window
+             (if vertical-p
+                 (split-window-horizontally (- (max 30 (/ (window-width) 3))))
+               (split-window-vertically (- (max 8 (/ (window-height) 4)))))))
+      (switch-to-buffer "*Calc Trail*")
+      (select-window
+       (setq calc-embedded-calculator-window
+             (if vertical-p
+                 (split-window-vertically -6)
+               (split-window-horizontally (- (/ (window-width) 2))))))
+      (switch-to-buffer "*Calculator*")
+      (select-window main-window))))
+#+end_src
+
 * FONTS
 Settings related to fonts within Doom Emacs:
 + 'doom-font' -- standard monospace font that is used for most things in Emacs.
@@ -417,6 +477,26 @@ This also fixes the truncated mode line problem that occurs occasionally
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 (setq all-the-icons-scale-factor 1.2)
+
+(autoload #'mixed-pitch-serif-mode "mixed-pitch"
+  "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
+
+(after! mixed-pitch
+  (defface variable-pitch-serif
+    '((t (:family "serif")))
+    "A variable-pitch face with serifs."
+    :group 'basic-faces)
+  (setq mixed-pitch-set-height t)
+  (setq variable-pitch-serif-font (font-spec :family "Alegreya" :size 27))
+  (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
+  (defun mixed-pitch-serif-mode (&optional arg)
+    "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch."
+    (interactive)
+    (let ((mixed-pitch-face 'variable-pitch-serif))
+      (mixed-pitch-mode (or arg 'toggle)))))
+
+(set-char-table-range composition-function-table ?f '(["\\(?:ff?[fijlt]\\)" 0 font-shape-gstring]))
+(set-char-table-range composition-function-table ?T '(["\\(?:Th\\)" 0 font-shape-gstring]))
 #+END_SRC
 
 * IVY
@@ -456,6 +536,7 @@ Available functions (positions) for 'ivy-posframe-display-functions-alist'
         (dmenu . 20)
         (t . 10)))
 (add-hook 'ivy-mode-hook #'ivy-posframe-mode)
+(setq ivy-read-action-function #'ivy-hydra-read-action)
 #+END_SRC
 
 ** IVY KEYBINDINGS
@@ -687,15 +768,13 @@ This change the fonts and formatting of org mode to make it much better looking.
 Note that I wrapped most of this in (after! org). Without this, my settings might be evaluated too early, which will result in my settings being overwritten by Doom's defaults. I have also enabled org-journal by adding (+journal) to the org section of my Doom Emacs init.el. I have this at the bottom of org mode so I can use my utility functions
 
 #+BEGIN_SRC emacs-lisp
-(setq org-directory "~/Documents/org"
-      org-roam-directory "roam/")
+(setq org-directory "~/Documents/org")
 (after! org
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   (add-hook 'org-mode-hook 'doom/org-font-setup)
   (setq org-directory "~/Documents/org/"
         org-use-property-inheritance t
         org-agenda-files '("~/Documents/org/agenda.org")
-        org-roam-directory "roam/"
         +org-capture-todo-file "agenda.org"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▼ "
@@ -722,29 +801,30 @@ Note that I wrapped most of this in (after! org). Without this, my settings migh
           (:noweb . "no")
           (:hlines . "no")
           (:tangle . "no")
-          (:comments . "link")))
-  (remove-hook 'text-mode-hook #'visual-line-mode)
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'org-mode-hook 'turn-on-flyspell)
-  (map! :map evil-org-mode-map
-        :after evil-org
-        :n "g <up>" #'org-backward-heading-same-level
-        :n "g <down>" #'org-forward-heading-same-level
-        :n "g <left>" #'org-up-element
-        :n "g <right>" #'org-down-element
-        :n "g k" #'org-backward-heading-same-level
-        :n "g j" #'org-forward-heading-same-level
-        :n "g h" #'org-up-element
-        :n "g l" #'org-down-element))
+          (:comments . "link"))))
+(remove-hook 'text-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+(map! :map evil-org-mode-map
+      :after evil-org
+      :n "g <up>" #'org-backward-heading-same-level
+      :n "g <down>" #'org-forward-heading-same-level
+      :n "g <left>" #'org-up-element
+      :n "g <right>" #'org-down-element
+      :n "g k" #'org-backward-heading-same-level
+      :n "g j" #'org-forward-heading-same-level
+      :n "g h" #'org-up-element
+      :n "g l" #'org-down-element)
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 (use-package! org-ref
   :after org
   :config
   (setq org-ref-completion-library 'org-ref-ivy-cite))
-  (use-package! org-roam
+(use-package! org-roam
   :config
-  (setq org-roam-director)
+  (setq org-roam-directory "~/Documents/org/roam"))
 #+END_SRC
 ** LSP
 LSP and company in src blocks
@@ -773,7 +853,7 @@ LSP and company in src blocks
            (put ',edit-pre 'function-documentation
                 (format "Prepare local buffer environment for org source block (%s)."
                         (upcase ,lang))))))
-   ))
+    ))
 (defvar org-babel-lang-list
   '("go" "python" "ipython" "bash" "sh"))
 (dolist (lang org-babel-lang-list)
@@ -1170,6 +1250,13 @@ To make syntax highlighting better, the editor needs to parse the code and build
 (package! tree-sitter-langs)
 #+end_src
 
+That said, if the directory doesn't exist we likely don't want to be using roam.
+Since we don't want to trigger errors (which will happen as soon as roam tries
+to initialise), let's not load roam.
+#+begin_src emacs-lisp :noweb-ref none :tangle (if (file-exists-p "~/Documents/org/roam") "no" "packages.el")
+(package! org-roam :disable t)
+#+end_src
+
 I am working on switching off of package.el, and this is all the left overs that I need.
 #+begin_src emacs-lisp
 (package! dmenu)
@@ -1423,7 +1510,7 @@ emacs-lisp         ; drown in parentheses
      +moonscript)  ; one-based indices in classes
 markdown           ; writing docs for people to ignore
 ;;nim              ; python + lisp at the speed of c
-nix                ; I hereby declare "nix geht mehr!"
+(:if (executable-find "nix") nix); I hereby declare "nix geht mehr!"
 ;;ocaml            ; an objective camel
 (org +pretty       ; organize your plain life in less plain text
      +dragndrop    ; images are a pain to insert
