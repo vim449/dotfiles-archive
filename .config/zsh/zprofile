@@ -3,8 +3,8 @@
 # profile file. Runs on login. Environmental variables are set here.
 
 # Adds `~/.local/bin` recursively to $PATH
-PATH=/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.cabal/bin:$HOME/.local/share/poetry/bin/:$PATH
-PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
+PATH="$(/bin/du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
+PATH="$PATH:/usr/local/bin:/sbin:/usr/sbin:$HOME/.config/emacs/bin/:$HOME/.cabal/bin:$HOME/.local/share/poetry/bin/:$PATH"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
 
 # Default programs:
@@ -41,6 +41,9 @@ export ANDROID_EMULATOR_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/android/emula
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}/java"
 export GRADLE_USER_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gradle"
 export POETRY_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/poetry"
+export TEXMFHOME="${XDG_DATA_HOME:-$HOME/.local/share}/texmf"
+export TEXMFVAR="${XDG_CACHE_HOME:-$HOME/.cache}/texlive/texmf-var"
+export TEXMFCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/texlive/texmf-config"
 
 # Other program settings:
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
