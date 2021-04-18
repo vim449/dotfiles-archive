@@ -98,7 +98,7 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
 import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
--- import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
@@ -149,7 +149,7 @@ myBrowser = "firefox "               -- Sets firefox as browser for tree select
 -- myBrowser = myTerminal ++ " -e lynx " -- Sets lynx as browser for tree select
 
 myEditor :: String
-myEditor = "emacsclient -c -a emacs "  -- Sets emacs as editor for tree select
+myEditor = "emacsclient -create-frame --alternate-editor=\"\" --no-wait"  -- Sets emacs as editor for tree select
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor for tree select
 
 myBorderWidth :: Dimension
@@ -176,7 +176,6 @@ myStartupHook :: X ()
 myStartupHook = do
           spawnOnce "picom --experimental-backend &"
           spawnOnce "redshift-gtk -t 3500:3000 &"
-          spawnOnce "nm-applet &"
           spawnOnce "trayer --edge top --align right --widthtype request --padding 3 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
           setWMName "LG3D"
 #+END_SRC
@@ -646,10 +645,10 @@ Allows to have several floating scratchpads running different applications. Impo
 #+BEGIN_SRC haskell
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                , NS "mocp" spawnMocp findMocp manageMocp
+                , NS "ncmpcpp" spawnNcmpcpp findNcmpcpp manageNcmpcpp
                 ]
   where
-    spawnTerm  = myTerminal ++ " -n scratchpad"
+    spawnTerm  = myTerminal ++ " -t scratchpad"
     findTerm   = resource =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
                where
@@ -657,9 +656,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnMocp  = myTerminal ++ " -n mocp 'mocp'"
-    findMocp   = resource =? "mocp"
-    manageMocp = customFloating $ W.RationalRect l t w h
+    spawnNcmpcpp  = myTerminal ++ " -t ncmpcpp -e ncmpcpp"
+    findNcmpcpp   = resource =? "ncmpcpp"
+    manageNcmpcpp = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -888,6 +887,7 @@ myKeys =
         , ("M-M1-l", spawn "blender")
         , ("M-M1-v", spawn "virt-manager")
         , ("M-M1-f", spawn "pcmanfm")
+        , ("M-M1-m", spawn (myTerminal ++ " -e ncmpcpp"))
 
     -- Kill windows
         , ("M-S-c", kill1)                         -- Kill the currently focused client
@@ -963,13 +963,13 @@ myKeys =
 
     -- Scratchpads
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "terminal")
-        , ("M-C-c", namedScratchpadAction myScratchPads "mocp")
+        , ("M-C-m", namedScratchpadAction myScratchPads "ncmpcpp")
 
-    -- Controls for mocp music player (SUPER-u followed by a key)
-        , ("M-u p", spawn "mocp --play")
-        , ("M-u l", spawn "mocp --next")
-        , ("M-u h", spawn "mocp --previous")
-        , ("M-u <Space>", spawn "mocp --toggle-pause")
+    -- Controls for mpd (SUPER-u followed by a key)
+        , ("M-u p", spawn "mpc play")
+        , ("M-u l", spawn "mpc next")
+        , ("M-u h", spawn "mpc prev")
+        , ("M-u <Space>", spawn "mpc toggle")
 
     -- Emacs (CTRL-e followed by a key)
         , ("C-e e", spawn "emacsclient -c -a 'emacs'")                            -- start emacs
@@ -980,18 +980,14 @@ myKeys =
         , ("C-e v", spawn "emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'") -- vterm within emacs
 
     -- Multimedia Keys
-        , ("<XF86AudioPlay>", spawn (myTerminal ++ "mocp --play"))
-        , ("<XF86AudioPrev>", spawn (myTerminal ++ "mocp --previous"))
-        , ("<XF86AudioNext>", spawn (myTerminal ++ "mocp --next"))
+        , ("<XF86AudioPlay>", spawn "mpc toggle")
+        , ("<XF86AudioPrev>", spawn "mpc prev")
+        , ("<XF86AudioNext>", spawn "mpc next")
         , ("<XF86AudioMute>",   spawn "sh $HOME/.local/bin/volumeControl mute")  -- Bug prevents it from toggling correctly in 12.04.
         , ("<XF86AudioLowerVolume>", spawn "sh $HOME/.local/bin/volumeControl down")
         , ("<XF86AudioRaiseVolume>", spawn "sh $HOME/.local/bin/volumeControl up")
-        , ("<XF86HomePage>", spawn myBrowser)
-        , ("<XF86Search>", safeSpawn myBrowser ["https://www.duckduckgo.com/"])
-        , ("<XF86Mail>", runOrRaise "geary" (resource =? "thunderbird"))
-        , ("<XF86Calculator>", runOrRaise "gcalctool" (resource =? "gcalctool"))
         , ("<XF86Eject>", spawn "toggleeject")
-        , ("<Print>", spawn "scrot -d 0")
+        , ("<Print>", spawn "scrot -d 0 ~/Media/Pictures")
         ]
     -- Appending search engine prompts to keybindings list.
     -- Look at "search engines" section of this config for values for "k".

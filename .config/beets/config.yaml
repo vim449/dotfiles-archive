@@ -1,0 +1,22 @@
+directory: ~/Media/Music/
+library: ~/.local/share/musiclibrary.db
+plugins: fetchart lyrics lastgenre inline acousticbrainz chroma scrub missing duplicates mpdupdate thumbnails mpdstats missing fuzzy ftintitle random
+strong_rec_thresh: 0.1
+
+mpd:
+  host: localhost
+  port: 6600
+
+thumbnails:
+  auto: yes
+
+missing:
+  total: yes
+  count: yes
+
+fuzzy:
+  threshold: 0.5
+
+fitintitle:
+  auto: yes
+  drop: no
