@@ -1,6 +1,6 @@
 directory: ~/Media/Music/
 library: ~/.local/share/musiclibrary.db
-plugins: fetchart lyrics lastgenre inline acousticbrainz chroma scrub missing duplicates mpdupdate thumbnails mpdstats missing fuzzy ftintitle random
+plugins: fetchart embedart lyrics lastgenre inline acousticbrainz chroma scrub missing duplicates mpdupdate thumbnails mpdstats missing fuzzy ftintitle random
 strong_rec_thresh: 0.1
 
 mpd:
