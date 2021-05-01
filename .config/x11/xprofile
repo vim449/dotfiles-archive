@@ -10,4 +10,6 @@ fcitx5 &
 lxsession &
 nm-applet &
 emacs --daemon &
+mpd &
+mpd-notification &
 xsetroot -cursor_name left_ptr &
