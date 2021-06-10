@@ -17,13 +17,14 @@ antigen bundles <<EOBUNDLES
     arzzen/calc.plugin.zsh
     IngoMeyer441/zsh-easy-motion
     hcgraf/zsh-sudo
-    softmoth/zsh-vim-mode
     zsh-vi-more/vi-increment
     zsh-vi-more/vi-motions
     zsh-vi-more/vi-quote
     MichaelAquilina/zsh-you-should-use
     zsh-users/zsh-autosuggestions
     zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-completions
+    softmoth/zsh-vim-mode
 EOBUNDLES
 antigen apply
 
@@ -65,8 +66,10 @@ alias btm="btm --color gruvbox"
 alias top="btm -b"
 alias "sudo nvim"="sudo -e"
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
+alias q="exit"
 
 # Keybindings
+bindkey -v
 bindkey "^[ " autosuggest-accept
 bindkey -M vicmd ' ' vi-easy-motion
 # Vim keys in tab complete
@@ -74,6 +77,7 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
+autopair-init
 
 # ZSH config
 source /usr/share/fzf/completion.zsh
