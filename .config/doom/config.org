@@ -22,7 +22,7 @@ If we want to keep human knowledge open and freely available to humanity, we hav
 #+end_quote
 
 * Intro
-Customizing things is great. TBH, its 90% of what I do on a computer. The downside is, you can't use these customized programs everywhere. This is really painful for editors, as you spend countless millenia perfecting your workflow, and then leave it. This is basically what lead me to use emacs, as I was always seeing on the internet that it can do anything. And while it can't do /anything/, its as close as you're going to get.
+Customizing things is great. TBH, its 90% of what I do on a computer. The downside is, you can't use these customized programs everywhere. This is really painful for editors, as you spend countless millennia perfecting your workflow, and then leave it. This is basically what lead me to use emacs, as I was always seeing on the internet that it can do anything. And while it can't do /anything/, its as close as you're going to get.
 
 When I first heard about emacs, the other big thing I heard about were "emacs-pinky" and the difficulty of e-lisp. I was also a long time vim user (I've used it the entire time I've used linux), so I wanted to find a way to use the vim keybinding too. As such, I was led to the =spacemacs= distribution, and I used it for a couple months. My main complaints were that it honestly makes configuring harder, not easier, and that it makes installing non-spacemacs packages harder than it should be. Shortly after, I heard about =doom emacs= and thought I should try using it for a while. I personally think that this is one of the best ways to use emacs.
 
@@ -58,7 +58,7 @@ good?
 + Enables one to complete tasks with a consistent, standard set of keybindings,
   GUI and editing methods --- learn once, use everywhere
 + Reduced context-switching
-+ Compressing the stages of a project --- a more centralised workflow can progress
++ Compressing the stages of a project --- a more centralized workflow can progress
   with greater ease
 + Integration between tasks previously relegated to different applications, but
   with a common subject --- e.g. linking to an email in a to-do list
@@ -117,7 +117,7 @@ digraph {
 
 *** Some notably unique features
 + Recursive editing
-+ Completely introspectable, with pervasive docstrings
++ Completely introspect-able, with pervasive docstrings
 + Mutable environment, which can be incrementally modified
 + Functionality without applications
 + Client-server separation allows for a daemon, giving near-instant perceived
@@ -138,18 +138,18 @@ him for a lifetime. --- Anne Isabella
 
 Most popular editors have a simple and pretty [[https://code.visualstudio.com/docs/getstarted/settings][settings interface]], filled with
 check-boxes, selects, and the occasional text-box. This makes it easy for the
-user to pick between common desirable behaviours. To me this is now like /giving
+user to pick between common desirable behaviors. To me this is now like /giving
 a man a fish/.
 
 What if you want one of those 'check-box' settings to be only on in certain
 conditions? Some editors have workspace settings, but that requires you to
-manually set the value for /every single instance/. Urgh, [[https://github.com/microsoft/vscode/issues/93153][what]] [[https://github.com/microsoft/vscode/issues/93628][a]] [[https://github.com/microsoft/vscode/issues/5595][pain]].
+manually set the value for /every single instance/. Ugh, [[https://github.com/microsoft/vscode/issues/93153][what]] [[https://github.com/microsoft/vscode/issues/93628][a]] [[https://github.com/microsoft/vscode/issues/5595][pain]].
 
 What if you could set the value of that 'check-box' setting to be the result of
 an arbitrary expression evaluated for each file? This is where an editor like
 Emacs comes in.
 Configuration for Emacs isn't a list of settings in JSON etc. it's *an executable
-program which modifies the behaviour of the editor to suit your liking*.
+program which modifies the behavior of the editor to suit your liking*.
 This is 'teaching a man to fish'.
 
 Emacs is built in the same language you configure it in (Emacs [[https://en.wikipedia.org/wiki/Lisp_(programming_language)][Lisp]], or [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][elisp]]).
@@ -177,7 +177,7 @@ Want to test it out? You don't need to save and restart, you can just /evaluate
 the expression/ within your current Emacs instance and try it immediately! This
 editor is, after all, a Lisp interpreter.
 
-Want to tweak the behaviour? Just re-evaluate your new version --- it's a
+Want to tweak the behavior? Just re-evaluate your new version --- it's a
 super-tight iteration loop.
 
 ** Editor comparison
@@ -195,7 +195,7 @@ I have attempted to quantify aspects of my impressions of them below.
 #+plot: transpose:yes type:radar min:0 max:4 ticks:4 file:"misc/editor-comparison.svg"
 | Editor           | Extensibility | Ecosystem | Ease of Use | Comfort | Completion | Performance |
 |------------------+---------------+-----------+-------------+---------+------------+-------------|
-| IDLE             |             1 |         1 |           2 |       1 |          1 |           2 |
+| IDLE             |             1 |         1 |           4 |       1 |          1 |           2 |
 | VSCode           |             3 |         3 |         3.5 |       2 |          4 |           3 |
 | Vim              |           3.5 |       3.5 |         2.5 |     3.5 |          2 |           4 |
 | Emacs            |             4 |         4 |           2 |       4 |        3.5 |           3 |
@@ -242,6 +242,13 @@ By default, using the customization interface will put the variables in =init.el
   (load custom-file))
 #+end_src
 *** Windows
+Let's split in the direction that makes sense by default, alright?
+#+begin_src emacs-lisp
+(defun prefer-horizontal-split ()
+  (set-variable 'split-height-threshold nil t)
+  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
+#+end_src
+
 I hated this at first, but now I can't live without seeing what buffer should open when I make a split.
 
 First, we have to get to the next window
@@ -371,12 +378,12 @@ indent-guides      ; highlighted indent columns
 minimap            ; show a map of the code on the side
 modeline           ; snazzy, Atom-inspired modeline, plus API
 nav-flash          ; blink cursor line after big motions
-neotree            ; a project drawer, like NERDTree for vim
+;;neotree          ; a project drawer, like NERDTree for vim
 ophints            ; highlight the region an operation acts on
 (popup +defaults)  ; tame sudden yet inevitable temporary windows
 (ligatures +extra) ; ligatures or substitute text with pretty symbols
 ;;tabs             ; an tab bar for Emacs
-;;treemacs         ; a project drawer, like neotree but cooler
+treemacs           ; a project drawer, like neotree but cooler
 unicode            ; extended unicode support for various languages
 vc-gutter          ; vcs diff in the fringe
 vi-tilde-fringe    ; fringe tildes to mark beyond EOB
@@ -420,9 +427,9 @@ vterm              ; the best terminal emulation in Emacs
 
 #+name: doom-checkers
 #+begin_src emacs-lisp
-syntax             ; tasing you for every semicolon you forget
-(:if (executable-find "aspell") (spell +aspell))
-;; tasing you for every misspelling mispelling
+(syntax +childframe) ; tasing you for every semicolon you forget
+(:if (executable-find "aspell") (spell +aspell +everywhere) ; if we have aspell, use it
+(spell +hunspell +everywhere)) ; otherwise, just use hunspell
 grammar            ; tasing grammar mistake every you make
 #+end_src
 
@@ -437,9 +444,8 @@ editorconfig       ; let someone else argue about tabs vs spaces
 (eval +overlay)    ; run code, run (also, repls)
 gist               ; interacting with github gists
 (lookup            ; navigate your code and its documentation
- +dictionary      ; navigate the syntax of the english language
- +offline         ; why use the internet?
- +docsets)        ; integration is always nice...
+ +dictionary       ; navigate the syntax of the english language
+ +docsets)         ; need help remembering what that *one* function does?
 (lsp +peek)
 (magit +forge)     ; a git porcelain for Emacs
 make               ; run make tasks from Emacs
@@ -455,10 +461,10 @@ upload             ; map local to remote projects via ssh/ftp
 
 #+name: doom-os
 #+begin_src emacs-lisp
-tty                ; improve the terminal Emacs experience
+;;tty              ; improve the terminal Emacs experience
 #+end_src
 **** Language Support
-Doom is pretty smart when it comes to language modules, so there is not tons of a performace hit until you open that file type. As such, just enable every language you know.
+Doom is pretty smart when it comes to language modules, so there is not tons of a performance hit until you open that file type. As such, just enable every language you know.
 
 #+name: doom-lang
 #+begin_src emacs-lisp
@@ -469,7 +475,7 @@ Doom is pretty smart when it comes to language modules, so there is not tons of 
 ;;coq              ; proofs-as-programs
 ;;crystal          ; ruby at the speed of c
 ;;csharp           ; unity, .NET, and mono shenanigans
-;;data             ; config/data formats
+data               ; config/data formats
 ;;(dart +flutter)  ; paint ui and not much else
 ;;elixir           ; erlang done right
 ;;elm              ; care for a cup of TEA?
@@ -556,13 +562,14 @@ irc                ; how neckbeards socialize
 **** Font Face
 'JetBrains Mono' is easily one of the best fonts I have ever found. I've found that 'Overpass' combines pretty well with most fonts, so I use this for variable pitch. The sizes of the fonts don't really match though, so I have to fiddle with those a lot
 #+begin_src emacs-lisp
+(setq all-the-icons-scale-factor 1.2)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 12)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 12)
+      doom-variable-pitch-font (font-spec :family "Overpass")
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 17)
-      doom-unicode-font (font-spec :family "DejaVuSerif" :size 12)
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light :size 12))
+      doom-unicode-font (font-spec :family "DejaVuSerif")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 #+end_src
-In additions to these fonts, I use Merriweather for certain modes, and Cantarell as a serified proportional font for all of the aesthetic modes like =write-room=.
+In additions to these fonts, I use Merriweather for certain modes, and Cantarell as a serifed proportional font for all of the aesthetic modes like =write-room=.
 
 When you are missing specified fonts, doom likes to yell a lot. So, lets just add a check to prevent this from happening, eh?
 #+name: detect-missing-fonts
@@ -716,6 +723,25 @@ There are some files that I open so much that it's better to just have bindings 
         :desc "Edit xmonad config" "x" #'(lambda () (interactive) (find-file "~/.config/xmonad/readme.org"))
         :desc "Edit alacritty config" "A" #'(lambda () (interactive) (find-file "~/.config/alacritty/alacritty.yml"))))
 #+end_src
+**** Eww
+EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to open in a specific browser (eww) with browse-url-browser-function. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings).
+
+#+begin_src emacs-lisp
+(setq browse-url-browser-function 'eww-browse-url)
+(map! :leader
+      (:prefix ("e" . "evaluate/Eww")
+       :desc "Eww web browser" "w" #'eww
+       :desc "Eww reload page" "R" #'eww-reload
+       :desc "Seach web for text in region" "s" #'eww-search-words
+       :desc "Copy URL to clipboard" "c" #'eww-copy-page-url))
+#+end_src
+
+**** Buffers
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Clone indirect buffer other window"
+      "b c" #'clone-indirect-buffer-other-window)
+#+end_src
 *** Window Title
 Instead of saying "doom emacs," the title for the window should really be what we're editing, and what project that's in.
 #+begin_src emacs-lisp
@@ -733,7 +759,7 @@ Instead of saying "doom emacs," the title for the window should really be what w
              (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 #+end_src
 *** Splash Screen
-Emacs is capable of rendering an image as a splash screen, or doing arbitrary computation to create a screen. [[https://github.com/MarioRicalde][@MarioRicalde]] created some great images, and now I just need to make some code to display the currect number of symbols based on the frame size...
+Emacs is capable of rendering an image as a splash screen, or doing arbitrary computation to create a screen. [[https://github.com/MarioRicalde][@MarioRicalde]] created some great images, and now I just need to make some code to display the correct number of symbols based on the frame size...
 #+begin_src emacs-lisp
 (defvar fancy-splash-image-template
   (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)
@@ -755,9 +781,9 @@ Emacs is capable of rendering an image as a splash screen, or doing arbitrary co
   :template non-default template file
   :file file to use instead of template")
 
-(defvar fancy-splash-template-colours
-  '(("$colour1" . keywords) ("$colour2" . type) ("$colour3" . base5) ("$colour4" . base8))
-  "list of colour-replacement alists of the form (\"$placeholder\" . 'theme-colour) which applied the template")
+(defvar fancy-splash-template-colors
+  '(("$color1" . keywords) ("$colour2" . type) ("$colour3" . base5) ("$colour4" . base8))
+  "list of color-replacement alists of the form (\"$placeholder\" . 'theme-colour) which applied the template")
 
 (unless (file-exists-p (expand-file-name "theme-splashes" doom-cache-dir))
   (make-directory (expand-file-name "theme-splashes" doom-cache-dir) t))
@@ -775,13 +801,13 @@ Emacs is capable of rendering an image as a splash screen, or doing arbitrary co
   (message "Cache cleared!"))
 
 (defun fancy-splash-generate-image (template height)
-  "Read TEMPLATE and create an image if HEIGHT with colour substitutions as
-   described by `fancy-splash-template-colours' for the current theme"
+  "Read TEMPLATE and create an image if HEIGHT with color substitutions as
+   described by `fancy-splash-template-colors' for the current theme"
   (with-temp-buffer
     (insert-file-contents template)
     (re-search-forward "$height" nil t)
     (replace-match (number-to-string height) nil nil)
-    (dolist (substitution fancy-splash-template-colours)
+    (dolist (substitution fancy-splash-template-colors)
       (goto-char (point-min))
       (while (re-search-forward (car substitution) nil t)
         (replace-match (doom-color (cdr substitution)) nil nil)))
@@ -1174,7 +1200,7 @@ Every so often, you want everyone else to know that you’re typing, or just to 
 (package! selectric-mode :pin "1840de71f7...")
 #+end_src
 
-Hey, let’s get the weather in here while we’re at it. Unfortunately this seems slightly unmaintained (few open bugfix PRs) so let’s roll our own version.
+Hey, let’s get the weather in here while we’re at it. Unfortunately this seems slightly unmaintained (few open bug-fix PRs) so let’s roll our own version.
 #+begin_src emacs-lisp
 (package! wttrin :recipe (:local-repo "lisp/wttrin"))
 #+end_src
@@ -1194,7 +1220,7 @@ What’s even the point of using Emacs unless you’re constantly telling everyo
 (package! elcord :pin "25531186c1...")
 #+end_src
 
-For some reason, I find myself demoing Emacs every now and then. Showing what keyboard stuff I’m doing on-screen seems helpful. While screenkey does exist, having something that doesn’t cover up screen content is nice.
+For some reason, I find myself demoing Emacs every now and then. Showing what keyboard stuff I’m doing on-screen seems helpful. While screenkey does exist, having something that doesn't cover up screen content is nice.
 #+begin_src emacs-lisp
 (package! keycast :pin "a3a0798349...")
 #+end_src
@@ -1256,122 +1282,306 @@ Sometimes, logging the keys is not enough. I occasionally want to have a log of 
 #+begin_src emacs-lisp
 (package! command-log-mode)
 #+end_src
+
+When I use dired, I occasionally am too lazy to open a new buffer to see images, so...
+#+begin_src emacs-lisp
+(package! peep-dired)
+#+end_src
 *** Features
-The very large files mode loads large files in chunks, allowing one to open ridiculously large files.
+**** CalcTeX
+This extension makes the emacs =calc= mode less terrible.
+#+begin_src emacs-lisp
+(package! calctex :recipe (:host github :repo "johnbcoughlin/calctex"
+                           :files ("*.el" "calctex/*.el" "calctex-contrib/*.el" "org-calctex/*.el" "vendor"))
+  :pin "784cf911bc...")
+#+end_src
+**** Emacs Everywhere
+This should be obvious
+#+begin_src emacs-lisp
+(package! emacs-everywhere :recipe (:local-repo "lisp/emacs-everywhere") :pin nil)
+#+end_src
+**** Magit Delta
+Delta is a great utility that someone made to give =git diff= proper syntax highlighting support. The same person then made an emacs package to let magit use delta.
+#+begin_src emacs-lisp
+(package! magit-delta :recipe (:host github :repo "dandavison/magit-delta") :pin "1164a6c3e5...")
+#+end_src
+**** Info Colors
+The man pages in emacs are great, but let's make them look better with pitch fontification.
+#+begin_src emacs-lisp
+(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
+#+end_src
+**** Large Files
+When you open files in emacs, it has to load the entire thing into RAM, and then have the modes process all of it. This becomes very slow when the files are larger, so someone created a plugin to load files in chunks.
 #+begin_src emacs-lisp
 (package! vlf :recipe (:host github :repo "m00natic/vlfi" :files ("*.el"))
   :pin "cc02f25337...")
 #+end_src
 
-To make syntax highlighting better, the editor needs to parse the code and build a syntax tree. However, this is both computationally expensive, and requires the code to be ran. Treesitter somehow manages to side step both these issues, and remains editor agnostic, so why not use it?
+Now, let's just load the plugin in the time we're not doing anything to keep performance.
+#+begin_src emacs-lisp :tangle yes
+(use-package! vlf-setup
+  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+#+end_src
+**** Screenshots
+Let's make it as easy as we can to take nice screenshots
+#+begin_src emacs-lisp
+(package! screenshot :recipe (:local-repo "lisp/screenshot"))
+#+end_src
+
+Now we just need to get the links to our screenshots, so let's use this script [[github:calinou/0x0][here]], which I've named upload on my system
+#+begin_src emacs-lisp
+(use-package! screenshot
+  :defer t
+  :config (setq screenshot-upload-fn "upload %s 2>/dev/null"))
+#+end_src
+**** Tree-sitter
+Tree-sitter is an editor agnostic protocol to help editors "understand" code, and then highlight them accordingly
 #+begin_src emacs-lisp
 (package! tree-sitter)
 (package! tree-sitter-langs)
 #+end_src
 
-That said, if the directory doesn't exist we likely don't want to be using roam.
-Since we don't want to trigger errors (which will happen as soon as roam tries
-to initialise), let's not load roam.
-#+begin_src emacs-lisp :noweb-ref none :tangle (if (file-exists-p "~/Documents/org/roam") "no" "packages.el")
-(package! org-roam :disable t)
+Now let's just make sure we're using it
+#+begin_src emacs-lisp :tangle yes
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 #+end_src
-
-I am working on switching off of package.el, and this is all the left overs that I need.
+**** Definitions
+Doom has the function =define-word=, but I want this to work when I can't always get online. Hence, =sdcv= and the =lexic= package.
 #+begin_src emacs-lisp
-(package! dmenu)
-(package! peep-dired)
+(package! lexic :recipe (:local-repo "lisp/lexic"))
+#+end_src
+**** Word Count
+Occasionally, I am required to write something that meets a certain word requirement, so this is nice.
+#+begin_src emacs-lisp
 (package! wc-mode)
-(package! vimrc-mode)
-(package! org-appear :recipe (:host github :repo "awth13/org-appear")
-  :pin "845be82b7a...")
-(package! org-fragtog :pin "0151cabc7a...")
-(package! org-pretty-tags :pin "5c7521651b...")
-(package! engrave-faces :recipe (:local-repo "lisp/engrave-faces"))
-(package! org-ref :pin "7dbe3ace9b...")
-(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view") :pin "13314338d7...")
-(package! org-chef :pin "5b461ed7d4...")
-(package! systemd :pin "b6ae63a236...")
+#+end_src
+**** Project Management
+Starting a new project can be a pain, so let's set up some template systems to automate it. I've chose to use =ptemplate= in this case, and Henrik said that this might become an official package, so this might not be needed in the future.
+#+begin_src emacs-lisp
+(package! ptemplate :recipe (:host github :repo "nbfalcon/ptemplate"))
+#+end_src
+
+ptemplate also has a dedicated template repo. While it only has 4 templates, and they're never ones that will get used, they d work as a learning resource, so...
+#+begin_src emacs-lisp
+(package! ptemplate-templates :recipe (:host github :repo "nbfalcon/ptemplate-templates"))
+#+end_src
+
+** Language Packages
+*** LaTeX
+Not sure what this is, exactly, but I like what it does.
+#+begin_src emacs-lisp
+(package! aas :recipe (:host github :repo "ymarco/auto-activating-snippets")
+  :pin "3076cefea0f6ae9d7757f13c27b5602e007b58ec")
+(package! laas :recipe (:local-repo "lisp/LaTeX-auto-activating-snippets"))
+#+end_src
+And some basic config
+#+begin_src emacs-lisp :tangle yes
+(use-package! aas
+  :commands aas-mode)
+
+(use-package! laas
+  :hook (LaTeX-mode . laas-mode)
+  :config
+  (defun laas-tex-fold-maybe ()
+    (unless (equal "/" aas-transient-snippet-key)
+      (+latex-fold-last-macro-a)))
+  (add-hook 'aas-post-snippet-expand-hook #'laas-tex-fold-maybe))
+#+end_src
+
+I don't trust AucTeX very much at all, but I trust this one more...
+#+begin_src emacs-lisp
+(package! auctex :pin "6440ec5964dcbe58155e28f00f84ec0118d8fb7b")
+#+end_src
+*** Org
+**** Improve agenda/capture
+The agenda is nice, but a souped up version is nicer.
+#+begin_src emacs-lisp
+(package! org-super-agenda :pin "f5e80e4d0da6b2eeda9ba21e021838fa6a495376")
+#+end_src
+
+Similarly ~doct~ (Declarative Org Capture Templates) seems to be a nicer way to
+set up org-capture.
+#+begin_src emacs-lisp
+(package! doct
+  :recipe (:host github :repo "progfolio/doct")
+  :pin "67fc46c8a68989b932bce879fbaa62c6a2456a1f")
+#+end_src
+**** Visuals
+Org tables aren't the prettiest thing to look at. This package is supposed to
+redraw them in the buffer with box-drawing characters. Sounds like an
+improvement to me! We'll make use of this with =writeroom-mode=.
+#+begin_src emacs-lisp
 (package! org-pretty-table
-  :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "474ad84a8f...")
-(package! info-colors)
-(package! evil-terminal-cursor-changer :disable t)
+  :recipe (:host github :repo "Fuco1/org-pretty-table") :pin "87772a9469d91770f87bfa788580fca69b9e697a")
 #+end_src
-* CENTAUR-TABS
-To use tabs in Doom Emacs, be sure to uncomment "tabs" in Doom's init.el. Displays tabs at the top of the window similar to tabbed web browsers such as Firefox. I don't actually use tabs in Emacs. I placed this here mainly to practice E-Lisp, also in case I ever need it. In the default configuration of Doom Emacs, 'SPC t' is used for "toggle" keybindings, so I choose 'SPC t c' to toggle centaur-tabs.
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-pretty-table
+  :commands (org-pretty-table-mode global-org-pretty-table-mode))
+#+end_src
 
-| COMMAND                     | DESCRIPTION        | KEYBINDING       |
-|-----------------------------+--------------------+------------------|
-| centaur-tabs-local-mode     | Toggle tabs on/off | SPC t c          |
-| centaur-tabs-forward        | Next tab           | g <right> or g t |
-| centaur-tabs-backward       | Previous tab       | g <left> or g T  |
-| centaur-tabs-forward-group  | Next tab group     | g <down>         |
-| centaur-tabs-backward-group | Previous tab group | g <up>           |
-
+For automatically toggling LaTeX fragment previews as the cursor moves in and
+out of them there's this nice package
 #+begin_src emacs-lisp
-(setq centaur-tabs-set-bar 'over
-      centaur-tabs-set-icons t
-      centaur-tabs-gray-out-icons 'buffer
-      centaur-tabs-height 24
-      centaur-tabs-set-modified-marker t
-      centaur-tabs-style "slant"
-      centaur-tabs-modified-marker "•")
-(map! :leader
-      :desc "Toggle tab locally" "t C" #'centaur-tabs-local-mode
-      :desc "Toggle tabs on/off" "t c" #'centaur-tabs-mode)
+(package! org-fragtog :pin "0151cabc7aa9f244f82e682b87713b344d780c23")
 #+end_src
 
-* DIRED
-Dired is the file manager within Emacs. Below, I setup keybindings for image previews (peep-dired). Doom Emacs does not use 'SPC d' for any of its keybindings, so I've chosen the format of 'SPC d' plus 'key'.
-
-| COMMAND                                   | DESCRIPTION                              | KEYBINDING |
-|-------------------------------------------+------------------------------------------+------------|
-| dired                                     | Open dired file manager                  | SPC d d    |
-| dired-jump                                | Jump to current directory in dired       | SPC d j    |
-| (in dired) peep-dired                     | Toggle image previews within dired       | SPC d p    |
-| (in dired) dired-view-file                | View file in dired                       | SPC d v    |
-| (in peep-dired-mode) peep-dired-next-file | Move to next file in peep-dired-mode     | j          |
-| (in peep-dired-mode) peep-dired-prev-file | Move to previous file in peep-dired-mode | k          |
-
+Then for showing org formatting markers (=*/=~=)  when inside such a region, we
+have =org-appear=.
 #+begin_src emacs-lisp
-(map! :leader
-      (:prefix ("d" . "dired")
-       :desc "Open dired" "d" #'dired
-       :desc "Dired jump to current" "j" #'dired-jump)
-      (:after dired
-       (:map dired-mode-map
-        :desc "Peep-dired image previews" "d p" #'peep-dired
-        :desc "Dired view file" "d v" #'dired-view-file)))
-(evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
-  (kbd "k") 'peep-dired-prev-file)
-(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-(setq dired-open-extensions '(("gif" . "sxiv")
-                              ("jpg" . "sxiv")
-                              ("png" . "sxiv")
-                              ("mkv" . "mpv")
-                              ("mp4" . "mpv")))
+(package! org-appear :recipe (:host github :repo "awth13/org-appear")
+  :pin "6ee49875f8bdefafbde849f5628d673e9740cf8c")
 #+end_src
 
-* EWW
-EWW is the Emacs Web Wowser, the builtin browser in Emacs. Below I set urls to open in a specific browser (eww) with browse-url-browser-function. By default, Doom Emacs does not use 'SPC e' for anything, so I choose to use the format 'SPC e' plus 'key' for these (I also use 'SPC e' for 'eval' keybindings).
-
+~org-superstar-mode~ is great. While we're at it we may as well make tags prettier as well
 #+begin_src emacs-lisp
-(setq browse-url-browser-function 'eww-browse-url)
-(map! :leader
-      (:prefix ("e" . "evaluate/Eww")
-       :desc "Eww web browser" "w" #'eww
-       :desc "Eww reload page" "R" #'eww-reload
-       :desc "Seach web for text in region" "s" #'eww-search-words
-       :desc "Copy URL to clipboard" "c" #'eww-copy-page-url))
+(package! org-pretty-tags :pin "5c7521651b35ae9a7d3add4a66ae8cc176ae1c76")
 #+end_src
 
-* CALC
+This is great for managing tables of content, and it makes ~indirect buffers~ mostly obsolete.
+#+begin_src emacs-lisp
+(package! org-ol-tree :recipe (:host github :repo "Townk/org-ol-tree")
+  :pin "207c748aa5fea8626be619e8c55bdb1c16118c25")
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-ol-tree
+  :commands org-ol-tree)
+(map! :map org-mode-map
+      :after org
+      :localleader
+      :desc "Outline" "O" #'org-ol-tree)
+#+end_src
+
+There's this nice package that can provide nice syntax highlighting with LaTeX
+exports.
+#+begin_src emacs-lisp
+(package! engrave-faces :recipe (:local-repo "lisp/engrave-faces"))
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(use-package! engrave-faces-latex
+  :after ox-latex)
+#+end_src
+**** Extra functionality
+Because of the /[[https://github.com/commonmark/commonmark-spec/wiki/markdown-flavors][lovely variety in markdown implementations]]/ there isn't actually
+such a thing a standard table spec ... or standard anything really. Because
+~org-md~ is a goody-two-shoes, it just uses HTML for all these non-standardized
+elements (a lot of them). So ~ox-gfm~ is handy for exporting markdown with all the
+features that GitHub has.
+#+begin_src emacs-lisp
+(package! ox-gfm :pin "99f93011b069e02b37c9660b8fcb45dab086a07f")
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(use-package! ox-gfm
+  :after org)
+#+end_src
+
+Now and then citations need to happen
+#+begin_src emacs-lisp
+(package! org-ref :pin "3ca9beb744621f007d932deb8a4197467012c23a")
+#+end_src
+
+There's a really cool package in development (in other words, mostly broken) to /transclude/ Org document content.
+#+begin_src emacs-lisp
+(package! org-transclusion :recipe (:host github :repo "nobiot/org-transclusion")
+  :pin "daa18df6de26b74badab0372e8a64fbde6a7be71")
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-transclusion
+  :commands org-transclusion-mode
+  :init
+  (map! :after org :map org-mode-map
+        "<f12>" #'org-transclusion-mode))
+#+end_src
+
+Came across this and ... it's cool
+#+begin_src emacs-lisp
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view") :pin "13314338d70d2c19511efccc491bed3ca0758170")
+#+end_src
+
+Sometimes I'm given non-org files, that's very sad. Luckily Pandoc offers a way
+to make that right again, and this package makes that even easier to do.
+#+begin_src emacs-lisp
+;;(package! org-pandoc-import :recipe
+;;  (:local-repo "lisp/org-pandoc-import" :files ("*.el" "filters" "preprocessors")))
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+;;(use-package! org-pandoc-import
+;;  :after org)
+#+end_src
+
+Org-roam is nice by itself, but there are so many /extra/ nice packages which integrate
+with it.
+#+begin_src emacs-lisp
+(package! org-roam-server :pin "2122a61e9e9be205355c7e2c1e4b65986d6985a5")
+#+end_src
+#+begin_src emacs-lisp :tangle yes
+(use-package org-roam-server
+  :after (org-roam server)
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8078
+        org-roam-server-export-inline-images t
+        org-roam-server-authenticate nil
+        org-roam-server-network-label-truncate t
+        org-roam-server-network-label-truncate-length 60
+        org-roam-server-network-label-wrap-length 20)
+  (defun org-roam-server-open ()
+    "Ensure the server is active, then open the roam graph."
+    (interactive)
+    (org-roam-server-mode 1)
+    (browse-url-xdg-open (format "http://localhost:%d" org-roam-server-port))))
+#+end_src
+*** Systemd
+Not a super often use-case, but nice to have when it /is/ needed.
+#+begin_src emacs-lisp
+(package! systemd :pin "b6ae63a236605b1c5e1069f7d3afe06ae32a7bae")
+#+end_src
+*** Graphviz
+#+begin_src emacs-lisp
+(package! graphviz-dot-mode)
+#+end_src
+*** VimL
+I know, I know, this sounds useless, but its actually /somewhat/ useful to have when I need to edit my neovim config, which uses 7 different coding languages.
+#+begin_src emacs-lisp
+(package! vimrc-mode)
+#+end_src
+* Package Config
+** Abbrev Mode
+Thanks to some stack overflow wizards, I can have all of my abbreviations in the same document.
+#+begin_src emacs-lisp
+(use-package abbrev
+  :init
+  (setq-default abbrev-mode t)
+  ;; a hook funtion that sets the abbrev-table to org-mode-abbrev-table
+  ;; whenever the major mode is a text mode
+  (defun tec/set-text-mode-abbrev-table ()
+    (if (derived-mode-p 'text-mode)
+        (setq local-abbrev-table org-mode-abbrev-table)))
+  :commands abbrev-mode
+  :hook
+  (abbrev-mode . tec/set-text-mode-abbrev-table)
+  :config
+  (setq abbrev-file-name (expand-file-name "abbrev.el" doom-private-dir))
+  (setq save-abbrevs 'silently))
+#+end_src
+** Avy
+Avy uses the QWERTY home-row for position jumping, but I would rather not use the g key..
+#+begin_src emacs-lisp
+(after! avy
+  ;; home row priorities: 8 6 4 5 - - 1 2 3 7
+  (setq avy-keys '(?a ?s ?d ?f ?h ?j ?k ?l)))
+#+end_src
+** Calc
 Any sane person prefers radians and exact values
 #+begin_src emacs-lisp
 (setq calc-angle-mode 'rad  ; radians are rad
       calc-symbolic-mode t) ; keeps expressions like \sqrt{2} irrational for as long as possible
 #+end_src
 
-Embedded calc is a lovely feature which let’s us use calc to operate on LaTeX maths expressions. The standard keybinding is a bit janky however (C-x * e), so we’ll add a localleader-based alternative.
+Embedded calc is a lovely feature which let’s us use calc to operate on LaTeX math expressions. The standard keybinding is a bit janky however (C-x * e), so we’ll add a localleader-based alternative.
 #+begin_src emacs-lisp
 (map! :map calc-mode-map
       :after calc
@@ -1421,18 +1631,101 @@ Unfortunately this operates without the (rather informative) calculator and trai
       (select-window main-window))))
 #+end_src
 
-* FONTS
-Settings related to fonts within Doom Emacs:
-+ 'doom-font' -- standard monospace font that is used for most things in Emacs.
-+ 'doom-variable-pitch-font' -- variable font which is useful in some Emacs plugins.
-+ 'doom-big-font' -- used in doom-big-font-mode; useful for presentations.
-+ 'font-lock-comment-face' -- for comments.
-+ 'font-lock-keyword-face' -- for keywords with special significance, like ‘for’ and ‘if’ in C.
-This also fixes the truncated mode line problem that occurs occasionally
-
+** Centaur-tabs
+Before this code will work, you have to un-comment =tabs= in the init.el section. Also, unicode for some reason causes lag, so let's change it.
 #+begin_src emacs-lisp
-(setq all-the-icons-scale-factor 1.2)
+(after! centaur-tabs
+  (centaur-tabs-mode -1)
+  (setq centaur-tabs-height 24
+        centaur-tabs-set-icons t
+        centaur-tabs-modified-marker "o"
+        centaur-tabs-close-button "×"
+        centaur-tabs-set-bar 'over
+        centaur-tabs-gray-out-icons 'buffer
+        centaur-tabs-style "slant"))
+(map! :leader
+      :desc "Toggle tab locally" "t C" #'centaur-tabs-local-mode
+      :desc "Toggle tabs on/off" "t c" #'centaur-tabs-mode)
+#+end_src
+** Company mode
+company mode is the preferred completion engine of doom emacs and integrates well with most plugins. the way it is configured in doom is almost perfect but i need to make a few adjustments, namely <tab> functionality, to make it ideal.
 
+it's nice to have completions almost all the time, in my opinion. key strokes
+are just waiting to be saved!
+#+begin_src emacs-lisp
+(after! company
+  (setq company-idle-delay 0.5
+        company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
+  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+#+end_src
+now, the improvements from ~precedent~ are mostly from remembering history, so
+let's improve that memory.
+#+begin_src emacs-lisp
+(setq-default history-length 1000
+              prescient-history-length 1000
+              yas-triggers-in-field t)
+#+end_src
+*** plain text
+=ispell= is nice, so let's have it on in all of the text modes, viz., =text=, =markdown=, and =gfm=.
+#+begin_src emacs-lisp
+(set-company-backend!
+  '(text-mode
+    markdown-mode
+    gfm-mode)
+  '(:seperate
+    company-ispell
+    company-files
+    company-yasnippet))
+#+end_src
+** Elcord
+#+begin_src emacs-lisp
+(setq elcord-use-major-mode-as-main-icon t)
+#+end_src
+** Emacs everywhere
+Now who wouldn't want this?
+#+begin_src emacs-lisp
+(when (daemonp)
+  (require 'spell-fu)
+  (setq emacs-everywhere-major-mode-function #'org-mode
+        emacs-everywhere-frame-name-format "Edit ∷ %s — %s")
+  (require 'emacs-everywhere))
+#+end_src
+** Eros Eval
+Why not make this slightly better looking while we're at it?
+#+begin_src emacs-lisp
+(setq eros-eval-result-prefix "⟹ ")
+#+end_src
+** Evil
+There's a mode called =evil-escape-mode=, which lets you leave insert mode by typing =jk= fairly fast. However, I absolutely hate this functionality, so I'm removing it.
+#+begin_src emacs-lisp :tangle packages.el
+(package! evil-escape :disable t)
+#+end_src
+For some reason, having this one evil extension causes me to randomly get an error =Device 1 is not a termcap terminal device=, so let's disable it.
+#+begin_src emacs-lisp :tangle packages.el
+(package! evil-terminal-cursor-changer :disable t)
+#+end_src
+When I make a substitution, it's usually global, so let's save some keystrokes.
+#+begin_src emacs-lisp
+(after! evil (setq evil-ex-substitute-global t))
+#+end_src
+** Info
+#+begin_src emacs-lisp
+(use-package! info-colors
+  :commands (info-colors-fontify-node))
+
+(add-hook 'Info-selection-hook 'info-colors-fontify-node)
+
+(add-hook 'Info-mode-hook #'mixed-pitch-mode)
+#+end_src
+** Magit
+Magit is really nice by default, but the diffs don't get any syntax-highlighting by default. This can be changed by using [[github:dandavison/magit-delta][magit-delta]].
+#+begin_src emacs-lisp
+(after! magit
+   (magit-delta-mode +1))
+#+end_src
+** Mixed Pitch
+#+begin_src emacs-lisp
 (autoload #'mixed-pitch-serif-mode "mixed-pitch"
   "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch." t)
 
@@ -1442,34 +1735,111 @@ This also fixes the truncated mode line problem that occurs occasionally
     "A variable-pitch face with serifs."
     :group 'basic-faces)
   (setq mixed-pitch-set-height t)
-  (setq variable-pitch-serif-font (font-spec :family "Cantarell" :size 27))
+  (setq variable-pitch-serif-font (font-spec :family "Alegreya" :size 27))
   (set-face-attribute 'variable-pitch-serif nil :font variable-pitch-serif-font)
   (defun mixed-pitch-serif-mode (&optional arg)
     "Change the default face of the current buffer to a serifed variable pitch, while keeping some faces fixed pitch."
     (interactive)
     (let ((mixed-pitch-face 'variable-pitch-serif))
       (mixed-pitch-mode (or arg 'toggle)))))
-
+#+end_src
+As mixed pitch uses the variable mixed-pitch-face, we can create a new function to apply mixed pitch with a serif face instead of the default. This was created for writeroom mode.
+#+begin_src emacs-lisp
 (set-char-table-range composition-function-table ?f '(["\\(?:ff?[fijlt]\\)" 0 font-shape-gstring]))
 (set-char-table-range composition-function-table ?T '(["\\(?:Th\\)" 0 font-shape-gstring]))
 #+end_src
+** Projectile mode
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/Documents/code/" "~/.config/"))
+#+end_src
 
-* IVY
-Ivy is a generic completion mechanism similar to Helm but more lightweight.
+Looking at documentation via SPC h f and SPC h v and looking at the source can add package source directories to projectile. This isn't desirable in my opinion.
+#+begin_src emacs-lisp
+(setq projectile-ignored-projects '("~/" "/tmp" "~/.emacs.d/.local/straight/repos/"))
+(defun projectile-ignored-project-function (filepath)
+  "Return t if FILEPATH is within any of `projectile-ignored-projects'"
+  (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
+#+end_src
 
-** IVY-POSFRAME
-Ivy-posframe is an ivy extension, which lets ivy use posframe to show its candidate menu. Some of the settings below involve:
-+ ivy-posframe-display-functions-alist -- sets the display position for specific programs
-+ ivy-posframe-height-alist -- sets the height of the list displayed for specific programs
+** Which-key
+Let's make this appear much faster
+#+begin_src emacs-lisp
+(setq which-key-idle-delay 0.5)
+#+end_src
 
-Available functions (positions) for 'ivy-posframe-display-functions-alist'
-+ ivy-posframe-display-at-frame-center
-+ ivy-posframe-display-at-window-center
-+ ivy-posframe-display-at-frame-bottom-left
-+ ivy-posframe-display-at-window-bottom-left
-+ ivy-posframe-display-at-frame-bottom-window-center
-+ ivy-posframe-display-at-point
-+ ivy-posframe-display-at-frame-top-center
+Does =evil-= need to appear on every binding? No.
+#+begin_src emacs-lisp
+(setq which-key-allow-multiple-replacements t)
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+   ))
+#+end_src
+
+** Zen
+Doom zooms in too much
+#+begin_src emacs-lisp
+(setq +zen-text-scale 0.8)
+#+end_src
+
+When zen is on in org, keep org nice, thank you!
+#+begin_src emacs-lisp
+(defvar +zen-serif-p nil
+  "Whether to use a serifed font with `mixed-pitch-mode'.")
+(after! writeroom-mode
+  (defvar-local +zen--original-org-indent-mode-p nil)
+  (defvar-local +zen--original-mixed-pitch-mode-p nil)
+  (defvar-local +zen--original-solaire-mode-p nil)
+  (defvar-local +zen--original-org-pretty-table-mode-p t)
+  (defun +zen-enable-mixed-pitch-mode-h ()
+    "Enable `mixed-pitch-mode' when in `+zen-mixed-pitch-modes'."
+    (when (apply #'derived-mode-p +zen-mixed-pitch-modes)
+      (if writeroom-mode
+          (progn
+            (setq +zen--original-solaire-mode-p solaire-mode)
+            (solaire-mode -1)
+            (setq +zen--original-mixed-pitch-mode-p mixed-pitch-mode)
+            (funcall (if +zen-serif-p #'mixed-pitch-serif-mode #'mixed-pitch-mode) 1))
+        (funcall #'mixed-pitch-mode (if +zen--original-mixed-pitch-mode-p 1 -1))
+        (when +zen--original-solaire-mode-p (solaire-mode 1)))))
+  (pushnew! writeroom--local-variables
+            'display-line-numbers
+            'visual-fill-column-width
+            'org-adapt-indentation
+            'org-superstar-headline-bullets-list
+            'org-superstar-remove-leading-stars)
+  (add-hook 'writeroom-mode-enable-hook
+            (defun +zen-prose-org-h ()
+              "Reformat the current Org buffer appearance for prose."
+              (when (eq major-mode 'org-mode)
+                (setq display-line-numbers nil
+                      visual-fill-column-width 60
+                      org-adapt-indentation nil)
+                (when (featurep 'org-superstar)
+                  (setq-local org-superstar-headline-bullets-list '("🙘" "🙙" "🙚" "🙛")
+                              ;; org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗")
+                              org-superstar-remove-leading-stars t)
+                  (org-superstar-restart))
+                (setq
+                 +zen--original-org-indent-mode-p org-indent-mode
+                 +zen--original-org-pretty-table-mode-p (bound-and-true-p org-pretty-table-mode))
+                (org-indent-mode -1)
+                (org-pretty-table-mode 1))))
+  (add-hook 'writeroom-mode-disable-hook
+            (defun +zen-nonprose-org-h ()
+              "Reverse the effect of `+zen-prose-org'."
+              (when (eq major-mode 'org-mode)
+                (when (featurep 'org-superstar)
+                  (org-superstar-restart))
+                (when +zen--original-org-indent-mode-p (org-indent-mode 1))
+                ;; (unless +zen--original-org-pretty-table-mode-p (org-pretty-table-mode -1))
+                ))))
+#+end_src
+** Ivy
+*** Ivy-posframe
+Ivy-posframe is an ivy extension, which lets ivy use posframe to show its candidate menu.
 
 ~NOTE~: If the setting for 'ivy-posframe-display' is set to 'nil' (false), anything that is set to 'ivy-display-function-fallback' will just default to their normal position in Doom Emacs (usually a bottom split). However, if this is set to 't' (true), then the fallback position will be centered in the window.
 
@@ -1494,7 +1864,7 @@ Available functions (positions) for 'ivy-posframe-display-functions-alist'
 (setq ivy-read-action-function #'ivy-hydra-read-action)
 #+end_src
 
-** IVY KEYBINDINGS
+*** Ivy keybindings
 By default, Doom Emacs has 'SPC w' for window related commands, so I put these bindings under 'SPC w i'
 
 #+begin_src emacs-lisp
@@ -1504,83 +1874,15 @@ By default, Doom Emacs has 'SPC w' for window related commands, so I put these b
        :desc "Switch view" "s" #'ivy-switch-view
        :desc "Pop view" "P" #'ivy-pop-view))
 #+end_src
-
-* MU4E
-Setting up mu4e which is an email client that works within emacs. You must install mu4e and mbsync (isync in arch) through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
-
+** Ispell
 #+begin_src emacs-lisp
-(require 'smtpmail)
-(after! mu4e
-  (setq mu4e-root-maildir "~/.local/share/mail"
-        mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
-        mu4e-update-interval (* 10 60))
-
-  (setq mu4e-contexts
-        (list
-         ;; Personal account
-         (make-mu4e-context
-          :name "Personal"
-          :match-func
-          (lambda (msg)
-            (when msg
-              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "adamson.dom@gmail.com")
-                  (user-full-name    . "Dominic Adamson")
-                  (mu4e-compose-signature . "Dominic Adamson via GMail")
-                  (smtpmail-smtp-server  . "smtp.gmail.com")
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
-                  (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
-                  (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
-                  (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
-
-         ;; School account
-         (make-mu4e-context
-          :name "School"
-          :match-func
-          (lambda (msg)
-            (when msg
-              (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
-          :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
-                  (user-full-name    . "Dominic Adamson")
-                  (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
-                  (smtpmail-smtp-server  . "smtp.gmail.com")
-                  (smtpmail-smtp-service . 587)
-                  (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
-                  (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
-                  (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
-                  (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
-
-  (setq mu4e-maildir-shortcuts
-        '(("/Personal/Inbox"             . ?i)
-          ("/Personal/[Gmail]/Sent Mail" . ?s)
-          ("/Personal/[Gmail]/Trash"     . ?t)
-          ("/Personal/[Gmail]/Drafts"    . ?d)
-          ("/Personal/[Gmail]/All Mail"  . ?a)
-
-          ("/SLCC/Inbox"                 . ?k)
-          ("/SLCC/[Gmail]/Sent Mail"     . ?w)
-          ("/SLCC/[Gmail]/Trash"         . ?g)
-          ("/SLCC/[Gmail]/Drafts"        . ?e)
-          ("/SLCC/[Gmail]/All Mail"      . ?q))))
+(setq ispell-dictionary "en-custom")
 #+end_src
-
-* NEOTREE
-Neotree is a file tree viewer. When you open neotree, it jumps to the current file thanks to ~neo-smart-open~. The neo-window-fixed-size setting makes the neotree width be adjustable. Doom Emacs had no keybindings set for neotree. Since Doom Emacs uses 'SPC t' for 'toggle' keybindings, I used 'SPC t n' for toggle-neotree.
-
+I want to keep track of all of the words I'm putting in my personal dictionary, so let's store it in =$DOOMDIR=
 #+begin_src emacs-lisp
-(after! neotree
-  (setq neo-smart-open t
-        neo-window-fixed-size nil
-        doom-themes-neotree-file-icons t))
-(after! doom-themes
-  (setq doom-neotree-enable-variable-pitch t))
-(map! :leader
-      :desc "Toggle neotree file viewer"
-      "t n" #'neotree-toggle)
+(setq ispell-personal-dictionary (expand-file-name ".ispell_personal" doom-private-dir))
 #+end_src
-
-* LSP
+** LSP
 LSP, or Language Server Protocol, is a standard created by microsoft for visual studio code that now is functional on almost every editor. It allows for a consistent interface to receive powerful IDE-like features across many languages. Here I enable every UI feature that lsp-ui provides.
 
 #+begin_src emacs-lisp
@@ -1594,7 +1896,7 @@ LSP, or Language Server Protocol, is a standard created by microsoft for visual 
 (use-package! lsp-mode
   :hook (lsp-mode . doom/lsp-mode-setup))
 #+end_src
-** LSP Servers
+*** LSP Servers
 Some languages and servers are not default on doom, even though they are the ones that function best. This section goes through and changes these defaults
 #+begin_src emacs-lisp
 (after! rustic
@@ -1604,55 +1906,76 @@ Some languages and servers are not default on doom, even though they are the one
   (set-lsp-priority! 'ccls 2))
 #+end_src
 
-* TREE-SITTER
-Tree-sitter is a open standard with bindings to emacs (similar to LSP or DAP) that allows for improved "understanding" of code languages. This is used here primarily to get better syntax highlighting while coding.
+** Dired
+Dired is the file manager within Emacs. Below, I setup keybindings for image previews (peep-dired). Doom Emacs does not use 'SPC d' for any of its keybindings, so I've chosen the format of 'SPC d' plus 'key'.
+
+| COMMAND                                   | DESCRIPTION                              | KEYBINDING |
+|-------------------------------------------+------------------------------------------+------------|
+| dired                                     | Open dired file manager                  | SPC d d    |
+| dired-jump                                | Jump to current directory in dired       | SPC d j    |
+| (in dired) peep-dired                     | Toggle image previews within dired       | SPC d p    |
+| (in dired) dired-view-file                | View file in dired                       | SPC d v    |
+| (in peep-dired-mode) peep-dired-next-file | Move to next file in peep-dired-mode     | j          |
+| (in peep-dired-mode) peep-dired-prev-file | Move to previous file in peep-dired-mode | k          |
 
 #+begin_src emacs-lisp
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(map! :leader
+      (:prefix ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Dired jump to current" "j" #'dired-jump)
+      (:after dired
+       (:map dired-mode-map
+        :desc "Peep-dired image previews" "d p" #'peep-dired
+        :desc "Dired view file" "d v" #'dired-view-file)))
+(evil-define-key 'normal peep-dired-mode-map (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+(setq dired-open-extensions '(("gif" . "sxiv")
+                              ("jpg" . "sxiv")
+                              ("png" . "sxiv")
+                              ("mkv" . "mpv")
+                              ("mp4" . "mpv")))
 #+end_src
 
-* COMPANY MODE
-Company mode is the preferred completion engine of doom emacs and integrates well with most plugins. The way it is configured in doom is almost perfect but I need to make a few adjustments, namely <TAB> functionality, to make it ideal.
-
-It's nice to have completions almost all the time, in my opinion. Key strokes
-are just waiting to be saved!
+** Yasnippets
+This makes it possible to make "dynamic" snippets where e-lisp functions are called on snippet expansion
 #+begin_src emacs-lisp
-(after! company
-  (setq company-idle-delay 0.5
-        company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
-  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+(setq yas-triggers-in-field t)
 #+end_src
-Now, the improvements from ~precedent~ are mostly from remembering history, so
-let's improve that memory.
+** Smart Parenthesis
+When I use org, I have to use the << >> pairing a lot, so let's make it a valid combination for smart parenthesis
 #+begin_src emacs-lisp
-(setq-default history-length 1000
-              prescient-history-length 1000
-              yas-triggers-in-field t)
+(sp-local-pair
+  '(org-mode)
+   "<<" ">>"
+   :actions '(insert))
+#+end_src
+** Ptemplate
+#+begin_src emacs-lisp
+;; (setq! ptemplate-project-template-dirs '('~/'))
+#+end_src
+#+begin_src emacs-lisp
+(use-package ptemplate-templates
+  :after (ptemplate)
+  :config (ptemplate-templates-mode 1))
+#+end_src
+* Language Configuration
+** File Types
+#+begin_src emacs-lisp
+(set-file-template! "\\.tex$" :trigger "__" :mode 'latex-mode)
+(set-file-template! "\\.org$" :trigger "__" :mode 'org-mode)
+(set-file-template! "/LICEN[CS]E$" :trigger '+file-templates/insert-license)
 #+end_src
 ** Plain Text
-=Ispell= is nice, so let's have it on in all of the text modes, viz., =text=, =markdown=, and =GFM=.
 #+begin_src emacs-lisp
-(set-company-backend!
-  '(text-mode
-    markdown-mode
-    gfm-mode)
-  '(:seperate
-    company-ispell
-    company-files
-    company-yasnippet))
-#+end_src
-* PROJECTILE MODE
-#+begin_src emacs-lisp
-(setq projectile-project-search-path '("~/Documents/code/" "~/.config/"))
+(after! text-mode
+  (add-hook! 'text-mode-hook
+             ;; Apply ANSI color codes
+             (with-silent-modifications
+               (ansi-color-apply-on-region (point-min) (point-max)))))
 #+end_src
 
-* Language Configuration
-** ORG MODE
+** Org mode
 :PROPERTIES:
 :CUSTOM_ID: org
 :header-args:emacs-lisp: :tangle no :noweb-ref org-conf
@@ -2090,11 +2413,11 @@ Org files look great, especially when you do what most people do, enabling thous
 #+end_src
 This has supposedly caused issues, so if I see anything weird as a result, it goes.
 **** Fontifying Src Blocks
-Org does lovely things with =#+begin_src= blocks, like using font-lock for language's major-mode behind the scenes and pulling out the lovely colourful results. By contrast, inline =src_= blocks are somewhat neglected.
+Org does lovely things with =#+begin_src= blocks, like using font-lock for language's major-mode behind the scenes and pulling out the lovely colorful results. By contrast, inline =src_= blocks are somewhat neglected.
 
 I am not the first person to feel this way, thankfully others have [[https://stackoverflow.com/questions/20309842/how-to-syntax-highlight-for-org-mode-inline-source-code-src-lang/28059832][taken to stackexchange]] to voice their desire for inline src fontification. I was going to steal their work, but unfortunately they didn't perform /true/ source code fontification, but simply applied the =org-code= face to the content.
 
-We can do better than that, and we shall! Using ~org-src-font-lock-fontify-block~ we can apply language-appropriate syntax highlighting. Then, continuing on to ={{{results(...)}}}= , it can have the =org-block= face applied to match, and then the value-surrounding constructs hidden by mimicking the behaviour of ~prettify-symbols-mode~.
+We can do better than that, and we shall! Using ~org-src-font-lock-fontify-block~ we can apply language-appropriate syntax highlighting. Then, continuing on to ={{{results(...)}}}= , it can have the =org-block= face applied to match, and then the value-surrounding constructs hidden by mimicking the behavior of ~prettify-symbols-mode~.
 #+begin_src emacs-lisp
 (defvar org-prettify-inline-results t
   "Whether to use (ab)use prettify-symbols-mode on {{{results(...)}}}.
@@ -2176,7 +2499,7 @@ Must be run as part of `org-font-lock-set-keywords-hook'."
 (add-hook 'org-font-lock-set-keywords-hook #'org-fontify-inline-src-blocks-enable)
 #+end_src
 **** Symbols
-Most of what I do in org involves making giant trees, and collapsing what I don't need to see, so I'm going to go ahead and change the collapsed items symbol to ▾. Also, while we're at it, why not add all the symbols we can ever want, and uncomment the ones we use?
+Most of what I do in org involves making giant trees, and collapsing what I don't need to see, so I'm going to go ahead and change the collapsed items symbol to ▾. Also, while we're at it, why not add all the symbols we can ever want, and  un-comment the ones we use?
 #+begin_src emacs-lisp
 ;; (use-package org-pretty-tags
 ;; :config
@@ -2294,7 +2617,7 @@ First off, let's make those fragments look as good as we can.
 #+end_src
 Sadly, using =native= highlighting adds the =org-block= face, which looks pretty bad, especially when previews for the fragments are used.
 
-Ideally =org-src-font-lock-fontify-block= wouldn’t add the =org-block= face, but we can avoid advising that entire function by just adding another face with =:inherit= default which will override the background colour.
+Ideally =org-src-font-lock-fontify-block= wouldn't add the =org-block= face, but we can avoid advising that entire function by just adding another face with =:inherit= default which will override the background color.
 
 Inspecting =org-do-latex-and-related= shows that ="latex"= is the language argument passed, and so we can override the background as discussed above.
 #+begin_src emacs-lisp
@@ -2307,7 +2630,7 @@ What's better than syntax-highlighted \LaTeX? /Rendered/ \LaTeX, obviously, whic
   :hook (org-mode . org-fragtog-mode))
 #+end_src
 ***** Prettier rendering
-It's nice to customise the look of LaTeX fragments so they fit better in the
+It's nice to customize the look of LaTeX fragments so they fit better in the
 text --- like this \(\sqrt{\beta^2+3}-\sum_{\phi=1}^\infty \frac{x^\phi-1}{\Gamma(a)}\).
 Let's start by adding a sans font. I'd also like to use some of the
 functionality from =bmc-maths=, so we'll load that too.
@@ -2464,7 +2787,7 @@ We can take some of the colors from our current doom theme, and inject them into
 #+begin_src emacs-lisp
 (after! org-plot
   (defun org-plot/generate-theme (_type)
-    "Use the current Doom theme colours to generate a GnuPlot preamble."
+    "Use the current Doom theme colors to generate a GnuPlot preamble."
     (format "
 fgt = \"textcolor rgb '%s'\" # foreground text
 fgat = \"textcolor rgb '%s'\" # foreground alt text
@@ -2509,7 +2832,7 @@ set palette defined ( 0 '%s',\
             (doom-color 'fg)
             (doom-color 'fg-alt)
             (doom-color 'fg)
-            ;; colours
+            ;; colors
             (doom-color 'red)
             (doom-color 'blue)
             (doom-color 'green)
@@ -2539,7 +2862,7 @@ set palette defined ( 0 '%s',\
 #+begin_src emacs-lisp
 (setq org-export-headline-levels 5) ; I like nesting
 #+end_src
-I’m also going to make use of an item in ox-extra so that I can add an :ignore: tag to headings for the content to be kept, but the heading itself ignored (unlike :noexport: which ignored both heading and content). This is useful when I want to use headings to provide a structure for writing that doesn’t appear in the final documents.
+I’m also going to make use of an item in ox-extra so that I can add an :ignore: tag to headings for the content to be kept, but the heading itself ignored (unlike :noexport: which ignored both heading and content). This is useful when I want to use headings to provide a structure for writing that doesn't appear in the final documents.
 #+begin_src emacs-lisp
 (require 'ox-extra)
 (ox-extras-activate '(ignore-headlines))
@@ -2724,7 +3047,7 @@ Let's consider content we want in particular situations.
 Captions could do with a bit of tweaking such that
 + You can easily have multiple captions
 + Links to figures take you to the /top/ of the figure (not the bottom)
-+ Caption labels could do with being emphasised slightly more
++ Caption labels could do with being emphasized slightly more
 + Multiline captions should run ragged-right, but only when then span more than
   one line
 
@@ -2752,7 +3075,7 @@ A LaTeX macro should make them trivial to create.
 
 #+name: org-latex-box-preamble
 #+begin_src LaTeX
-% args = #1 Name, #2 Colour, #3 Ding, #4 Label
+% args = #1 Name, #2 Color, #3 Ding, #4 Label
 \\newcommand{\\defsimplebox}[4]{%
   \\definecolor{#1}{HTML}{#2}
   \\newenvironment{#1}[1][]
@@ -2795,7 +3118,7 @@ access.
 
 In the "universal preamble", we already embed the source =.org= file, but it would
 be nice to embed all the tangled files. This is fairly easy to accomplish using
-a cannibalised version of ~org-babel-tangle~ which just collects the file names of
+a cannibalized version of ~org-babel-tangle~ which just collects the file names of
 each block that is tangled.
 
 #+begin_src emacs-lisp
@@ -2972,8 +3295,8 @@ introduce an =:order= keyword. Using this I'll arrange snippets as follows.
 + =0= Typography
   - =0= Fonts themselves
   - =0.1= Typographic tweaks (=microtype=)
-  - =0.2= Maths setup
-  - =0.3= Maths font
+  - =0.2= Math setup
+  - =0.3= Math font
   - =0.4= Extra text shaping (~\acr~)
   - =0.5-0.9= Miscellaneous text modifications, trying to put shorter snippets first
 + =1= (/default/)
@@ -3198,7 +3521,7 @@ Then a function is needed to generate a LaTeX snippet which applies the fontset.
 would be nice if this could be done for individual styles and use different
 styles as the main document font. If the individual typefaces for a fontset are
 defined individually as
-src_elisp{:serif}, src_elisp{:sans}, src_elisp{:mono}, and src_elisp{:maths}.
+src_elisp{:serif}, src_elisp{:sans}, src_elisp{:mono}, and src_elisp{:math}.
 I can use those to generate LaTeX for subsets of the full fontset. Then, if I
 don't let any fontset names have =-= in them, I can use =-sans= and =-mono= as
 suffixes that specify the document font to use.
@@ -3418,7 +3741,7 @@ When we make a new file, be nice and give us a preamble. To do that, bind the co
   (if (equal doom/gyas-latex-class-choice "bmc") 'nil
     (eq (read-char-choice "Include default preamble? [Type y/n]" '(?y ?n)) ?y)))
 #+end_src
-* SHELLS
+** Shells
 Settings for the various shells and terminal emulators within Emacs.
 + 'shell-file-name' -- sets the shell to be used in M-x shell, M-x term, M-x ansi-term and M-x vterm.
 + 'eshell-aliases-file' -- sets an aliases file for the eshell.
@@ -3437,127 +3760,857 @@ Settings for the various shells and terminal emulators within Emacs.
       :desc "Counsel eshell history"
       "e h" #'counsel-esh-history)
 #+end_src
-
-* SPLITS
-I set splits to default to opening on the right using 'prefer-horizontal-split'. I set a keybinding for 'clone-indirect-buffer-other-window' for when I want to have the same document in two splits. The text of the indirect buffer is always identical to the text of its base buffer; changes made by editing either one are visible immediately in the other. But in all other respects, the indirect buffer and its base buffer are completely separate. For example, I can fold one split but other will be unfolded.
-
+** Graphviz
 #+begin_src emacs-lisp
-(defun prefer-horizontal-split ()
-  (set-variable 'split-height-threshold nil t)
-  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
-(add-hook 'markdown-mode-hook 'prefer-horizontal-split)
-(map! :leader
-      :desc "Clone indirect buffer other window"
-      "b c" #'clone-indirect-buffer-other-window)
+(use-package! graphviz-dot-mode
+   :commands graphviz-dot-mode
+    :mode ("\\.dot\\'" "\\.gz\\'")
+    :init
+    (after! org
+        (setcdr (assoc "dot" org-src-lang-modes)
+                'graphviz-dot)))
+
+(use-package! company-graphviz-dot
+   :after graphviz-dot-mode)
+#+end_src
+** Snippets
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle no :comments no
+:END:
+*** Latex mode
+File template
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: LaTeX template
+# --
+\documentclass${1:[${2:opt1,...}]}{`(tec/yas-latex-get-class-choice)`}
+
+\title{${3:`(s-titleized-words (file-name-base (or buffer-file-name "new buffer")))`}}
+\author{${4:`(user-full-name)`}}
+\date{${5:`(format-time-string "%Y-%m-%d")`}}
+`(if (tec/yas-latex-preamble-if) tec/yas-latex-template-preamble "")`
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}
 #+end_src
 
-* SPELLCHECK
-Emacs needs to know the default dictionary to use with spell backends like aspell.
-#+begin_src emacs-lisp
-(setq ispell-dictionary "en")
+Deliminators
+#+begin_src snippet
+# name: _deliminators
+# --
+\left`(tec/tex-open-delim-from-char)` `%`$1 \right`(tec/tex-close-delim-from-char)` $0
+
 #+end_src
 
-* PASSWORDS
-This sets up the auth-source library and adds functions to access passwords outside of emacs
-#+begin_src emacs-lisp
-(defun lookup-password (&rest keys)
-  (let ((result (apply #'auth-source-search keys)))
-    (if result
-        (funcall (plist-get (car result) :secret))
-      nil)))
+Aligned equals
+#+begin_src snippet
+# key: ==
+# name: aligned equals
+# --
+&=
 #+end_src
 
-* ELFEED
-Doom adds the elfeed-org plugin with elfeed, meaning that feeds can be configured with org.
-** root :elfeed:
-*** [[https://archlinux.org/feeds/news/][ArchLinux News]] :arch:
-
-* VERY LARGE FILES MODE
-This package makes it possible to open *massive* files by loading them from disc incrementally in chunks.
-#+begin_src emacs-lisp
-(use-package! vlf-setup
-  :defer-incrementally vlf-tune vlf-base vlf-write vlf-search vlf-occur vlf-follow vlf-ediff vlf)
+Begin alias
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: begin-alias
+# key: beg
+# type: command
+# --
+(doom-snippets-expand :name "begin")
 #+end_src
 
-* EMACS EVERYWHERE
-Now who wouldn't want this?
-#+begin_src emacs-lisp
-(when (daemonp)
-  (require 'spell-fu)
-  (setq emacs-everywhere-major-mode-function #'org-mode
-        emacs-everywhere-frame-name-format "Edit ∷ %s — %s")
-  (require 'emacs-everywhere))
+Cases
+#+begin_src snippet
+# -*- mode: snippet -*-
+# key: cs
+# name: cases
+# group: math
+# condition: (texmathp)
+# --
+\begin{cases}
+  `%`$1
+\end{cases}$0
 #+end_src
 
-* WHICH-KEY
-Does =evil-= need to appear on every binding? No.
-#+begin_src emacs-lisp
-(setq which-key-allow-multiple-replacements t)
-(after! which-key
-  (pushnew!
-   which-key-replacement-alist
-   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
-   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
-   ))
+Code
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: code
+# --
+\begin{minted}{${1:language}}
+${0:`%`}
+\end{minted}
+
 #+end_src
 
-* ZEN
-Doom zooms in too much
-#+begin_src emacs-lisp
-(setq +zen-text-scale 0.8)
+Corollary
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: corollary
+# key: clr
+# group: theorems
+# --
+\begin{corollary}${1:[${2:name}]}
+  `%`$0
+\end{corollary}
 #+end_src
 
-When zen is on in org, keep org nice, thank you!
-#+begin_src emacs-lisp
-(defvar +zen-serif-p nil
-  "Whether to use a serifed font with `mixed-pitch-mode'.")
-(after! writeroom-mode
-  (defvar-local +zen--original-org-indent-mode-p nil)
-  (defvar-local +zen--original-mixed-pitch-mode-p nil)
-  (defvar-local +zen--original-solaire-mode-p nil)
-  (defvar-local +zen--original-org-pretty-table-mode-p t)
-  (defun +zen-enable-mixed-pitch-mode-h ()
-    "Enable `mixed-pitch-mode' when in `+zen-mixed-pitch-modes'."
-    (when (apply #'derived-mode-p +zen-mixed-pitch-modes)
-      (if writeroom-mode
-          (progn
-            (setq +zen--original-solaire-mode-p solaire-mode)
-            (solaire-mode -1)
-            (setq +zen--original-mixed-pitch-mode-p mixed-pitch-mode)
-            (funcall (if +zen-serif-p #'mixed-pitch-serif-mode #'mixed-pitch-mode) 1))
-        (funcall #'mixed-pitch-mode (if +zen--original-mixed-pitch-mode-p 1 -1))
-        (when +zen--original-solaire-mode-p (solaire-mode 1)))))
-  (pushnew! writeroom--local-variables
-            'display-line-numbers
-            'visual-fill-column-width
-            'org-adapt-indentation
-            'org-superstar-headline-bullets-list
-            'org-superstar-remove-leading-stars)
-  (add-hook 'writeroom-mode-enable-hook
-            (defun +zen-prose-org-h ()
-              "Reformat the current Org buffer appearance for prose."
-              (when (eq major-mode 'org-mode)
-                (setq display-line-numbers nil
-                      visual-fill-column-width 60
-                      org-adapt-indentation nil)
-                (when (featurep 'org-superstar)
-                  (setq-local org-superstar-headline-bullets-list '("🙘" "🙙" "🙚" "🙛")
-                              ;; org-superstar-headline-bullets-list '("🙐" "🙑" "🙒" "🙓" "🙔" "🙕" "🙖" "🙗")
-                              org-superstar-remove-leading-stars t)
-                  (org-superstar-restart))
-                (setq
-                 +zen--original-org-indent-mode-p org-indent-mode
-                 +zen--original-org-pretty-table-mode-p (bound-and-true-p org-pretty-table-mode))
-                (org-indent-mode -1)
-                (org-pretty-table-mode 1))))
-  (add-hook 'writeroom-mode-disable-hook
-            (defun +zen-nonprose-org-h ()
-              "Reverse the effect of `+zen-prose-org'."
-              (when (eq major-mode 'org-mode)
-                (when (featurep 'org-superstar)
-                  (org-superstar-restart))
-                (when +zen--original-org-indent-mode-p (org-indent-mode 1))
-                ;; (unless +zen--original-org-pretty-table-mode-p (org-pretty-table-mode -1))
-                ))))
+Definition
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: definition
+# key: def
+# group: theorems
+# --
+\begin{definition}${1:[${2:name}]}
+  `%`$0
+\end{definition}
 #+end_src
 
+Deliminators
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: deliminators
+# key: @
+# condition: (texmathp)
+# type: command
+# --
+(tec/get-open-delim-char)
+(yas-expand-snippet (yas-lookup-snippet "_deliminators" 'latex-mode))
+#+end_src
+
+Deliminators angle
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: deliminators - angle <>
+# key: <
+# condition: (texmathp)
+# type: command
+# --
+(setq tec/tex-last-delim-char ?\<)
+(setq tec/tex-delim-dot-second nil)
+(tec/tex-delim-yas-expand)
+#+end_src
+
+Deliminators bracket
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: deliminators - bracket []
+# key: [
+# condition: (texmathp)
+# type: command
+# --
+(setq tec/tex-last-delim-char ?\[)
+(setq tec/tex-delim-dot-second nil)
+(tec/tex-delim-yas-expand)
+#+end_src
+
+Deliminators curly
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: deliminators - curley {}
+# key: {
+# condition: (texmathp)
+# type: command
+# --
+(setq tec/tex-last-delim-char ?\{)
+(setq tec/tex-delim-dot-second nil)
+(tec/tex-delim-yas-expand)
+
+#+end_src
+
+Deliminators parenthesis
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: deliminators - paren ()
+# key: (
+# condition: (texmathp)
+# type: command
+# --
+(setq tec/tex-last-delim-char ?\()
+(setq tec/tex-delim-dot-second nil)
+(tec/tex-delim-yas-expand)
+#+end_src
+
+Enumerate
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: enumerate
+# key: en
+# --
+\begin{enumerate}
+`(if % % "  \\item ")`$0
+\end{enumerate}
+#+end_src
+
+Example
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: example
+# key: eg
+# group: theorems
+# --
+\begin{example}${1:[${2:name}]}
+  `%`$0
+\end{example}
+#+end_src
+
+Frac short
+#+begin_src snippet
+# -*- mode: snippet -*-
+# key: /
+# name: frac-short
+# group: math
+# condition: (texmathp)
+# --
+\frac{${1:`(or % "")`}}{$2}$0
+#+end_src
+
+Int ^
+#+begin_src snippet
+# -*- mode: snippet -*-
+# key: int
+# name: int_^
+# --
+\int${1:$(when (> (length yas-text) 0) "_")
+}${1:$(when (> (length yas-text) 1) "{")
+}${1:left}${1:$(when (> (length yas-text) 1) "}")
+}${2:$(when (> (length yas-text) 0) "^")
+}${2:$(when (> (length yas-text) 1) "{")
+}${2:right}${2:$(when (> (length yas-text) 1) "}")} $0
+#+end_src
+
+Itemize
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: itemize
+# key: it
+# uuid: it
+# --
+\begin{itemize}
+`(if % % "  \\item ")`$0
+\end{itemize}
+#+end_src
+
+Lemma
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: lemma
+# key: lmm
+# group: theorems
+# --
+\begin{lemma}${1:[${2:name}]}
+  `%`$0
+\end{lemma}
+#+end_src
+
+Lim
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: lim
+# key: lim
+# --
+\lim_{${1:n} \to ${2:\infty}} $0
+#+end_src
+
+Mathclap
+#+begin_src snippet
+# -*- mode: snippet -*-
+# key: mc
+# name: mathclap
+# group: math
+# condition: (texmathp)
+# --
+\mathclap{`%`$1}$0
+#+end_src
+
+Prod ^
+#+begin_src snippet
+# key: prod
+# name: prod_^
+# --
+\prod${1:$(when (> (length yas-text) 0) "_")
+}${1:$(when (> (length yas-text) 1) "{")
+}${1:i=1}${1:$(when (> (length yas-text) 1) "}")
+}${2:$(when (> (length yas-text) 0) "^")
+}${2:$(when (> (length yas-text) 1) "{")
+}${2:n}${2:$(when (> (length yas-text) 1) "}")} $0
+#+end_src
+
+Proof
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: proof
+# key: prf
+# group: theorems
+# --
+\begin{proof}${1:[${2:name}]}
+  `%`$0
+\end{proof}
+#+end_src
+
+Remark
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: remark
+# key: rmk
+# group: theorems
+# --
+\begin{remark}${1:[${2:name}]}
+  `%`$0
+\end{remark}
+#+end_src
+
+Sum ^
+#+begin_src snippet
+# key: sum
+# name: sum_^
+# --
+\sum${1:$(when (> (length yas-text) 0) "_")
+}${1:$(when (> (length yas-text) 1) "{")
+}${1:i=1}${1:$(when (> (length yas-text) 1) "}")
+}${2:$(when (> (length yas-text) 0) "^")
+}${2:$(when (> (length yas-text) 1) "{")
+}${2:n}${2:$(when (> (length yas-text) 1) "}")} $0
+#+end_src
+
+Theorem
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: theorem
+# key: thm
+# group: theorems
+# --
+\begin{theorem}${1:[${2:name}]}
+  `%`$0
+\end{theorem}
+#+end_src
+
+*** Markdown mode
+File template
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Org template
+# --
+# ${1:`(s-titleized-words (file-name-base (or buffer-file-name "new buffer")))`}
+
+$0
+#+end_src
+
+*** Org mode
+File template
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Org template
+# --
+,#+title: ${1:`(s-titleized-words (replace-regexp-in-string "^[0-9]\\{4\\}-[0-9][0-9]-[0-9][0-9]-" "" (file-name-base (or buffer-file-name "new buffer"))))`}
+,#+author: ${2:`(user-full-name)`}
+,#+date: ${3:`(format-time-string "%Y-%m-%d")`}
+
+$0
+#+end_src
+
+Display maths
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: display math
+# key: M
+# condition: t
+# expand-env: ((yas-after-exit-snippet-hook (lambda () (org-edit-latex-fragment) (evil-insert-state) (insert "\n  \n") (left-char))))
+# --
+\\[`%`$0\\]
+#+end_src
+
+Elisp source
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: elisp src
+# uuid: src_elisp
+# key: <el
+# condition: t
+# expand-env: ((yas-after-exit-snippet-hook #'org-edit-src-code))
+# --
+,#+begin_src emacs-lisp
+`%`$0
+,#+end_src
+#+end_src
+
+Global property
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Global property
+# key: #+p
+# condition: (> 20 (line-number-at-pos))
+# --
+,#+property: $0
+#+end_src
+
+Header argument dir
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - dir
+# key: d
+# condition: (+yas/org-src-header-p)
+# --
+:dir `(file-relative-name (read-directory-name "Working directory: "))` $0
+#+end_src
+
+Header argument eval
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - eval
+# key: v
+# condition: (+yas/org-src-header-p)
+# --
+`(let ((out (+yas/org-prompt-header-arg :eval "Evaluate: " '("no" "query" "no-export" "query-export")))) (if out (concat ":eval " out " ") ""))`$0
+#+end_src
+
+Header argument export
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - export
+# key: e
+# condition: (+yas/org-src-header-p)
+# --
+`(let ((out (+yas/org-prompt-header-arg :exports "Exports: " '("code" "results" "both" "none")))) (if out (concat ":exports " out " ") ""))`$0
+#+end_src
+
+Header argument file
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - file
+# key: f
+# condition: (+yas/org-src-header-p)
+# --
+:file $0
+#+end_src
+
+Header argument graphics
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - graphics
+# key: g
+# condition: (+yas/org-src-header-p)
+# --
+:results file graphics $0
+#+end_src
+
+Header argument height
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - height
+# key: H
+# condition: (+yas/org-src-header-p)
+# --
+:height $0
+#+end_src
+
+Header argument noweb
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - noweb
+# key: n
+# condition: (+yas/org-src-header-p)
+# --
+`(let ((out (+yas/org-prompt-header-arg :noweb "Evaluate: " '("no" "yes" "tangle" "no-export" "strip-export" "eval")))) (if out (concat ":noweb " out " ") ""))`$0
+#+end_src
+
+Header argument output
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - output
+# key: o
+# condition: (+yas/org-src-header-p)
+# --
+:results output $0
+#+end_src
+
+Header argument results
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - results
+# key: r
+# condition: (+yas/org-src-header-p)
+# --
+`(let ((out
+(string-trim-right
+ (concat
+  (+yas/org-prompt-header-arg :results "Result collection: " '("value " "output "))
+  (+yas/org-prompt-header-arg :results "Results type: " '("table " "vector " "list " "verbatim " "file "))
+  (+yas/org-prompt-header-arg :results "Results format: " '("code " "drawer " "html " "latex " "link " "graphics " "org " "pp " "raw "))
+  (+yas/org-prompt-header-arg :results "Result output: " '("silent " "replace " "append " "prepend "))))))
+  (if (string= out "") ""
+  (concat ":results " out " ")))
+`$0
+#+end_src
+
+Header argument session
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - session
+# key: s
+# condition: (+yas/org-src-header-p)
+# --
+:session "${1:`(file-name-base (or (buffer-file-name) "unnnamed"))`-session}" $0
+#+end_src
+
+Header argument silent
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - silent
+# key: S
+# condition: (+yas/org-src-header-p)
+# --
+:results silent $0
+#+end_src
+
+Header argument tangle
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - tangle
+# key: t
+# condition: (+yas/org-src-header-p)
+# --
+:tangle $0
+#+end_src
+
+Header argument width
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - width
+# key: W
+# condition: (+yas/org-src-header-p)
+# --
+:width $0
+#+end_src
+
+Header argument wrap
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Header arg - wrap
+# key: w
+# condition: (+yas/org-src-header-p)
+# --
+`(let ((out (+yas/org-prompt-header-arg :noweb "Wrap: " '("example" "export" "comment" "src")))) (if out (concat ":wrap " out " ") ""))`$0
+#+end_src
+
+Inline math
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: inline math
+# key: m
+# condition: t
+# expand-env: ((yas-after-exit-snippet-hook (lambda () (org-edit-latex-fragment) (evil-insert-state) (goto-char 3))))
+# --
+\\(`%`$0\\)
+#+end_src
+
+Property header arguments
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: Property - header arg
+# key: h
+# condition: (or (looking-back "^#\\+PROPERTY:.*" (line-beginning-position)) (looking-back "^#\\+property:.*" (line-beginning-position)))
+# --
+header-args:${1:`(or (+yas/org-most-common-no-property-lang) "?")`} $0
+#+end_src
+
+Python source
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: python src
+# uuid: src_python
+# key: <py
+# condition: t
+# expand-env: ((yas-after-exit-snippet-hook #'org-edit-src-code))
+# --
+,#+begin_src python
+`%`$0
+,#+end_src
+#+end_src
+
+Source
+#+begin_src snippet
+# -*- mode: snippet -*-
+# name: #+begin_src
+# uuid: src
+# key: src
+# --
+,#+begin_src ${1:`(or (+yas/org-last-src-lang) "?")`}
+`%`$0
+,#+end_src
+#+end_src
+* Applications
+While Emacs is mostly used for my programming needs, I like to use emacs for many other things as well. These configuration changes don't fit in well with the rest of the config, so I shove them here.
+** Mu4e
+Setting up mu4e which is an email client that works within emacs. You must install mu4e and mbsync (isync in arch) through your Linux distribution's package manager. Setting up smtp for sending mail. Make sure the gnutls command line utils are installed. Package 'gnutls-bin' in Debian/Ubuntu, and 'gnutls' in Arch.
+
+#+begin_src emacs-lisp
+(require 'smtpmail)
+(after! mu4e
+  (setq mu4e-root-maildir "~/.local/share/mail"
+        mu4e-get-mail-command "mbsync -c ~/.config/mbsync/mbsyncrc -a"
+        mu4e-update-interval (* 10 60))
+
+  (setq mu4e-contexts
+        (list
+         ;; Personal account
+         (make-mu4e-context
+          :name "Personal"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "adamson.dom@gmail.com")
+                  (user-full-name    . "Dominic Adamson")
+                  (mu4e-compose-signature . "Dominic Adamson via GMail")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 587)
+                  (mu4e-drafts-folder  . "/Personal/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/Personal/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/Personal/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/Personal/[Gmail]/Trash")))
+
+         ;; School account
+         (make-mu4e-context
+          :name "School"
+          :match-func
+          (lambda (msg)
+            (when msg
+              (string-prefix-p "/SLCC" (mu4e-message-field msg :maildir))))
+          :vars '((user-mail-address . "dadam126@bruinmail.slcc.edu")
+                  (user-full-name    . "Dominic Adamson")
+                  (mu4e-compose-signature . "Dominic Adamson\n Sent from mozilla thunderbird\n")
+                  (smtpmail-smtp-server  . "smtp.gmail.com")
+                  (smtpmail-smtp-service . 587)
+                  (mu4e-drafts-folder  . "/SLCC/[Gmail]/Drafts")
+                  (mu4e-sent-folder  . "/SLCC/[Gmail]/Sent Mail")
+                  (mu4e-refile-folder  . "/SLCC/[Gmail]/All Mail")
+                  (mu4e-trash-folder  . "/SLCC/[Gmail]/Trash")))))
+
+  (setq mu4e-maildir-shortcuts
+        '(("/Personal/Inbox"             . ?i)
+          ("/Personal/[Gmail]/Sent Mail" . ?s)
+          ("/Personal/[Gmail]/Trash"     . ?t)
+          ("/Personal/[Gmail]/Drafts"    . ?d)
+          ("/Personal/[Gmail]/All Mail"  . ?a)
+
+          ("/SLCC/Inbox"                 . ?k)
+          ("/SLCC/[Gmail]/Sent Mail"     . ?w)
+          ("/SLCC/[Gmail]/Trash"         . ?g)
+          ("/SLCC/[Gmail]/Drafts"        . ?e)
+          ("/SLCC/[Gmail]/All Mail"      . ?q))))
+#+end_src
+
+** Elfeed
+While it may seem otherwise, RSS feeds are still a perfectly valid and useful thing. =Elfeed= is an emacs package, with a corresponding doom module, that acts as an RSS feed reader. There's plenty of things to configure here, but most of it comes from  [[github:fuxialexander/doom-emacs-private-xfu/tree/master/master/modules/app/rss][fuxialexander]].
+*** Keybindings
+#+begin_src emacs-lisp
+(map! :map elfeed-search-mode-map
+      :after elfeed-search
+      [remap kill-this-buffer] "q"
+      [remap kill-buffer] "q"
+      :n doom-leader-key nil
+      :n "q" #'+rss/quit
+      :n "e" #'elfeed-update
+      :n "r" #'elfeed-search-untag-all-unread
+      :n "u" #'elfeed-search-tag-all-unread
+      :n "s" #'elfeed-search-live-filter
+      :n "RET" #'elfeed-search-show-entry
+      :n "p" #'elfeed-show-pdf
+      :n "+" #'elfeed-search-tag-all
+      :n "-" #'elfeed-search-untag-all
+      :n "S" #'elfeed-search-set-filter
+      :n "b" #'elfeed-search-browse-url
+      :n "y" #'elfeed-search-yank)
+(map! :map elfeed-show-mode-map
+      :after elfeed-show
+      [remap kill-this-buffer] "q"
+      [remap kill-buffer] "q"
+      :n doom-leader-key nil
+      :nm "q" #'+rss/delete-pane
+      :nm "o" #'ace-link-elfeed
+      :nm "RET" #'org-ref-elfeed-add
+      :nm "n" #'elfeed-show-next
+      :nm "N" #'elfeed-show-prev
+      :nm "p" #'elfeed-show-pdf
+      :nm "+" #'elfeed-show-tag
+      :nm "-" #'elfeed-show-untag
+      :nm "s" #'elfeed-show-new-live-search
+      :nm "y" #'elfeed-show-yank)
+#+end_src
+*** Usability
+#+begin_src emacs-lisp
+(after! elfeed-search
+  (set-evil-initial-state! 'elfeed-search-mode 'normal))
+(after! elfeed-show-mode
+  (set-evil-initial-state! 'elfeed-show-mode   'normal))
+
+(after! evil-snipe
+  (push 'elfeed-show-mode   evil-snipe-disabled-modes)
+  (push 'elfeed-search-mode evil-snipe-disabled-modes))
+#+end_src
+*** TODO Visuals
+#+begin_src emacs-lisp
+(after! elfeed
+  (elfeed-org)
+  (use-package! elfeed-link)
+
+  (setq elfeed-search-filter "@1-week-ago +unread"
+        elfeed-search-print-entry-function '+rss/elfeed-search-print-entry
+        elfeed-search-title-min-width 80
+        elfeed-show-entry-switch #'pop-to-buffer
+        elfeed-show-entry-delete #'+rss/delete-pane
+        elfeed-show-refresh-function #'+rss/elfeed-show-refresh--better-style
+        shr-max-image-proportion 0.6)
+
+  (add-hook! 'elfeed-show-mode-hook (hide-mode-line-mode 1))
+  (add-hook! 'elfeed-search-update-hook #'hide-mode-line-mode)
+
+  (defface elfeed-show-title-face '((t (:weight ultrabold :slant italic :height 1.5)))
+    "title face in elfeed show buffer"
+    :group 'elfeed)
+  (defface elfeed-show-author-face `((t (:weight light)))
+    "title face in elfeed show buffer"
+    :group 'elfeed)
+  (set-face-attribute 'elfeed-search-title-face nil
+                      :foreground 'nil
+                      :weight 'light)
+
+  (defadvice! +rss-elfeed-wrap-h-nicer ()
+    "Enhances an elfeed entry's readability by wrapping it to a width of
+`fill-column' and centering it with `visual-fill-column-mode'."
+    :override #'+rss-elfeed-wrap-h
+    (setq-local truncate-lines nil
+                shr-width 120
+                visual-fill-column-center-text t
+                default-text-properties '(line-height 1.1))
+    (let ((inhibit-read-only t)
+          (inhibit-modification-hooks t))
+      (visual-fill-column-mode)
+      ;; (setq-local shr-current-font '(:family "Merriweather" :height 1.2))
+      (set-buffer-modified-p nil)))
+
+  (defun +rss/elfeed-search-print-entry (entry)
+    "Print ENTRY to the buffer."
+    (let* ((elfeed-goodies/tag-column-width 40)
+           (elfeed-goodies/feed-source-column-width 30)
+           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+           (feed (elfeed-entry-feed entry))
+           (feed-title
+            (when feed
+              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+           (tags-str (concat (mapconcat 'identity tags ",")))
+           (title-width (- (window-width) elfeed-goodies/feed-source-column-width
+                           elfeed-goodies/tag-column-width 4))
+
+           (tag-column (elfeed-format-column
+                        tags-str (elfeed-clamp (length tags-str)
+                                               elfeed-goodies/tag-column-width
+                                               elfeed-goodies/tag-column-width)
+                        :left))
+           (feed-column (elfeed-format-column
+                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width)
+                         :left)))
+
+      (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+      (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+      (insert (propertize title 'face title-faces 'kbd-help title))
+      (setq-local line-spacing 0.2)))
+
+  (defun +rss/elfeed-show-refresh--better-style ()
+    "Update the buffer to match the selected entry, using a mail-style."
+    (interactive)
+    (let* ((inhibit-read-only t)
+           (title (elfeed-entry-title elfeed-show-entry))
+           (date (seconds-to-time (elfeed-entry-date elfeed-show-entry)))
+           (author (elfeed-meta elfeed-show-entry :author))
+           (link (elfeed-entry-link elfeed-show-entry))
+           (tags (elfeed-entry-tags elfeed-show-entry))
+           (tagsstr (mapconcat #'symbol-name tags ", "))
+           (nicedate (format-time-string "%a, %e %b %Y %T %Z" date))
+           (content (elfeed-deref (elfeed-entry-content elfeed-show-entry)))
+           (type (elfeed-entry-content-type elfeed-show-entry))
+           (feed (elfeed-entry-feed elfeed-show-entry))
+           (feed-title (elfeed-feed-title feed))
+           (base (and feed (elfeed-compute-base (elfeed-feed-url feed)))))
+      (erase-buffer)
+      (insert "\n")
+      (insert (format "%s\n\n" (propertize title 'face 'elfeed-show-title-face)))
+      (insert (format "%s\t" (propertize feed-title 'face 'elfeed-search-feed-face)))
+      (when (and author elfeed-show-entry-author)
+        (insert (format "%s\n" (propertize author 'face 'elfeed-show-author-face))))
+      (insert (format "%s\n\n" (propertize nicedate 'face 'elfeed-log-date-face)))
+      (when tags
+        (insert (format "%s\n"
+                        (propertize tagsstr 'face 'elfeed-search-tag-face))))
+      ;; (insert (propertize "Link: " 'face 'message-header-name))
+      ;; (elfeed-insert-link link link)
+      ;; (insert "\n")
+      (cl-loop for enclosure in (elfeed-entry-enclosures elfeed-show-entry)
+               do (insert (propertize "Enclosure: " 'face 'message-header-name))
+               do (elfeed-insert-link (car enclosure))
+               do (insert "\n"))
+      (insert "\n")
+      (if content
+          (if (eq type 'html)
+              (elfeed-insert-html content base)
+            (insert content))
+        (insert (propertize "(empty)\n" 'face 'italic)))
+      (goto-char (point-min))))
+
+  )
+#+end_src
+** Dictionary
+Let's start off by loading =lexic=, then integrate it into all of our pre-existing functionality so it feels nice to use.
+#+begin_src emacs-lisp
+(use-package! lexic
+  :commands lexic-search lexic-list-dictionary
+  :config
+  (map! :map lexic-mode-map
+        :n "q" #'lexic-return-from-lexic
+        :nv "RET" #'lexic-search-word-at-point
+        :n "a" #'outline-show-all
+        :n "h" (cmd! (outline-hide-sublevels 3))
+        :n "o" #'lexic-toggle-entry
+        :n "n" #'lexic-next-entry
+        :n "N" (cmd! (lexic-next-entry t))
+        :n "p" #'lexic-previous-entry
+        :n "P" (cmd! (lexic-previous-entry t))
+        :n "E" (cmd! (lexic-return-from-lexic) ; expand
+                     (switch-to-buffer (lexic-get-buffer)))
+        :n "M" (cmd! (lexic-return-from-lexic) ; minimise
+                     (lexic-goto-lexic))
+        :n "C-p" #'lexic-search-history-backwards
+        :n "C-n" #'lexic-search-history-forwards
+        :n "/" (cmd! (call-interactively #'lexic-search))))
+#+end_src
+
+We need to override =wordnet= for this to work correctly
+#+begin_src emacs-lisp
+(defadvice! +lookup/dictionary-definition-lexic (identifier &optional arg)
+   "Look up the definition of the word at point (or selection) using lexic-search."
+    :override #'+lookup/dictionary-definition
+     (interactive
+            (list (or (doom-thing-at-point-or-region 'word)
+                      (read-string "Look up in dictionary: "))
+                  current-prefix-arg))
+      (lexic-search identifier nil nil t))
+#+end_src
+** Irc
+The freenode debacle drew me into the concept of IRC, and I have found that it's actually pretty nice once you get used to a messaging system that doesn't store anything for you. For the most part, I've just used the semi-official kiwi client for messaging, so here's my hack-job, mostly curtesy Teco (as most of this is), to set up Circe.
+
+First, we need to set up the whole authentication hassle, so let's make things easy and put all of the server information in =.authinfo.gpg= (I store mine in a more XDG compliant place, but that's besides the point).
+Here's what an example authinfo would look like:
+#+begin_src authinfo :tangle no
+machine chat.libera
+#+end_src
